@@ -1,2 +1,2 @@
-Data    Horas Trabalhadas    Tipo Tarefa                  Descrição da Tarefa Realizada
-17/03	2					 estudo						  Instalação do arcabouço no projeto; Compilação e execução do projeto sem nenhuma modificação.
+Data      Horas Trabalhadas    Tipo Tarefa                  DescriÃ§Ã£o da Tarefa Realizada
+17/03	2		estudo						   InstalaÃ§Ã£o do arcabouÃ§o no projeto; CompilaÃ§Ã£o e execuÃ§Ã£o do projeto sem nenhuma modificaÃ§Ã£o.
