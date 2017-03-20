@@ -1,4 +1,4 @@
 Data            Horas Trabalhadas              TipoTarefa       Descrição da Tarefa Realizada
-17/03           2                              estudo           Instalação do arcabouço no projeto;
+17/03           2                              Estudo           Instalação do arcabouço no projeto;
                                                                 Compilação e execução do projeto sem nenhuma modificação.
 19/03           0.5                            Configuração     Setup para rodar programa pelo Visual Studio
