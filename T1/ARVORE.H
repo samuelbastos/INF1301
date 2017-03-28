@@ -79,7 +79,6 @@
 
    } ARV_tpCondRet ;
 
-
 /***********************************************************************
 *
 *  $FC Função: ARV Criar árvore
@@ -88,18 +87,24 @@
 *     Cria uma nova árvore vazia.
 *     Caso já exista uma árvore, esta será destruída.
 *
+*  $EP Parâmetros
+*     $P pArvore - ponteiro para apontar para a arvore criada
+*
 *  $FV Valor retornado
 *     ARV_CondRetOK
 *     ARV_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_CriarArvore( void ) ;
+   ARV_tpCondRet ARV_CriarArvore( void ** ptArvore ) ;
 
 
 /***********************************************************************
 *
 *  $FC Função: ARV Destruir árvore
+*
+*  $EP Parâmetros
+*     $P pArvore - ponteiro que aponta para a árvore que será destruida
 *
 *  $ED Descrição da função
 *     Destrói o corpo e a cabeça da árvore, anulando a árvore corrente.
@@ -107,7 +112,7 @@
 *
 ***********************************************************************/
 
-   void ARV_DestruirArvore( void ) ;
+   void ARV_DestruirArvore( void ** ptArvore ) ;
 
 
 /***********************************************************************
@@ -115,6 +120,7 @@
 *  $FC Função: ARV Adicionar filho à esquerda
 *
 *  $EP Parâmetros
+*     $P pArvore - ponteiro que aponta para a árvore onde o filho será adicionado
 *     $P ValorParm - valor a ser inserido no novo nó.
 *
 *  $FV Valor retornado
@@ -125,7 +131,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_InserirEsquerda( char ValorParm ) ;
+   ARV_tpCondRet ARV_InserirEsquerda( void ** ptArvore, char ValorParm ) ;
 
 
 /***********************************************************************
@@ -133,6 +139,7 @@
 *  $FC Função: ARV Adicionar filho à direita
 *
 *  $EP Parâmetros
+*     $P pArvore - ponteiro que aponta para a árvore onde o filho será adicionado
 *     $P ValorParm - valor a ser inserido no novo nó
 *
 *  $FV Valor retornado
@@ -143,12 +150,15 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_InserirDireita( char ValorParm ) ;
+   ARV_tpCondRet ARV_InserirDireita( void ** ptArvore, char ValorParm ) ;
 
 
 /***********************************************************************
 *
 *  $FC Função: ARV Ir para nó pai
+*
+*  $EP Parâmetros
+*     $P pArvore - ponteiro para a estrutura árvore
 *
 *  $FV Valor retornado
 *     ARV_CondRetOK
@@ -158,12 +168,15 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_IrPai( void ) ;
+   ARV_tpCondRet ARV_IrPai( void * pArvore ) ;
 
 
 /***********************************************************************
 *
 *  $FC Função: ARV Ir para nó à esquerda
+*
+*  $EP Parâmetros
+*     $P pArvore - ponteiro para a estrutura árvore
 *
 *  $FV Valor retornado
 *     ARV_CondRetOK
@@ -173,12 +186,15 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_IrNoEsquerda( void ) ;
+   ARV_tpCondRet ARV_IrNoEsquerda( void * pArvore ) ;
 
 
 /***********************************************************************
 *
 *  $FC Função: ARV Ir para nó à direita
+*
+*  $EP Parâmetros
+*     $P pArvore - ponteiro para a estrutura árvore
 *
 *  $FV Valor retornado
 *     ARV_CondRetOK
@@ -188,7 +204,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_IrNoDireita( void ) ;
+   ARV_tpCondRet ARV_IrNoDireita( void * pArvore ) ;
 
 
 /***********************************************************************
@@ -196,6 +212,7 @@
 *  $FC Função: ARV Obter valor corrente
 *
 *  $EP Parâmetros
+*     $P pArvore - ponteiro para a estrutura árvore
 *     $P ValorParm - é o parâmetro que receberá o valor contido no nó.
 *                    Este parâmetro é passado por referência.
 *
@@ -206,7 +223,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_ObterValorCorr( char * ValorParm ) ;
+   ARV_tpCondRet ARV_ObterValorCorr( void * pArvore, char * ValorParm ) ;
 
 #undef ARVORE_EXT
 

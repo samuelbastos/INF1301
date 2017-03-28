@@ -87,16 +87,11 @@
 
    } tpArvore ;
 
-/*****  Dados encapsulados no módulo  *****/
-
-      static tpArvore * pArvore = NULL ;
-            /* Ponteiro para a cabe‡a da árvore */
-
 /***** Protótipos das funções encapuladas no módulo *****/
 
    static tpNoArvore * CriarNo( char ValorParm ) ;
 
-   static ARV_tpCondRet CriarNoRaiz( char ValorParm ) ;
+   static ARV_tpCondRet CriarNoRaiz( tpArvore ** ptArvore, char ValorParm ) ;
 
    static void DestroiArvore( tpNoArvore * pNo ) ;
 
@@ -107,12 +102,12 @@
 *  Função: ARV Criar árvore
 *  ****/
 
-   ARV_tpCondRet ARV_CriarArvore( void )
+   ARV_tpCondRet ARV_CriarArvore( tpArvore ** ptArvore )
    {
-
+	  tpArvore * pArvore = (*ptArvore);
       if ( pArvore != NULL )
       {
-         ARV_DestruirArvore( ) ;
+         ARV_DestruirArvore( ptArvore ) ;
       } /* if */
 
       pArvore = ( tpArvore * ) malloc( sizeof( tpArvore )) ;
@@ -124,6 +119,8 @@
       pArvore->pNoRaiz = NULL ;
       pArvore->pNoCorr = NULL ;
 
+	  (*ptArvore) = pArvore;
+
       return ARV_CondRetOK ;
 
    } /* Fim função: ARV Criar árvore */
@@ -133,19 +130,21 @@
 *  Função: ARV Destruir árvore
 *  ****/
 
-   void ARV_DestruirArvore( void )
+   void ARV_DestruirArvore( tpArvore ** ptArvore )
    {
-
-      if ( pArvore != NULL )
-      {
-         if ( pArvore->pNoRaiz != NULL )
-         {
-            DestroiArvore( pArvore->pNoRaiz ) ;
-         } /* if */
-         free( pArvore ) ;
-         pArvore = NULL ;
-      } /* if */
-
+	  tpArvore * pArvore = (*ptArvore);
+	  if ( ptArvore != NULL)
+	  {
+		  if ( pArvore != NULL )
+		  {
+			 if ( pArvore->pNoRaiz != NULL )
+			 {
+				DestroiArvore( pArvore->pNoRaiz ) ;
+			 } /* if */
+			 free( pArvore ) ;
+			 (*ptArvore) = NULL ;
+		  } /* if */
+	  }
    } /* Fim função: ARV Destruir árvore */
 
 /***************************************************************************
@@ -153,7 +152,7 @@
 *  Função: ARV Adicionar filho à esquerda
 *  ****/
 
-   ARV_tpCondRet ARV_InserirEsquerda( char ValorParm )
+   ARV_tpCondRet ARV_InserirEsquerda( tpArvore ** ptArvore, char ValorParm )
    {
 
       ARV_tpCondRet CondRet ;
@@ -161,9 +160,11 @@
       tpNoArvore * pCorr ;
       tpNoArvore * pNo ;
 
+	  tpArvore * pArvore = (*ptArvore);
+
       /* Tratar vazio, esquerda */
 
-         CondRet = CriarNoRaiz( ValorParm ) ;
+         CondRet = CriarNoRaiz( ptArvore, ValorParm ) ;
          if ( CondRet != ARV_CondRetNaoCriouRaiz )
          {
             return CondRet ;
@@ -202,7 +203,7 @@
 *  Função: ARV Adicionar filho à direita
 *  ****/
 
-   ARV_tpCondRet ARV_InserirDireita( char ValorParm )
+   ARV_tpCondRet ARV_InserirDireita( tpArvore ** ptArvore, char ValorParm )
    {
 
       ARV_tpCondRet CondRet ;
@@ -210,9 +211,11 @@
       tpNoArvore * pCorr ;
       tpNoArvore * pNo ;
 
+	  tpArvore * pArvore = (*ptArvore);
+
       /* Tratar vazio, direita */
 
-         CondRet = CriarNoRaiz( ValorParm ) ;
+         CondRet = CriarNoRaiz( ptArvore, ValorParm ) ;
          if ( CondRet != ARV_CondRetNaoCriouRaiz )
          {
             return CondRet ;
@@ -251,7 +254,7 @@
 *  Função: ARV Ir para nó pai
 *  ****/
 
-   ARV_tpCondRet ARV_IrPai( void )
+   ARV_tpCondRet ARV_IrPai( tpArvore * pArvore )
    {
 
       if ( pArvore == NULL )
@@ -278,7 +281,7 @@
 *  Função: ARV Ir para nó à esquerda
 *  ****/
 
-   ARV_tpCondRet ARV_IrNoEsquerda( void )
+   ARV_tpCondRet ARV_IrNoEsquerda( tpArvore * pArvore )
    {
 
       if ( pArvore == NULL )
@@ -306,7 +309,7 @@
 *  Função: ARV Ir para nó à direita
 *  ****/
 
-   ARV_tpCondRet ARV_IrNoDireita( void )
+   ARV_tpCondRet ARV_IrNoDireita( tpArvore * pArvore )
    {
 
       if ( pArvore == NULL )
@@ -334,7 +337,7 @@
 *  Função: ARV Obter valor corrente
 *  ****/
 
-   ARV_tpCondRet ARV_ObterValorCorr( char * ValorParm )
+   ARV_tpCondRet ARV_ObterValorCorr( tpArvore * pArvore, char * ValorParm )
    {
 
       if ( pArvore == NULL )
@@ -398,15 +401,16 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet CriarNoRaiz( char ValorParm )
+   ARV_tpCondRet CriarNoRaiz( tpArvore ** ptArvore, char ValorParm )
    {
 
       ARV_tpCondRet CondRet ;
       tpNoArvore * pNo ;
+	  tpArvore * pArvore = (*ptArvore);
 
-      if ( pArvore == NULL )
+      if ( ptArvore == NULL )
       {
-         CondRet = ARV_CriarArvore( ) ;
+         CondRet = ARV_CriarArvore( ptArvore ) ;
 
          if ( CondRet != ARV_CondRetOK )
          {
