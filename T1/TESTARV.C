@@ -53,6 +53,7 @@
 #include    "lerparm.h"
 
 #include    "arvore.h"
+#include	"lista.h"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
