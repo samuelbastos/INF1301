@@ -6,7 +6,7 @@ Data            Horas Trabalhadas     TipoTarefa        Descrição da Tarefa Re
                                                         
 22/03           1                     Estudar		        Remoção de DLL do executavel gerado pelo VS.
 
-27/03				    3                     Codificar		      Colocar todos os arquivos necessarios no repositorio do github.
+27/03           3                     Codificar		      Colocar todos os arquivos necessarios no repositorio do github.
                                                         Modificar o módulo de árvore para que o mesmo pudesse criar várias instâncias de
                                                         árvore ao em vez de só uma.
                                                         Incluido o módulo de listas no projeto.
