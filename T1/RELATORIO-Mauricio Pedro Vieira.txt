@@ -1,8 +1,10 @@
-Data            Horas Trabalhadas     TipoTarefa        Descrição da Tarefa Realizada
-20/03           3                     Configuração      Instalação do arcabouço no projeto;
+﻿Data            Horas Trabalhadas     TipoTarefa        Descrição da Tarefa Realizada
+20/03           3                     Estudar		Instalação do arcabouço no projeto;
                                                         Compilação e execução do projeto sem nenhuma modificação no Prompt.
                                                         Compilação e execução do projeto sem nenhuma modificação no Visual Studio.
                                                         Executar o projeto passando scripts de parametro no Prompt e VS.
                                                         
-22/03           1                     Configuração      Remoção de DLL do executavel gerado pelo VS.
+22/03           1                     Estudar		Remoção de DLL do executavel gerado pelo VS.
+
+27/03				      Codificar		Colocar todos os arquivos necessarios no git
                                                                 
