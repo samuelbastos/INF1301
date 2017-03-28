@@ -61,6 +61,15 @@
 
          char Valor ;
                /* Valor do nó */
+		 
+		 void* Lista ;
+               /* Valor do nó */
+
+		 char Chave;
+			  /* Valor alfanumérico que representa a ordem que as folhas costuradas devem respeitar */
+
+		 struct tgNoArvore * pNoCosturado;
+			 /* Ponteiro para a próxima folha da costura */
 
    } tpNoArvore ;
 

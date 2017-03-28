@@ -88,7 +88,8 @@
 *     Caso já exista uma árvore, esta será destruída.
 *
 *  $EP Parâmetros
-*     $P pArvore - ponteiro para apontar para a arvore criada
+*     $P ptArvore - ponteiro passado por referência para apontar para a 
+*				    árvore criada
 *
 *  $FV Valor retornado
 *     ARV_CondRetOK
@@ -104,7 +105,8 @@
 *  $FC Função: ARV Destruir árvore
 *
 *  $EP Parâmetros
-*     $P pArvore - ponteiro que aponta para a árvore que será destruida
+*     $P ptArvore - ponteiro passado por referência que aponta para a 
+*                   árvore que será destruida
 *
 *  $ED Descrição da função
 *     Destrói o corpo e a cabeça da árvore, anulando a árvore corrente.
@@ -120,7 +122,8 @@
 *  $FC Função: ARV Adicionar filho à esquerda
 *
 *  $EP Parâmetros
-*     $P pArvore - ponteiro que aponta para a árvore onde o filho será adicionado
+*     $P ptArvore - ponteiro passado por referência que aponta para a 
+*				    árvore onde o filho será adicionado
 *     $P ValorParm - valor a ser inserido no novo nó.
 *
 *  $FV Valor retornado
@@ -139,7 +142,8 @@
 *  $FC Função: ARV Adicionar filho à direita
 *
 *  $EP Parâmetros
-*     $P pArvore - ponteiro que aponta para a árvore onde o filho será adicionado
+*     $P ptArvore - ponteiro passado por referência que aponta para a 
+*				    árvore onde o filho será adicionado
 *     $P ValorParm - valor a ser inserido no novo nó
 *
 *  $FV Valor retornado
