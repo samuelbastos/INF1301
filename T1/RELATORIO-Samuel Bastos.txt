@@ -6,6 +6,6 @@ Data            Horas Trabalhadas              TipoTarefa       Descrição da T
 
 30/03		5 			       Estudo 		Estudo do código para entender como os scripts de teste são interpretados;
                                                                 Estudo do código para entender as funções do módulo de árvore e suas condições de retorno.
-					       Imprementação	Escrita do primeiro script de testes; Pequenas modificações no código.
+					       Implementação	Escrita do primeiro script de testes; Pequenas modificações no código.
 
 
