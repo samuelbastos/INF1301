@@ -58,18 +58,15 @@
                *
                *$EED Assertivas estruturais
                *   se pNoDir do nó X != NULL então pNoPai de pNoDir aponta para o nó X */
-
-         char Valor ;
-               /* Valor do nó */
-		 
-		 void* Lista ;
+       
+       void* Lista ;
                /* Valor do nó */
 
-		 char Chave;
-			  /* Valor alfanumérico que representa a ordem que as folhas costuradas devem respeitar */
+       char Chave;
+           /* Valor alfanumérico que representa a ordem que as folhas costuradas devem respeitar */
 
-		 struct tgNoArvore * pNoCosturado;
-			 /* Ponteiro para a próxima folha da costura */
+       struct tgNoArvore * pNoCosturado;
+          /* Ponteiro para a próxima folha da costura */
 
    } tpNoArvore ;
 
@@ -113,7 +110,7 @@
 
    ARV_tpCondRet ARV_CriarArvore( tpArvore ** ptArvore )
    {
-	  tpArvore * pArvore = (*ptArvore);
+     tpArvore * pArvore = (*ptArvore);
       if ( pArvore != NULL )
       {
          ARV_DestruirArvore( ptArvore ) ;
@@ -128,7 +125,7 @@
       pArvore->pNoRaiz = NULL ;
       pArvore->pNoCorr = NULL ;
 
-	  (*ptArvore) = pArvore;
+     (*ptArvore) = pArvore;
 
       return ARV_CondRetOK ;
 
@@ -141,19 +138,19 @@
 
    void ARV_DestruirArvore( tpArvore ** ptArvore )
    {
-	  tpArvore * pArvore = (*ptArvore);
-	  if ( ptArvore != NULL)
-	  {
-		  if ( pArvore != NULL )
-		  {
-			 if ( pArvore->pNoRaiz != NULL )
-			 {
-				DestroiArvore( pArvore->pNoRaiz ) ;
-			 } /* if */
-			 free( pArvore ) ;
-			 (*ptArvore) = NULL ;
-		  } /* if */
-	  }
+     tpArvore * pArvore = (*ptArvore);
+     if ( ptArvore != NULL)
+     {
+        if ( pArvore != NULL )
+        {
+          if ( pArvore->pNoRaiz != NULL )
+          {
+            DestroiArvore( pArvore->pNoRaiz ) ;
+          } /* if */
+          free( pArvore ) ;
+          (*ptArvore) = NULL ;
+        } /* if */
+     }
    } /* Fim função: ARV Destruir árvore */
 
 /***************************************************************************
@@ -169,15 +166,15 @@
       tpNoArvore * pCorr ;
       tpNoArvore * pNo ;
 
-	  tpArvore * pArvore = (*ptArvore);
+     tpArvore * pArvore = (*ptArvore);
 
       /* Tratar vazio, esquerda */
-
-         CondRet = CriarNoRaiz( ptArvore, ValorParm ) ;
-         if ( CondRet != ARV_CondRetNaoCriouRaiz )
-         {
-            return CondRet ;
-         } /* if */
+       
+     CondRet = CriarNoRaiz( ptArvore, ValorParm ) ;
+     if ( CondRet != ARV_CondRetNaoCriouRaiz )
+     {
+        return CondRet ;
+     } /* if */
 
       /* Criar nó à esquerda de folha */
 
@@ -220,15 +217,14 @@
       tpNoArvore * pCorr ;
       tpNoArvore * pNo ;
 
-	  tpArvore * pArvore = (*ptArvore);
+     tpArvore * pArvore = (*ptArvore);
 
       /* Tratar vazio, direita */
-
-         CondRet = CriarNoRaiz( ptArvore, ValorParm ) ;
-         if ( CondRet != ARV_CondRetNaoCriouRaiz )
-         {
-            return CondRet ;
-         } /* if */
+     CondRet = CriarNoRaiz( ptArvore, ValorParm ) ;
+     if ( CondRet != ARV_CondRetNaoCriouRaiz )
+     {
+        return CondRet ;
+     } /* if */
 
       /* Criar nó à direita de folha */
 
@@ -357,7 +353,7 @@
       {
          return ARV_CondRetArvoreVazia ;
       } /* if */
-      * ValorParm = pArvore->pNoCorr->Valor ;
+      * ValorParm = pArvore->pNoCorr->Chave ;
 
       return ARV_CondRetOK ;
 
@@ -393,7 +389,8 @@
       pNo->pNoPai = NULL ;
       pNo->pNoEsq = NULL ;
       pNo->pNoDir = NULL ;
-      pNo->Valor  = ValorParm ;
+      pNo->Chave  = ValorParm ;
+     pNo->Lista = NULL;
       return pNo ;
 
    } /* Fim função: ARV Criar nó da árvore */
@@ -415,7 +412,7 @@
 
       ARV_tpCondRet CondRet ;
       tpNoArvore * pNo ;
-	  tpArvore * pArvore = (*ptArvore);
+     tpArvore * pArvore = (*ptArvore);
 
       if ( ptArvore == NULL )
       {
@@ -472,4 +469,3 @@
    } /* Fim função: ARV Destruir a estrutura da árvore */
 
 /********** Fim do módulo de implementação: Módulo árvore **********/
-
