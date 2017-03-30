@@ -1,0 +1,156 @@
+== Árvore não existe, não pode ir à esquerda
+=iresq 4
+
+== Recupera falha (nunca vai dar 0)
+=iresq 0 
+=recuperar
+
+== Árvore não existe, não pode ir à direita
+=irdir 4
+
+== Recupera falha (nunca vai dar 0)
+=irdir 0
+=recuperar
+
+== Verificar ObterValorCorr relativo a árvore inexistente
+=obter  '!'   4
+
+== Árvore vazia, não consegue obter valor
+=obter  '!'   0
+=recuperar
+=obter  'z'   4
+=recuperar
+
+== Árvore vazia, não consegue ir ao pai
+=irpai 4
+
+== Recupera falha (nunca vai dar 0)
+=irpai 0
+=recuperar
+
+== Criar árvore (sempre consegue criar, mesmo se já houver árvore (sobrescreve))
+=criar  0
+
+== Verificar se a arvore criada está vazia
+=irdir      5
+=iresq      5
+=irpai      5
+=obter      '!'   5
+
+== Insere nó inicial
+=insdir 'a' 0
+
+== Volta ao pai (não consegue, já é raiz)
+=irpai 6
+
+== Insere a esquerda nó
+=insesq 'b' 0
+
+== Volta ao pai
+=irpai 0
+
+== Insere nó a esquerda (já existe, não vai conseguir)
+=insesq 'y' 3
+
+== Recupera falha 
+=insesq 'y' 0
+=recuperar
+== Insere nó a direita
+=insdir 'x' 0
+
+== Volta para o pai
+=irpai 0
+
+== Tenta buscar pai do nó raiz
+=irpai 6
+
+== Recupera falha 
+=irpai 0
+=recuperar
+
+== Volta ao nó esquerdo
+=iresq 0
+
+== Tenta ir à folhas inexistentes
+=irdir 7
+=iresq 7
+
+== Recupera tentativa 
+=irdir 0 
+=recuperar
+=iresq 0
+=recuperar
+
+== Insere nó a direita e esquerda e volta para pai
+=insdir 'c' 0
+=irpai 0
+=insesq 'd' 0
+=irpai 0
+
+== Tenta fazer inserção de nós que já existem
+=insdir 'e' 3
+=insesq 'f' 3
+
+== Recupera falha anterior
+=insdir 'g' 0
+=recuperar
+=insesq 'h' 0
+=recuperar
+
+== Vai para esquerda e obtem valor
+=iresq 0
+=obter 'd' 0
+
+== Percorre a árvore inteira
+=irpai 0
+=irpai 0
+=obter 'a' 0
+=iresq 0
+=obter 'b' 0
+=iresq 0
+=obter 'd' 0
+=irpai 0
+=irdir 0
+=obter 'c' 0
+=irpai 0
+=irpai 0
+=irdir 0
+=obter 'x' 0
+
+== Insere mais duas folhas ao atual
+=insesq 'e' 0
+=irpai 0
+=insdir  'f' 0
+
+== Vai a direita/esquerda (não tem filho)
+=irdir 7
+=iresq 7
+
+== Insere nó a direita
+=insdir 'q' 0
+
+== Destroi árvore
+=destruir 0
+
+== Cria árvore nova
+=criar 0
+
+== Insere primeiro nó
+=insdir 'a' 0
+
+== Insere nó a direita e esquerda 
+=insdir 'b' 0
+=irpai 0
+=insesq 'c' 0
+=irpai 0
+
+== Checa valores
+=obter 'a' 0
+=irdir 0
+=obter 'b' 0
+=irpai 0
+=iresq 0
+=obter 'c' 0
+
+== Destroi nova árvore
+=destruir 0
