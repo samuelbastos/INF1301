@@ -4,7 +4,8 @@ Data            Horas Trabalhadas              TipoTarefa       Descrição da T
 
 19/03           0.5                            Configuração     Setup para rodar programa pelo Visual Studio.
 
-30/03		5 			       Estudo 		Estudo do código para entender como os scripts de teste são 									interpretados; Estudo do código para entender as funções do módulo 						  		   de árvore e suas condições de retorno.
-					       Imprementação	Escrita do primeiro script de testes; Pequenas modificações no                                                                     código.
+30/03		5 			       Estudo 		Estudo do código para entender como os scripts de teste são interpretados;
+                                                                Estudo do código para entender as funções do módulo de árvore e suas condições de retorno.
+					       Imprementação	Escrita do primeiro script de testes; Pequenas modificações no código.
 
 
