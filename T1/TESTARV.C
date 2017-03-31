@@ -99,6 +99,7 @@ void * arvores[10];
       char ValorEsperado = '?'  ;
       char ValorObtido   = '!'  ;
       char ValorDado     = '\0' ;
+	  int  ArvoreObtida   = 11  ;
 
       int  NumLidos = -1 ;
 
@@ -109,14 +110,21 @@ void * arvores[10];
          if ( strcmp( ComandoTeste , CRIAR_ARV_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i" ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 1 )
+            NumLidos = LER_LerParametros( "ii" ,
+                               &ArvoreObtida, &CondRetEsperada ) ;
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_CriarArvore(&arvores[0]) ;
+			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
+			{
+				CondRetObtido = ARV_CriarArvore(&arvores[ArvoreObtida]);
+			}
+			else
+			{
+				CondRetObtido = ARV_CondRetAcessoInvalidoVetor;
+			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
@@ -128,14 +136,21 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , INS_DIR_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ci" ,
-                               &ValorDado , &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
+            NumLidos = LER_LerParametros( "ici" ,
+                               &ArvoreObtida, &ValorDado , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_InserirDireita( &arvores[0], ValorDado ) ;
+			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
+			{
+				CondRetObtido = ARV_InserirDireita( &arvores[ArvoreObtida], ValorDado ) ;
+			}
+			else
+			{
+				CondRetObtido = ARV_CondRetAcessoInvalidoVetor;
+			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado inserir àa direita." );
@@ -147,14 +162,21 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , INS_ESQ_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ci" ,
-                               &ValorDado , &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
+            NumLidos = LER_LerParametros( "ici" ,
+                               &ArvoreObtida, &ValorDado , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_InserirEsquerda( &arvores[0], ValorDado ) ;
+			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
+			{
+				CondRetObtido = ARV_InserirEsquerda( &arvores[ArvoreObtida], ValorDado ) ;
+			}
+			else
+			{
+				CondRetObtido = ARV_CondRetAcessoInvalidoVetor;
+			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao inserir à esquerda." );
@@ -166,14 +188,21 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , IR_PAI_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i" ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 1 )
+            NumLidos = LER_LerParametros( "ii" ,
+                               &ArvoreObtida, &CondRetEsperada ) ;
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_IrPai( arvores[0] ) ;
+			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
+			{
+				CondRetObtido = ARV_IrPai( arvores[ArvoreObtida] ) ;
+			}
+			else
+			{
+				CondRetObtido = ARV_CondRetAcessoInvalidoVetor;
+			}			
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para pai." );
@@ -185,14 +214,21 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , IR_ESQ_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i" ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 1 )
+            NumLidos = LER_LerParametros( "ii" ,
+                               &ArvoreObtida, &CondRetEsperada ) ;
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_IrNoEsquerda( arvores[0] ) ;
+			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
+			{
+				CondRetObtido = ARV_IrNoEsquerda( arvores[ArvoreObtida] ) ;
+			}
+			else
+			{
+				CondRetObtido = ARV_CondRetAcessoInvalidoVetor;
+			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para esquerda." );
@@ -204,14 +240,21 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , IR_DIR_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "i" ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 1 )
+            NumLidos = LER_LerParametros( "ii" ,
+                               &ArvoreObtida, &CondRetEsperada ) ;
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_IrNoDireita( arvores[0] ) ;
+			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
+			{
+				CondRetObtido = ARV_IrNoDireita( arvores[ArvoreObtida] ) ;
+			}
+			else
+			{
+				CondRetObtido = ARV_CondRetAcessoInvalidoVetor;
+			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para direita." );
@@ -223,14 +266,21 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , OBTER_VAL_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ci" ,
-                               &ValorEsperado , &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
+            NumLidos = LER_LerParametros( "ici" ,
+                               &ArvoreObtida, &ValorEsperado , &CondRetEsperada ) ;
+            if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = ARV_ObterValorCorr( arvores[0], &ValorObtido ) ;
+			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
+			{
+				CondRetObtido = ARV_ObterValorCorr( arvores[ArvoreObtida], &ValorObtido ) ;
+			}
+			else
+			{
+				CondRetObtido = ARV_CondRetAcessoInvalidoVetor;
+			}
 
             Ret = TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                    "Retorno errado ao obter valor corrente." );
@@ -249,14 +299,20 @@ void * arvores[10];
 
          else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
+			NumLidos = LER_LerParametros( "i", &ArvoreObtida ) ;
 
-            ARV_DestruirArvore( &arvores[0] ) ;
+			if ( NumLidos != 1 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            ARV_DestruirArvore( &arvores[ArvoreObtida] ) ;
 
             return TST_CondRetOK ;
 
          } /* fim ativa: Testar ARV Destruir árvore */
 
-      return TST_CondRetNaoConhec ;
+      return TST_CondRetNaoConhec ;	
 
    } /* Fim função: TARV Efetuar operações de teste específicas para árvore */
 
