@@ -13,8 +13,8 @@
 == Volta ao pai (não consegue, já é raiz)
 =irpai 0 6
 
-== Insere a esquerda nó
-=insesq 0 'b' 4 5 6 0
+== Insere a esquerda nó (COM LISTA VAZIA)
+=insesq 0 'b' 0 0 0 0
 
 == Volta ao pai
 =irpai 0 0
