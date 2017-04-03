@@ -8,4 +8,6 @@ Data            Horas Trabalhadas              TipoTarefa       Descrição da T
                                                                 Estudo do código para entender as funções do módulo de árvore e suas condições de retorno.
 					       Implementação	Escrita do primeiro script de testes; Pequenas modificações no código.
 
+30/03           3                              Implementação    Mudança no TesteArvore para suportar o vetor de árvores;
+                                                                Novo script de testes refletindo mudanças 
 
