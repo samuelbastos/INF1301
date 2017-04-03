@@ -1,4 +1,5 @@
 Data            Horas Trabalhadas              TipoTarefa       Descrição da Tarefa Realizada
+
 17/03           2                              Estudo           Instalação do arcabouço no projeto;
                                                                 Compilação e execução do projeto sem nenhuma modificação.
 
@@ -9,5 +10,8 @@ Data            Horas Trabalhadas              TipoTarefa       Descrição da T
 					       Implementação	Escrita do primeiro script de testes; Pequenas modificações no código.
 
 30/03           3                              Implementação    Mudança no TesteArvore para suportar o vetor de árvores;
-                                                                Novo script de testes refletindo mudanças 
+                                                                Novo script de testes refletindo mudanças. 
 
+02/04           2                              Implementação    Possibilidade de passar valores das listas como parâmetro;
+                                                                Novo script de testes básico para checar se a criação das listas e seus
+                                                                preenchimentos estão ok.
