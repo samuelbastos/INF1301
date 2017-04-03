@@ -1,0 +1,46 @@
+== Criar árvore (sempre consegue criar, mesmo se já houver árvore (sobrescreve))
+=criar 0 0
+
+== Insere nó inicial
+=insdir 0 'a' 0 0 0 0
+
+== Insere a esquerda nó
+=insesq 0 'b' 0 0 0 0
+
+== Volta ao pai
+=irpai 0 0
+
+== Insere nó a direita
+=insdir 0 'x' 7 8 9 0
+
+== Volta para o pai
+=irpai 0 0
+
+== Volta ao nó esquerdo
+=iresq 0 0
+
+== Insere nó a direita e esquerda e volta para pai
+=insdir 0 'c' 10 11 12 0
+=irpai 0 0
+=insesq 0 'd' 13 14 15 0
+=irpai 0 0
+
+== Vai para esquerda e obtem valor
+=iresq 0 0
+=obter 0 'd' 0
+
+== Percorre a árvore inteira
+=irpai 0 0
+=irpai 0 0
+=obter 0 'a' 0
+=iresq 0 0
+=obter 0 'b' 0
+=iresq 0 0
+=obter 0 'd' 0
+=irpai 0 0
+=irdir 0 0
+=obter 0 'c' 0
+=irpai 0 0
+=irpai 0 0
+=irdir 0 0
+=obter 0 'x' 0

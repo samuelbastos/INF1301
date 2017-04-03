@@ -38,25 +38,26 @@
 =obter  0    '!'   5
 
 == Insere nó inicial
-=insdir 0 'a' 0
+=insdir 0 'a' 0 0 0 0
 
 == Volta ao pai (não consegue, já é raiz)
 =irpai 0 6
 
 == Insere a esquerda nó
-=insesq 0 'b' 0
+=insesq 0 'b' 0 0 0 0
 
 == Volta ao pai
 =irpai 0 0
 
 == Insere nó a esquerda (já existe, não vai conseguir)
-=insesq 0 'y' 3
+=insesq 0 'y' 1 2 3 3
 
 == Recupera falha 
-=insesq 0 'y' 0
+=insesq 0 'y' 1 2 3 0
 =recuperar
+
 == Insere nó a direita
-=insdir 0 'x' 0
+=insdir 0 'x' 0 0 0 0
 
 == Volta para o pai
 =irpai 0 0
@@ -82,19 +83,19 @@
 =recuperar
 
 == Insere nó a direita e esquerda e volta para pai
-=insdir 0 'c' 0
+=insdir 0 'c' 10 11 12 0
 =irpai 0 0
-=insesq 0 'd' 0
+=insesq 0 'd' 13 14 15 0
 =irpai 0 0
 
 == Tenta fazer inserção de nós que já existem
-=insdir 0 'e' 3
-=insesq 0 'f' 3
+=insdir 0 'e' 1 2 3 3
+=insesq 0 'f' 1 2 3 3
 
 == Recupera falha anterior
-=insdir 0 'g' 0
+=insdir 0 'g' 1 2 3 0
 =recuperar
-=insesq 0 'h' 0
+=insesq 0 'h' 1 2 3 0
 =recuperar
 
 == Vai para esquerda e obtem valor
@@ -118,16 +119,16 @@
 =obter 0 'x' 0
 
 == Insere mais duas folhas ao atual
-=insesq 0 'e' 0
+=insesq 0 'e' 16 17 18 0
 =irpai 0 0
-=insdir  0 'f' 0
+=insdir  0 'f' 0 0 0 0
 
 == Vai a direita/esquerda (não tem filho)
 =irdir 0 7
 =iresq 0 7
 
 == Insere nó a direita
-=insdir 0 'q' 0
+=insdir 0 'q' 22 23 24 0
 
 == Destroi árvore
 =destruir 0 0
@@ -136,12 +137,12 @@
 =criar 1 0
 
 == Insere primeiro nó
-=insdir 1 'a' 0
+=insdir 1 'a' 1 2 3 0
 
 == Insere nó a direita e esquerda 
-=insdir 1 'b' 0
+=insdir 1 'b' 4 5 6 0
 =irpai 1 0
-=insesq 1 'c' 0
+=insesq 1 'c' 7 8 9 0
 =irpai 1 0
 
 == Checa valores
@@ -176,25 +177,25 @@
 =obter  7    '!'   5
 
 == (ARVORE_ALEATORIA)Insere nó inicial
-=insdir 7 'a' 0
+=insdir 7 'a' 1 2 3 0
 
 == (ARVORE_ALEATORIA)Volta ao pai (não consegue, já é raiz)
 =irpai 7 6
 
 == (ARVORE_ALEATORIA)Insere a esquerda nó
-=insesq 7 'b' 0
+=insesq 7 'b' 4 5 6 0
 
 == (ARVORE_ALEATORIA)Volta ao pai
 =irpai 7 0
 
 == (ARVORE_ALEATORIA)Insere nó a esquerda (já existe, não vai conseguir)
-=insesq 7 'y' 3
+=insesq 7 'y' 1 2 3 3
 
 == (ARVORE_ALEATORIA)Recupera falha 
-=insesq 7 'y' 0
+=insesq 7 'y' 1 2 3 0
 =recuperar
 == Insere nó a direita
-=insdir 7 'x' 0
+=insdir 7 'x' 1 2 3 0
 
 == (ARVORE_ALEATORIA)Volta para o pai
 =irpai 7 0
@@ -220,14 +221,14 @@
 =recuperar
 
 == (ARVORE_ALEATORIA)Insere nó a direita e esquerda e volta para pai
-=insdir 7 'c' 0
+=insdir 7 'c' 7 8 9 0
 =irpai 7 0
-=insesq 7 'd' 0
+=insesq 7 'd' 10 11 12 0
 =irpai 7 0
 
 == (ARVORE_ALEATORIA)Tenta fazer inserção de nós que já existem
-=insdir 7 'e' 3
-=insesq 7 'f' 3
+=insdir 7 'e' 1 2 3 3
+=insesq 7 'f' 1 2 3 3
 
 == Destroi todas as árvores
 =destruir 2 0
@@ -250,7 +251,7 @@
 =recuperar
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Insere nó inicial
-=insdir 13 'a' 0
+=insdir 13 'a' 1 2 3 0
 =recuperar
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Volta ao pai (não consegue, já é raiz)
@@ -258,7 +259,7 @@
 =recuperar
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Insere a esquerda nó
-=insesq 13 'b' 0
+=insesq 13 'b' 1 2 3 0
 =recuperar
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Volta ao pai
@@ -272,13 +273,13 @@
 =obter  10    '!'   9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Insere nó inicial
-=insdir 10 'a' 9
+=insdir 10 'a' 1 2 3 9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Volta ao pai (não consegue, já é raiz)
 =irpai 10 9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Insere a esquerda nó
-=insesq 10 'b' 9
+=insesq 10 'b' 1 2 3 9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Volta ao pai
 =irpai 10 9
@@ -292,13 +293,13 @@
 =obter  -1    '!'   9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Insere nó inicial
-=insdir -1 'a' 9
+=insdir -1 'a' 1 2 3 9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Volta ao pai (não consegue, já é raiz)
 =irpai -1 9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Insere a esquerda nó
-=insesq -1 'b' 9
+=insesq -1 'b' 1 2 3 9
 
 == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Volta ao pai
 =irpai -1 9

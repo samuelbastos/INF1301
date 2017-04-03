@@ -263,6 +263,7 @@
    ARV_tpCondRet ARV_IrPai( tpArvore * pArvore )
    {
 	   int valorA, valorB, valorC;
+	   char chave;
 
       if ( pArvore == NULL )
       {
@@ -285,6 +286,7 @@
 			  valorB = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
 			  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
 			  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
+			  chave = pArvore->pNoCorr->Chave;
 		  }
 
          return ARV_CondRetOK ;
@@ -303,6 +305,7 @@
    ARV_tpCondRet ARV_IrNoEsquerda( tpArvore * pArvore )
    {
 	  int valorA, valorB, valorC;
+	  char chave;
 
       if ( pArvore == NULL )
       {
@@ -328,6 +331,7 @@
 		  valorB = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
 		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
 		  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
+		  chave = pArvore->pNoCorr->Chave;
 	  }
       return ARV_CondRetOK ;
 
@@ -341,6 +345,7 @@
    ARV_tpCondRet ARV_IrNoDireita( tpArvore * pArvore )
    {
 	    int valorA, valorB, valorC;
+		char chave;
 
       if ( pArvore == NULL )
       {
@@ -366,6 +371,7 @@
 		  valorB = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
 		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
 		  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
+		  chave = pArvore->pNoCorr->Chave;
 	  }
       return ARV_CondRetOK ;
 
