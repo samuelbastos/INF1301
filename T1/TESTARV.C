@@ -100,6 +100,9 @@ void * arvores[10];
       char ValorObtido   = '!'  ;
       char ValorDado     = '\0' ;
 	  int  ArvoreObtida   = 11  ;
+	  int valorListaA = 0;
+	  int valorListaB = 0;
+	  int valorListaC = 0;
 
       int  NumLidos = -1 ;
 
@@ -112,6 +115,7 @@ void * arvores[10];
 
             NumLidos = LER_LerParametros( "ii" ,
                                &ArvoreObtida, &CondRetEsperada ) ;
+
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
@@ -136,16 +140,16 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , INS_DIR_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ici" ,
-                               &ArvoreObtida, &ValorDado , &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
+            NumLidos = LER_LerParametros( "iciiii" ,
+                               &ArvoreObtida, &ValorDado , &valorListaA, &valorListaB, &valorListaC, &CondRetEsperada ) ;
+            if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
             } /* if */
 
 			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
 			{
-				CondRetObtido = ARV_InserirDireita( &arvores[ArvoreObtida], ValorDado ) ;
+				CondRetObtido = ARV_InserirDireita( &arvores[ArvoreObtida], ValorDado, valorListaA, valorListaB, valorListaC ) ;
 			}
 			else
 			{
@@ -162,16 +166,16 @@ void * arvores[10];
          else if ( strcmp( ComandoTeste , INS_ESQ_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ici" ,
-                               &ArvoreObtida, &ValorDado , &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
+            NumLidos = LER_LerParametros( "iciiii" ,
+                               &ArvoreObtida, &ValorDado , &valorListaA, &valorListaB, &valorListaC, &CondRetEsperada ) ;
+            if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
             } /* if */
 
 			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
 			{
-				CondRetObtido = ARV_InserirEsquerda( &arvores[ArvoreObtida], ValorDado ) ;
+				CondRetObtido = ARV_InserirEsquerda( &arvores[ArvoreObtida], ValorDado, valorListaA, valorListaB, valorListaC ) ;
 			}
 			else
 			{

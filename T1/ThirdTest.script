@@ -1,0 +1,35 @@
+== Criar árvore (sempre consegue criar, mesmo se já houver árvore (sobrescreve))
+=criar 0 0
+
+== Verificar se a arvore criada está vazia
+=irdir  0    5
+=iresq  0    5
+=irpai  0    5
+=obter  0    '!'   5
+
+== Insere nó inicial
+=insdir 0 'a' 1 2 3 0
+
+== Volta ao pai (não consegue, já é raiz)
+=irpai 0 6
+
+== Insere a esquerda nó
+=insesq 0 'b' 4 5 6 0
+
+== Volta ao pai
+=irpai 0 0
+
+== Cria nó da direita
+=insdir 0 'c' 7 8 9 0
+
+== Vai para o pai
+=irpai 0 0
+
+== Vai para o nó da esquerda
+=iresq 0 0
+
+== Vai para o nó pai
+=irpai 0 0
+
+== Vai para o nó da direita
+=irdir 0 0

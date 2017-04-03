@@ -137,7 +137,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_InserirEsquerda( void ** ptArvore, char ValorParm ) ;
+   ARV_tpCondRet ARV_InserirEsquerda( void ** ptArvore, char ValorParm, int valorA, int valorB, int valorC ) ;
 
 
 /***********************************************************************
@@ -157,7 +157,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_InserirDireita( void ** ptArvore, char ValorParm ) ;
+   ARV_tpCondRet ARV_InserirDireita( void ** ptArvore, char ValorParm, int valorA, int valorB, int valorC ) ;
 
 
 /***********************************************************************
