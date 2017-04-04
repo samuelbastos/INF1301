@@ -148,6 +148,7 @@
 
       pArvore->pNoRaiz = NULL ;
       pArvore->pNoCorr = NULL ;
+	  pArvore->pCostura = NULL;
 
      (*ptArvore) = pArvore;
 
@@ -455,6 +456,7 @@
       pNo->pNoPai = NULL ;
       pNo->pNoEsq = NULL ;
       pNo->pNoDir = NULL ;
+  	  pNo->pNoCosturado = NULL;
       pNo->Chave  = ValorParm ;
 
 	  if(ValorListaA == 0 && ValorListaB == 0 && ValorListaC == 0)
@@ -560,7 +562,7 @@
 
    void DestroiCostura( tpCostura * pCostura )
    {
-
+	  tpNoArvore * currentNo, * deletaPonteiroCostura;
 	  if (pCostura == NULL)
 	  {
 		return;
@@ -568,7 +570,14 @@
 
       if ( pCostura->folhasParaCosturar != NULL )
       {
-		  free(pCostura->folhasParaCosturar);
+	      currentNo = pCostura->primeiroNo;
+	      while (currentNo != NULL)
+	      {
+			  deletaPonteiroCostura = currentNo;
+			  currentNo = currentNo->pNoCosturado;
+			  deletaPonteiroCostura->pNoCosturado = NULL;
+	      }
+	      free(pCostura->folhasParaCosturar);
       } /* if */
 
       free( pCostura ) ;
@@ -630,7 +639,7 @@
 		   return ARV_CondRetArvoreVazia;
 	   } /* if */
 
-	   //DestroiCostura(pARV->pCostura);
+	   DestroiCostura(pARV->pCostura);
 
 	   pARV->pCostura =  ( tpCostura * ) malloc( sizeof( tpCostura ));
 	   pARV->pCostura->folhasParaCosturar = (tpNoArvore **) malloc(8*sizeof(tpNoArvore*));
@@ -645,7 +654,7 @@
 		   minNo = posParaMaximizar;
 		   for (j = posParaMaximizar; j < pARV->pCostura->numeroFolhasArmazenadas; j++)
 		   {
-			   if (pARV->pCostura->folhasParaCosturar[j] < pARV->pCostura->folhasParaCosturar[minNo])
+			   if (pARV->pCostura->folhasParaCosturar[j]->Chave < pARV->pCostura->folhasParaCosturar[minNo]->Chave)
 			   {
 				   minNo = j;
 			   } /* if */
@@ -653,6 +662,7 @@
 		   noAux = pARV->pCostura->folhasParaCosturar[posParaMaximizar];
 		   pARV->pCostura->folhasParaCosturar[posParaMaximizar] = pARV->pCostura->folhasParaCosturar[minNo];
 		   pARV->pCostura->folhasParaCosturar[minNo] = noAux;
+		   posParaMaximizar++;
 	   }
 
 	   for (i = 0; i < pARV->pCostura->numeroFolhasArmazenadas - 1; i++)
@@ -665,6 +675,17 @@
    }
 
 
+   /***********************************************************************
+*
+*  $FC Função: ARV Imprime os nós costurados na ordem em que foram costurados
+*
+*  $FV Valor retornado
+*     ARV_CondRetOK
+*     ARV_CondRetArvoreNaoExiste
+*     ARV_CondRetArvoreVazia
+*	  ARV_CondRetArvoreNaoCosturada
+*
+***********************************************************************/
 
    ARV_tpCondRet ARV_ImprimeCostura( void * pArvore)
    {
@@ -684,10 +705,12 @@
 		   return ARV_CondRetArvoreNaoCosturada;
 	   }
 
-	   printf("Nós da Arvore na ordem em que foram costurados: ");
+	   currentNo = pARV->pCostura->primeiroNo;
+	   printf("\nNós da Arvore na ordem em que foram costurados: ");
 	   while (currentNo != NULL)
 	   {
-		   printf("%c ", &currentNo->Chave);
+		   printf("%c ", currentNo->Chave);
+		   currentNo = currentNo->pNoCosturado;
 	   }
 	   printf("\n");
 

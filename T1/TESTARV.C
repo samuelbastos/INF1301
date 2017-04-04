@@ -298,16 +298,17 @@ void * arvores[10];
 
          else if ( strcmp( ComandoTeste , COSTURA_CMD ) == 0 )
          {
-			NumLidos = LER_LerParametros( "i", &ArvoreObtida ) ;
+			NumLidos = LER_LerParametros( "ii", &ArvoreObtida, &CondRetEsperada ) ;
 
-			if ( NumLidos != 1 )
+			if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            ARV_Costura( arvores[ArvoreObtida] ) ;
+            CondRetObtido = ARV_Costura( arvores[ArvoreObtida] ) ;
 
-            return TST_CondRetOK ;
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                        "Retorno errado ao tentar costurar a árvore." );
 
          } /* fim ativa: Testar ARV Costurar árvore */
 
@@ -315,16 +316,17 @@ void * arvores[10];
 
          else if ( strcmp( ComandoTeste , IMPRIME_COS_CMD ) == 0 )
          {
-			NumLidos = LER_LerParametros( "i", &ArvoreObtida ) ;
+			NumLidos = LER_LerParametros( "ii", &ArvoreObtida, &CondRetEsperada ) ;
 
-			if ( NumLidos != 1 )
+			if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            ARV_ImprimeCostura( arvores[ArvoreObtida] ) ;
+            CondRetObtido = ARV_ImprimeCostura( arvores[ArvoreObtida] ) ;
 
-            return TST_CondRetOK ;
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                        "Retorno errado ao imprimir costura." );
 
          } /* fim ativa: Testar ARV Costurar árvore */
 

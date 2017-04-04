@@ -1,0 +1,107 @@
+== Cria Arvore Para Teste de Costura
+=criar 0 0
+=insesq 0 'a' 0 0 0 0
+=insesq 0 'b' 0 0 0 0
+=insesq 0 'j' 2 24 3 0
+=irpai 0 0
+=insdir 0 'k' 3 3 3 0
+=irpai 0 0
+=irpai 0 0
+=insdir 0 't' 0 0 0 0
+=insesq 0 'm' 0 0 0 0
+=irpai 0 0
+=insdir 0 'x' 0 0 0 0
+=insdir 0 'z' 1 2 3 0
+=irpai 0 0
+=insesq 0 'r' 0 0 0 0
+=insesq 0 'p' -2 -5 1 0
+=irpai 0 0
+=insdir 0 'y' 255 522 0 0
+=costura 0 0
+=imprimecos 0 0
+
+== Cria Arvore com folhas fora de ordem alfabetica Para Teste de Costura
+=criar 1 0
+=insesq 1 'a' 0 0 0 0
+=insesq 1 'b' 0 0 0 0
+=insesq 1 'l' 2 24 3 0
+=irpai 1 0
+=insdir 1 'k' 3 3 3 0
+=irpai 1 0
+=irpai 1 0
+=insdir 1 't' 0 0 0 0
+=insesq 1 'y' 0 0 0 0
+=irpai 1 0
+=insdir 1 'x' 0 0 0 0
+=insdir 1 'c' 1 2 3 0
+=irpai 1 0
+=insesq 1 'r' 0 0 0 0
+=insesq 1 'p' -2 -5 1 0
+=irpai 1 0
+=insdir 1 'z' 255 522 0 0
+=costura 1 0
+=imprimecos 1 0
+
+== Simula mesma Arvore de Costura anterior mas costura, depois adiciona um no e costura novamente
+=criar 1 0
+=insesq 1 'a' 0 0 0 0
+=insesq 1 'b' 0 0 0 0
+=insesq 1 'l' 2 24 3 0
+=irpai 1 0
+=insdir 1 'k' 3 3 3 0
+=irpai 1 0
+=irpai 1 0
+=insdir 1 't' 0 0 0 0
+=insesq 1 'y' 0 0 0 0
+=irpai 1 0
+=insdir 1 'x' 0 0 0 0
+=insdir 1 'c' 1 2 3 0
+=irpai 1 0
+=insesq 1 'r' 0 0 0 0
+=insesq 1 'p' -2 -5 1 0
+=irpai 1 0
+=insdir 1 'z' 255 522 0 0
+=costura 1 0
+=imprimecos 1 0
+=insesq 1 's' 0 2 0 0
+=costura 1 0
+=imprimecos 1 0
+
+== Tenta costurar uma arvore que nao existe
+=costura 2 4
+
+== Tenta costurar uma arvore vazia
+=criar 2 0
+=costura 2 5
+
+== Costura e imprime uma arvore de um unico no
+=insesq 2 'w' 14 25 333 0
+=costura 2 0
+=imprimecos 2 0
+
+== Tenta imprimir uma arvore que nao existe
+=imprimecos 3 4
+
+== Tenta imprimir uma arvore vazia
+=criar 3 0
+=imprimecos 3 5
+
+== Tenta imprimir uma arvore de um unico no nao costurada
+=insesq 3 'd' 2 4 4 0
+=imprimecos 3 10
+
+== Tenta imprimir uma arvore de varios nos nao costurada
+=criar 4 0
+=insesq 4 'a' 0 0 0 0
+=insesq 4 'b' 0 0 0 0
+=insesq 4 'l' 2 24 3 0
+=irpai 4 0
+=insdir 4 'k' 3 3 3 0
+=irpai 4 0
+=irpai 4 0
+=insdir 4 't' 0 0 0 0
+=insesq 4 'y' 0 0 0 0
+=irpai 4 0
+=insdir 4 'x' 0 0 0 0
+=insdir 4 'c' 1 2 3 0
+=imprimecos 4 10
