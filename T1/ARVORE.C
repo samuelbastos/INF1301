@@ -7,16 +7,9 @@
 *  Nome da base de software:    Exemplo de teste automatizado
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\SIMPLES.BSW
 *
-*  Projeto: Disciplinas INF 1628 / 1301
-*  Gestor:  DI/PUC-Rio
-*  Autores: avs - Arndt von Staa
-*
-*  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*       3.00   avs   28/02/2003 Uniformização da interface das funções e
-*                               de todas as condições de retorno.
-*       2.00   avs   03/08/2002 Eliminação de código duplicado, reestruturação
-*       1.00   avs   15/08/2001 Início do desenvolvimento
+*  Projeto: T1 INF1301 2017.1
+*  Autores: mv Maurício Vieira
+*           sb Samuel Bastos
 *
 ***************************************************************************/
 
@@ -287,6 +280,7 @@
 			  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
 			  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
 			  chave = pArvore->pNoCorr->Chave;
+			  printf("Chave: %c ; valorA: %d, valorB: %d, valorC: %d \n", chave, valorA, valorB, valorC);
 		  }
 
          return ARV_CondRetOK ;
@@ -332,6 +326,7 @@
 		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
 		  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
 		  chave = pArvore->pNoCorr->Chave;
+		  printf("Chave: %c ; valorA: %d, valorB: %d, valorC: %d \n", chave, valorA, valorB, valorC);
 	  }
       return ARV_CondRetOK ;
 
@@ -372,6 +367,7 @@
 		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
 		  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
 		  chave = pArvore->pNoCorr->Chave;
+		  printf("Chave: %c ; valorA: %d, valorB: %d, valorC: %d \n", chave, valorA, valorB, valorC);
 	  }
       return ARV_CondRetOK ;
 

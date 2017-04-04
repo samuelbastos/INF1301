@@ -7,6 +7,11 @@
 *  Arquivo gerado:              LISTA.h
 *  Letras identificadoras:      LIS
 *
+*  Projeto: T1 INF1301 2017.1
+*  Autores: avs Arndt Von Staa
+*			mv  Maurício Vieira
+*           sb  Samuel Bastos
+*
 *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\LISTA.BSW
 *
