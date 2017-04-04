@@ -1,0 +1,1 @@
+TRAB1.exe /sFinalTest.script > logFinal.log

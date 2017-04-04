@@ -21,6 +21,10 @@
 #include "LISTA.H"
 #undef ARVORE_OWN
 
+/* Parametro que define qual o numero máximo de folhas que o programa consegue costurar */
+
+#define NUM_MAX_FOLHA 16
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: ARV Descritor do nó da árvore
@@ -521,8 +525,6 @@
 *
 *  $FC Função: ARV Destruir a estrutura da costura
 *
-*  $EAE Assertivas de entradas esperadas
-*     pCostura != NULL
 *
 ***********************************************************************/
 
@@ -553,7 +555,8 @@
 
    /***********************************************************************
 *
-*  $FC Função: ARV Encontra os nós folhas da Arvore e extraem eles para serem ordenados
+*  $FC Função: ARV Encontra os nós folhas da Arvore e cria uma referencia para eles
+*			   na estrutura auxiliar de ordenação
 *
 *  $FV Valor retornado
 *     ARV_CondRetOK
@@ -608,7 +611,16 @@
 	   DestroiCostura(pARV->pCostura);
 
 	   pARV->pCostura =  ( tpCostura * ) malloc( sizeof( tpCostura ));
-	   pARV->pCostura->folhasParaCosturar = (tpNoArvore **) malloc(8*sizeof(tpNoArvore*));
+	   if (pARV->pCostura == NULL)
+	   {
+		   return ARV_CondRetFaltouMemoria;
+	   }
+
+	   pARV->pCostura->folhasParaCosturar = (tpNoArvore **) malloc(NUM_MAX_FOLHA*sizeof(tpNoArvore*));
+	   if (pARV->pCostura->folhasParaCosturar == NULL)
+	   {
+		   return ARV_CondRetFaltouMemoria;
+	   }
 	   pARV->pCostura->numeroFolhasArmazenadas = 0;
 	   pARV->pCostura->primeiroNo = NULL;
 

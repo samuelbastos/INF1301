@@ -1,0 +1,1 @@
+TRAB1.exe /sScriptDoErroRecuperado.script > logComErroRecuperado.log
