@@ -11,7 +11,7 @@
 *  Autores: avs Arndt Von Staa
 *			mv  Maurício Vieira
 *           sb  Samuel Bastos
-*
+* 
 ***************************************************************************/
 
 #include   <stdio.h>

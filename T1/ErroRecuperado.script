@@ -1,6 +1,11 @@
 == Arvore nao existe, nao pode ir a esquerda
 =iresq 0 4
 
+// Erro proposital; Nao pode ir a esquerda pois a arvore nao foi criada ainda.
+== Recupera falha (nunca vai dar 0)
+=iresq 0 0 
+=recuperar
+
 == Arvore nao existe, nao pode ir a direita
 =irdir 0 4
 

@@ -10,6 +10,10 @@
 == arvore vazia, nao consegue ir ao pai
 =irpai 0 4
 
+// Erro proposital nao recuperado; Nao pode acessar pai de arvore inexistente; Raiz nao tem pai.
+== Tenta acessar pai de uma arvore inexistente
+=irpai 0 0
+
 == Criar arvore (sempre consegue criar, mesmo se ja houver arvore (sobrescreve))
 =criar 0 0
 
