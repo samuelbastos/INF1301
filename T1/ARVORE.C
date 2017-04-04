@@ -271,18 +271,6 @@
       {
          pArvore->pNoCorr = pArvore->pNoCorr->pNoPai ;
 
-		  if(pArvore->pNoCorr->Lista != NULL)
-		  {
-			  IrInicioLista( pArvore->pNoCorr->Lista ) ;
-			  valorA = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-			  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
-			  valorB = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-			  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
-			  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-			  chave = pArvore->pNoCorr->Chave;
-			  printf("Chave: %c ; valorA: %d, valorB: %d, valorC: %d \n", chave, valorA, valorB, valorC);
-		  }
-
          return ARV_CondRetOK ;
 
       } else {
@@ -317,17 +305,7 @@
       } /* if */
 
       pArvore->pNoCorr = pArvore->pNoCorr->pNoEsq ;
-	  if(pArvore->pNoCorr->Lista != NULL)
-	  {
-		  IrInicioLista( pArvore->pNoCorr->Lista ) ;
-		  valorA = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
-		  valorB = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
-		  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-		  chave = pArvore->pNoCorr->Chave;
-		  printf("Chave: %c ; valorA: %d, valorB: %d, valorC: %d \n", chave, valorA, valorB, valorC);
-	  }
+
       return ARV_CondRetOK ;
 
    } /* Fim função: ARV Ir para nó à esquerda */
@@ -358,17 +336,7 @@
       } /* if */
 
       pArvore->pNoCorr = pArvore->pNoCorr->pNoDir ;
-	  if(pArvore->pNoCorr->Lista != NULL)
-	  {
-		  IrInicioLista( pArvore->pNoCorr->Lista ) ;
-		  valorA = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
-		  valorB = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-		  LIS_AvancarElementoCorrente(pArvore->pNoCorr->Lista, 1);
-		  valorC = (int)LIS_ObterValor( pArvore->pNoCorr->Lista );
-		  chave = pArvore->pNoCorr->Chave;
-		  printf("Chave: %c ; valorA: %d, valorB: %d, valorC: %d \n", chave, valorA, valorB, valorC);
-	  }
+
       return ARV_CondRetOK ;
 
    } /* Fim função: ARV Ir para nó à direita */
@@ -413,7 +381,7 @@
 
    tpNoArvore * CriarNo( char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
-	  int A,B,C;
+	  int retornoA, retornoB, retornoC;
       tpNoArvore * pNo ;
 
       pNo = ( tpNoArvore * ) malloc( sizeof( tpNoArvore )) ;
@@ -436,9 +404,9 @@
 		  pNo->Lista = LIS_CriarLista(NULL);
 		  LIS_EsvaziarLista(pNo->Lista);
 
-		  A = LIS_InserirElementoAntes(pNo->Lista,(void*)ValorListaA);
-		  B = LIS_InserirElementoApos(pNo->Lista, (void*)ValorListaB);
-		  C = LIS_InserirElementoApos(pNo->Lista, (void*)ValorListaC);
+		  retornoA = LIS_InserirElementoAntes(pNo->Lista,(void*)ValorListaA);
+		  retornoB = LIS_InserirElementoApos(pNo->Lista, (void*)ValorListaB);
+		  retornoC = LIS_InserirElementoApos(pNo->Lista, (void*)ValorListaC);
 	  }
 
       return pNo ;
