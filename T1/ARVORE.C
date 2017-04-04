@@ -53,14 +53,14 @@
                *$EED Assertivas estruturais
                *   se pNoDir do nó X != NULL então pNoPai de pNoDir aponta para o nó X */
        
-       LIS_tppLista Lista ;
+         LIS_tppLista Lista ;
                /* Valor do nó */
 
-       char Chave;
-           /* Valor alfanumérico que representa a ordem que as folhas costuradas devem respeitar */
+         char Chave;
+               /* Valor alfanumérico que representa a ordem que as folhas costuradas devem respeitar */
 
-       struct tgNoArvore * pNoCosturado;
-          /* Ponteiro para a próxima folha da costura */
+         struct tgNoArvore * pNoCosturado;
+               /* Ponteiro para a próxima folha da costura */
 
    } tpNoArvore ;
 
@@ -104,7 +104,8 @@
 
    ARV_tpCondRet ARV_CriarArvore( tpArvore ** ptArvore )
    {
-     tpArvore * pArvore = (*ptArvore);
+
+      tpArvore * pArvore = (*ptArvore);
       if ( pArvore != NULL )
       {
          ARV_DestruirArvore( ptArvore ) ;
@@ -119,7 +120,7 @@
       pArvore->pNoRaiz = NULL ;
       pArvore->pNoCorr = NULL ;
 
-     (*ptArvore) = pArvore;
+      (*ptArvore) = pArvore;
 
       return ARV_CondRetOK ;
 
@@ -132,6 +133,7 @@
 
    void ARV_DestruirArvore( tpArvore ** ptArvore )
    {
+
      tpArvore * pArvore = (*ptArvore);
      if ( ptArvore != NULL)
      {
@@ -145,6 +147,7 @@
           (*ptArvore) = NULL ;
         } /* if */
      }
+
    } /* Fim função: ARV Destruir árvore */
 
 /***************************************************************************
@@ -155,10 +158,10 @@
    ARV_tpCondRet ARV_InserirEsquerda( tpArvore ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
 
-      ARV_tpCondRet CondRet ;
+     ARV_tpCondRet CondRet ;
 
-      tpNoArvore * pCorr ;
-      tpNoArvore * pNo ;
+     tpNoArvore * pCorr ;
+     tpNoArvore * pNo ;
 
      tpArvore * pArvore = (*ptArvore);
 
@@ -206,10 +209,10 @@
    ARV_tpCondRet ARV_InserirDireita( tpArvore ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
 
-      ARV_tpCondRet CondRet ;
+     ARV_tpCondRet CondRet ;
 
-      tpNoArvore * pCorr ;
-      tpNoArvore * pNo ;
+     tpNoArvore * pCorr ;
+     tpNoArvore * pNo ;
 
      tpArvore * pArvore = (*ptArvore);
 
@@ -255,8 +258,6 @@
 
    ARV_tpCondRet ARV_IrPai( tpArvore * pArvore )
    {
-	   int valorA, valorB, valorC;
-	   char chave;
 
       if ( pArvore == NULL )
       {
@@ -286,8 +287,6 @@
 
    ARV_tpCondRet ARV_IrNoEsquerda( tpArvore * pArvore )
    {
-	  int valorA, valorB, valorC;
-	  char chave;
 
       if ( pArvore == NULL )
       {
@@ -317,8 +316,6 @@
 
    ARV_tpCondRet ARV_IrNoDireita( tpArvore * pArvore )
    {
-	    int valorA, valorB, valorC;
-		char chave;
 
       if ( pArvore == NULL )
       {
@@ -381,6 +378,7 @@
 
    tpNoArvore * CriarNo( char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
+
 	  int retornoA, retornoB, retornoC;
       tpNoArvore * pNo ;
 
@@ -430,7 +428,7 @@
 
       ARV_tpCondRet CondRet ;
       tpNoArvore * pNo ;
-	 tpArvore * pArvore = (*ptArvore);
+	  tpArvore * pArvore = (*ptArvore);
 
       if ( ptArvore == NULL )
       {
