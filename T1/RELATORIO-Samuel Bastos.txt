@@ -12,6 +12,6 @@ Data            Horas Trabalhadas              TipoTarefa       Descrição da T
 30/03           3                              Implementação    Mudança no TesteArvore para suportar o vetor de árvores;
                                                                 Novo script de testes refletindo mudanças. 
 
-02/04           2                              Implementação    Possibilidade de passar valores das listas como parâmetro;
+02/04           3                              Implementação    Possibilidade de passar valores das listas como parâmetro;
                                                                 Novo script de testes básico para checar se a criação das listas e seus
                                                                 preenchimentos estão ok.
