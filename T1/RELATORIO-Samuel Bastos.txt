@@ -15,3 +15,5 @@ Data            Horas Trabalhadas              TipoTarefa       Descrição da T
 02/04           3                              Implementação    Possibilidade de passar valores das listas como parâmetro;
                                                                 Novo script de testes básico para checar se a criação das listas e seus
                                                                 preenchimentos estão ok.
+
+04/04           2                              Implementação    Correções na documentação; Revisão do script de testes principal
