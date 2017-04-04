@@ -77,7 +77,10 @@
          ARV_CondRetFaltouMemoria = 8,
                /* Faltou memória ao alocar dados */
 
-		ARV_CondRetAcessoInvalidoVetor = 9
+		ARV_CondRetAcessoInvalidoVetor = 9,
+			/* Acesso invalido ao vetor de arvores */
+
+		ARV_CondRetArvoreNaoCosturada = 10
 			/* Acesso invalido ao vetor de arvores */
 
    } ARV_tpCondRet ;
@@ -231,6 +234,39 @@
 ***********************************************************************/
 
    ARV_tpCondRet ARV_ObterValorCorr( void * pArvore, char * ValorParm ) ;
+
+/***********************************************************************
+*
+*  $FC Função: ARV Costura os nós folha da árvore ordenados por sua Chave
+*
+*  $EP Parâmetros
+*     $P pArvore - ponteiro para a estrutura árvore
+*
+*  $FV Valor retornado
+*     ARV_CondRetOK
+*     ARV_CondRetArvoreNaoExiste
+*     ARV_CondRetArvoreVazia
+*
+***********************************************************************/
+
+   ARV_tpCondRet ARV_Costura( void * pArvore) ;
+
+/***********************************************************************
+*
+*  $FC Função: ARV Imprime os nós da costura na ordem em que foram costurados
+*
+*  $EP Parâmetros
+*     $P pArvore - ponteiro para a estrutura árvore
+*
+*  $FV Valor retornado
+*     ARV_CondRetOK
+*     ARV_CondRetArvoreNaoExiste
+*     ARV_CondRetArvoreVazia
+*	  ARV_CondRetArvoreNaoCosturada
+*
+***********************************************************************/
+
+   ARV_tpCondRet ARV_ImprimeCostura( void * pArvore) ;
 
 #undef ARVORE_EXT
 

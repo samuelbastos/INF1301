@@ -64,6 +64,8 @@
 #define     IR_ESQ_CMD          "=iresq"
 #define     IR_DIR_CMD          "=irdir"
 #define     OBTER_VAL_CMD       "=obter"
+#define		COSTURA_CMD			"=costura"
+#define		IMPRIME_COS_CMD		"=imprimecos"
 #define     DESTROI_CMD         "=destruir"
 
 /* Vetor de árvores para serem usados nos testes */
@@ -298,6 +300,40 @@ void * arvores[10];
                                      "Conteúdo do nó está errado." ) ;
 
          } /* fim ativa: Testar ARV Obter valor corrente */
+
+	  /* Testar ARV Costurar árvore */
+
+         else if ( strcmp( ComandoTeste , COSTURA_CMD ) == 0 )
+         {
+			NumLidos = LER_LerParametros( "i", &ArvoreObtida ) ;
+
+			if ( NumLidos != 1 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            ARV_Costura( arvores[ArvoreObtida] ) ;
+
+            return TST_CondRetOK ;
+
+         } /* fim ativa: Testar ARV Costurar árvore */
+
+	  /* Testar ARV Imprimir Costura da árvore */
+
+         else if ( strcmp( ComandoTeste , IMPRIME_COS_CMD ) == 0 )
+         {
+			NumLidos = LER_LerParametros( "i", &ArvoreObtida ) ;
+
+			if ( NumLidos != 1 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            ARV_ImprimeCostura( arvores[ArvoreObtida] ) ;
+
+            return TST_CondRetOK ;
+
+         } /* fim ativa: Testar ARV Costurar árvore */
 
       /* Testar ARV Destruir árvore */
 

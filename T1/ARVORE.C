@@ -71,6 +71,32 @@
 
    } tpNoArvore ;
 
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: ARV Descritor da estrutura para auxiliar a costura
+*
+*
+*  $ED Descrição do tipo
+*     Descreve as estruturas auxiliares que serão utilizadas para costurar
+*  as folhas da árvore
+*
+***********************************************************************/
+
+   typedef struct tgCostura {
+
+	   tpNoArvore ** folhasParaCosturar;
+			/* Vetor para organizar as folhas a serem costuradas */
+
+	   int numeroFolhasArmazenadas;
+			/* Armazena o número de folhas que já foi colocada no vetor de organização */
+
+	   tpNoArvore * primeiroNo;
+			/* Ponteiro para o primeiro nó da costura uma vez que essa já foi feita */
+	   
+   } tpCostura;
+
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: ARV Descritor da cabeça de uma árvore
@@ -92,7 +118,11 @@
          tpNoArvore * pNoCorr ;
                /* Ponteiro para o nó corrente da árvore */
 
+		 tpCostura * pCostura;
+			  /* Ponteiro para estrutura de costura */
+
    } tpArvore ;
+
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
@@ -466,7 +496,7 @@
 
       ARV_tpCondRet CondRet ;
       tpNoArvore * pNo ;
-	 tpArvore * pArvore = (*ptArvore);
+	  tpArvore * pArvore = (*ptArvore);
 
       if ( ptArvore == NULL )
       {
@@ -521,5 +551,151 @@
       free( pNo ) ;
 
    } /* Fim função: ARV Destruir a estrutura da árvore */
+
+
+/***********************************************************************
+*
+*  $FC Função: ARV Destruir a estrutura da costura
+*
+*  $EAE Assertivas de entradas esperadas
+*     pCostura != NULL
+*
+***********************************************************************/
+
+   void DestroiCostura( tpCostura * pCostura )
+   {
+
+	  if (pCostura == NULL)
+	  {
+		return;
+	  }
+
+      if ( pCostura->folhasParaCosturar != NULL )
+      {
+		  free(pCostura->folhasParaCosturar);
+      } /* if */
+
+      free( pCostura ) ;
+
+   } /* Fim função: ARV Destruir a estrutura da costura */
+
+
+   /***********************************************************************
+*
+*  $FC Função: ARV Encontra os nós folhas da Arvore e extraem eles para serem ordenados
+*
+*  $FV Valor retornado
+*     ARV_CondRetOK
+*     ARV_CondRetArvoreNaoExiste
+*     ARV_CondRetArvoreVazia
+*
+***********************************************************************/
+
+   void ExtraiNosParaCostura( tpArvore * pARV, tpNoArvore * no)
+   {
+	   if (no == NULL)
+	   {
+		   return;
+	   } /* if */
+	   if (no->pNoEsq == NULL && no->pNoDir == NULL)
+	   {
+		   pARV->pCostura->folhasParaCosturar[pARV->pCostura->numeroFolhasArmazenadas] = no;
+		   pARV->pCostura->numeroFolhasArmazenadas++;
+		   return;
+	   } /* if */
+	   ExtraiNosParaCostura(pARV, no->pNoEsq);
+	   ExtraiNosParaCostura(pARV, no->pNoDir);
+   }
+
+
+/***********************************************************************
+*
+*  $FC Função: ARV Costura os nós folha da árvore ordenados por sua Chave
+*
+*  $FV Valor retornado
+*     ARV_CondRetOK
+*     ARV_CondRetArvoreNaoExiste
+*     ARV_CondRetArvoreVazia
+*
+***********************************************************************/
+   
+   ARV_tpCondRet ARV_Costura( void * pArvore)
+   {
+	   int i, j, minNo, posParaMaximizar;
+	   tpNoArvore * noAux;
+	   tpArvore * pARV = (tpArvore *) pArvore;
+
+	   if (pARV == NULL)
+	   {
+		   return ARV_CondRetArvoreNaoExiste;
+	   } /* if */
+	   if (pARV->pNoRaiz == NULL)
+	   {
+		   return ARV_CondRetArvoreVazia;
+	   } /* if */
+
+	   //DestroiCostura(pARV->pCostura);
+
+	   pARV->pCostura =  ( tpCostura * ) malloc( sizeof( tpCostura ));
+	   pARV->pCostura->folhasParaCosturar = (tpNoArvore **) malloc(8*sizeof(tpNoArvore*));
+	   pARV->pCostura->numeroFolhasArmazenadas = 0;
+	   pARV->pCostura->primeiroNo = NULL;
+
+	   ExtraiNosParaCostura(pARV, pARV->pNoRaiz);
+
+	   posParaMaximizar = 0;
+	   for (i = 0; i < pARV->pCostura->numeroFolhasArmazenadas - 1; i++)
+	   {
+		   minNo = posParaMaximizar;
+		   for (j = posParaMaximizar; j < pARV->pCostura->numeroFolhasArmazenadas; j++)
+		   {
+			   if (pARV->pCostura->folhasParaCosturar[j] < pARV->pCostura->folhasParaCosturar[minNo])
+			   {
+				   minNo = j;
+			   } /* if */
+		   }
+		   noAux = pARV->pCostura->folhasParaCosturar[posParaMaximizar];
+		   pARV->pCostura->folhasParaCosturar[posParaMaximizar] = pARV->pCostura->folhasParaCosturar[minNo];
+		   pARV->pCostura->folhasParaCosturar[minNo] = noAux;
+	   }
+
+	   for (i = 0; i < pARV->pCostura->numeroFolhasArmazenadas - 1; i++)
+	   {
+		   pARV->pCostura->folhasParaCosturar[i]->pNoCosturado = pARV->pCostura->folhasParaCosturar[i+1];
+	   }
+	   pARV->pCostura->primeiroNo = pARV->pCostura->folhasParaCosturar[0];
+
+	   return ARV_CondRetOK;
+   }
+
+
+
+   ARV_tpCondRet ARV_ImprimeCostura( void * pArvore)
+   {
+	   tpNoArvore * currentNo;
+	   tpArvore * pARV = (tpArvore *) pArvore;
+
+	   if (pARV == NULL)
+	   {
+		   return ARV_CondRetArvoreNaoExiste;
+	   } /* if */
+	   if (pARV->pNoRaiz == NULL)
+	   {
+		   return ARV_CondRetArvoreVazia;
+	   } /* if */
+	   if (pARV->pCostura == NULL || pARV->pCostura->primeiroNo == NULL)
+	   {
+		   return ARV_CondRetArvoreNaoCosturada;
+	   }
+
+	   printf("Nós da Arvore na ordem em que foram costurados: ");
+	   while (currentNo != NULL)
+	   {
+		   printf("%c ", &currentNo->Chave);
+	   }
+	   printf("\n");
+
+	   return ARV_CondRetOK;
+   }
 
 /********** Fim do módulo de implementação: Módulo árvore **********/
