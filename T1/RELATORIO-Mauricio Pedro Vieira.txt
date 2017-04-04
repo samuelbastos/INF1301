@@ -12,3 +12,9 @@
                                                         Incluido o módulo de listas no projeto.
 
 31/03		1		      Revisar Código	Revisão os scripts de testes
+
+03/04		5		      Codificar		Implementação da funcionalidade de costura de árvore
+							Implementação da funcionalidade de imprimir a costura da árvore
+							Criação de scripts de testes para testar todas as condições de retorno de ambas as funcionalidades implementadas no dia
+							Compilação de todos os casos de testes produzidos pela dupla em um só script de testes
+
