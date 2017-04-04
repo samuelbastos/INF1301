@@ -121,6 +121,9 @@
 *     $P ptArvore - ponteiro passado por referência que aponta para a 
 *				    árvore onde o filho será adicionado
 *     $P ValorParm - valor a ser inserido no novo nó.
+*     $P ValorListaA - primeiro valor da lista do nó.
+*     $P ValorListaB - segundo valor da lista do nó.
+*     $P ValorListaC - terceiro valor da lista do nó.
 *
 *  $FV Valor retornado
 *     ARV_CondRetOK
@@ -130,7 +133,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_InserirEsquerda( void ** ptArvore, char ValorParm, int valorA, int valorB, int valorC ) ;
+   ARV_tpCondRet ARV_InserirEsquerda( void ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC ) ;
 
 
 /***********************************************************************
@@ -141,6 +144,9 @@
 *     $P ptArvore - ponteiro passado por referência que aponta para a 
 *				    árvore onde o filho será adicionado
 *     $P ValorParm - valor a ser inserido no novo nó
+*     $P ValorListaA - primeiro valor da lista do nó.
+*     $P ValorListaB - segundo valor da lista do nó.
+*     $P ValorListaC - terceiro valor da lista do nó.
 *
 *  $FV Valor retornado
 *     ARV_CondRetOK
@@ -150,7 +156,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet ARV_InserirDireita( void ** ptArvore, char ValorParm, int valorA, int valorB, int valorC ) ;
+   ARV_tpCondRet ARV_InserirDireita( void ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC ) ;
 
 
 /***********************************************************************

@@ -93,9 +93,9 @@ void * arvores[10];
       char ValorObtido   = '!'  ;
       char ValorDado     = '\0' ;
 	  int  ArvoreObtida   = 11  ;
-	  int valorListaA = 0;
-	  int valorListaB = 0;
-	  int valorListaC = 0;
+	  int  ValorListaA = 0;
+	  int  ValorListaB = 0;
+	  int  ValorListaC = 0;
 
       int  NumLidos = -1 ;
 
@@ -134,7 +134,7 @@ void * arvores[10];
          {
 
             NumLidos = LER_LerParametros( "iciiii" ,
-                               &ArvoreObtida, &ValorDado , &valorListaA, &valorListaB, &valorListaC, &CondRetEsperada ) ;
+                               &ArvoreObtida, &ValorDado , &ValorListaA, &ValorListaB, &ValorListaC, &CondRetEsperada ) ;
             if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
@@ -142,7 +142,7 @@ void * arvores[10];
 
 			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
 			{
-				CondRetObtido = ARV_InserirDireita( &arvores[ArvoreObtida], ValorDado, valorListaA, valorListaB, valorListaC ) ;
+				CondRetObtido = ARV_InserirDireita( &arvores[ArvoreObtida], ValorDado, ValorListaA, ValorListaB, ValorListaC ) ;
 			}
 			else
 			{
@@ -160,7 +160,7 @@ void * arvores[10];
          {
 
             NumLidos = LER_LerParametros( "iciiii" ,
-                               &ArvoreObtida, &ValorDado , &valorListaA, &valorListaB, &valorListaC, &CondRetEsperada ) ;
+                               &ArvoreObtida, &ValorDado , &ValorListaA, &ValorListaB, &ValorListaC, &CondRetEsperada ) ;
             if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
@@ -168,7 +168,7 @@ void * arvores[10];
 
 			if ( ArvoreObtida < 10 && ArvoreObtida >= 0 )
 			{
-				CondRetObtido = ARV_InserirEsquerda( &arvores[ArvoreObtida], ValorDado, valorListaA, valorListaB, valorListaC ) ;
+				CondRetObtido = ARV_InserirEsquerda( &arvores[ArvoreObtida], ValorDado, ValorListaA, ValorListaB, ValorListaC ) ;
 			}
 			else
 			{

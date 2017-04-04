@@ -89,9 +89,9 @@
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-   static tpNoArvore * CriarNo( char ValorParm, int valorA, int valorB, int valorC ) ;
+   static tpNoArvore * CriarNo( char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC ) ;
 
-   static ARV_tpCondRet CriarNoRaiz( tpArvore ** ptArvore, char ValorParm, int valorA, int valorB, int valorC ) ;
+   static ARV_tpCondRet CriarNoRaiz( tpArvore ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC ) ;
 
    static void DestroiArvore( tpNoArvore * pNo ) ;
 
@@ -152,7 +152,7 @@
 *  Função: ARV Adicionar filho à esquerda
 *  ****/
 
-   ARV_tpCondRet ARV_InserirEsquerda( tpArvore ** ptArvore, char ValorParm, int valorA, int valorB, int valorC )
+   ARV_tpCondRet ARV_InserirEsquerda( tpArvore ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
 
       ARV_tpCondRet CondRet ;
@@ -164,7 +164,7 @@
 
       /* Tratar vazio, esquerda */
        
-     CondRet = CriarNoRaiz( ptArvore, ValorParm, valorA, valorB, valorC ) ;
+     CondRet = CriarNoRaiz( ptArvore, ValorParm, ValorListaA, ValorListaB, ValorListaC ) ;
      if ( CondRet != ARV_CondRetNaoCriouRaiz )
      {
         return CondRet ;
@@ -180,7 +180,7 @@
                
          if ( pCorr->pNoEsq == NULL )
          {
-            pNo = CriarNo( ValorParm, valorA, valorB, valorC ) ;
+            pNo = CriarNo( ValorParm, ValorListaA, ValorListaB, ValorListaC ) ;
             if ( pNo == NULL )
             {
                return ARV_CondRetFaltouMemoria ;
@@ -203,7 +203,7 @@
 *  Função: ARV Adicionar filho à direita
 *  ****/
 
-   ARV_tpCondRet ARV_InserirDireita( tpArvore ** ptArvore, char ValorParm, int valorA, int valorB, int valorC )
+   ARV_tpCondRet ARV_InserirDireita( tpArvore ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
 
       ARV_tpCondRet CondRet ;
@@ -214,7 +214,7 @@
      tpArvore * pArvore = (*ptArvore);
 
       /* Tratar vazio, direita */
-     CondRet = CriarNoRaiz( ptArvore, ValorParm, valorA, valorB, valorC ) ;
+     CondRet = CriarNoRaiz( ptArvore, ValorParm, ValorListaA, ValorListaB, ValorListaC ) ;
      if ( CondRet != ARV_CondRetNaoCriouRaiz )
      {
         return CondRet ;
@@ -230,7 +230,7 @@
 
          if ( pCorr->pNoDir == NULL )
          {
-            pNo = CriarNo( ValorParm, valorA, valorB, valorC ) ;
+            pNo = CriarNo( ValorParm, ValorListaA, ValorListaB, ValorListaC ) ;
             if ( pNo == NULL )
             {
                return ARV_CondRetFaltouMemoria ;
@@ -411,7 +411,7 @@
 *
 ***********************************************************************/
 
-   tpNoArvore * CriarNo( char ValorParm, int valorA, int valorB, int valorC )
+   tpNoArvore * CriarNo( char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
 	  int A,B,C;
       tpNoArvore * pNo ;
@@ -427,7 +427,7 @@
       pNo->pNoDir = NULL ;
       pNo->Chave  = ValorParm ;
 
-	  if(valorA == 0 && valorB == 0 && valorC == 0)
+	  if(ValorListaA == 0 && ValorListaB == 0 && ValorListaC == 0)
 	  {
 		  pNo->Lista = NULL;
 	  }
@@ -436,9 +436,9 @@
 		  pNo->Lista = LIS_CriarLista(NULL);
 		  LIS_EsvaziarLista(pNo->Lista);
 
-		  A = LIS_InserirElementoAntes(pNo->Lista,(void*)valorA);
-		  B = LIS_InserirElementoApos(pNo->Lista, (void*)valorB);
-		  C = LIS_InserirElementoApos(pNo->Lista, (void*)valorC);
+		  A = LIS_InserirElementoAntes(pNo->Lista,(void*)ValorListaA);
+		  B = LIS_InserirElementoApos(pNo->Lista, (void*)ValorListaB);
+		  C = LIS_InserirElementoApos(pNo->Lista, (void*)ValorListaC);
 	  }
 
       return pNo ;
@@ -457,7 +457,7 @@
 *
 ***********************************************************************/
 
-   ARV_tpCondRet CriarNoRaiz( tpArvore ** ptArvore, char ValorParm, int valorA, int valorB, int valorC )
+   ARV_tpCondRet CriarNoRaiz( tpArvore ** ptArvore, char ValorParm, int ValorListaA, int ValorListaB, int ValorListaC )
    {
 
       ARV_tpCondRet CondRet ;
@@ -476,7 +476,7 @@
 
       if ( pArvore->pNoRaiz == NULL )
       {
-         pNo = CriarNo( ValorParm, valorA, valorB, valorC ) ;
+         pNo = CriarNo( ValorParm, ValorListaA, ValorListaB, ValorListaC ) ;
          if ( pNo == NULL )
          {
             return ARV_CondRetFaltouMemoria ;
