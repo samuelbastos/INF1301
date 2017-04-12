@@ -16,5 +16,5 @@ Data            Horas Trabalhadas              TipoTarefa                Descri�
                                                                          Novo script de testes básico para checar se a criação das listas e seus
                                                                          preenchimentos estão ok.
 
-04/04           4                              revisar especificações    Correções na documentação; Revisão do script de testes principal;
+04/04           4                              revisar especificações   Correções na documentação; Revisão do script de testes principal;
                                                                          Criação de scripts que possuem erro.
