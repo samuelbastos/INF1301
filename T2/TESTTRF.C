@@ -1,39 +1,30 @@
 /***************************************************************************
 *  $MCI Módulo de implementação: Módulo de teste específico
 *
-*  Arquivo gerado:              TESTARV.C
-*  Letras identificadoras:      TARV
+*  Arquivo gerado:              TESTTRF.C
+*  Letras identificadoras:      TTRF
 *
 *  Nome da base de software:    Exemplo de teste automatizado
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\SIMPLES.BSW
 *
-*  Projeto: T1 INF1301 2017.1
+*  Projeto: T2 INF1301 2017.1
 *  Autores: mv Maurício Vieira
 *           sb Samuel Bastos
 *
 *  $ED Descrição do módulo
-*     Este mÇodulo contém as funções específicas para o teste do
-*     módulo árvore. Ilustra como redigir um interpretador de comandos
+*     Este módulo contém as funções específicas para o teste do
+*     módulo tarefa. Ilustra como redigir um interpretador de comandos
 *     de teste específicos utilizando o arcabouço de teste para C.
 *
 *  $EIU Interface com o usuário pessoa
-*     Comandos de teste específicos para testar o módulo árvore:
+*     Comandos de teste específicos para testar o módulo tarefa:
 *
-*     =criar        - chama a função ARV_CriarArvore( )
-*     =insdir <Char>
-*                   - chama a função ARV_InserirDireita( <Char> )
-*                     Obs. notação: <Char>  é o valor do parâmetro
-*                     que se encontra no comando de teste.
-*
-*     "=insesq" <Char>
-*                   - chama a função ARV_InserirEsquerda( <Char> )
-*     "=irpai"      - chama a função ARV_IrPai( )
-*     "=iresq"      - chama a função ARV_IrEsquerda( )
-*     "=irdir"      - chama a função ARV_IrDireita( )
-*     "=obter" <Char>
-*                   - chama a função ARV_ObterValorCorr( ) e compara
-*                     o valor retornado com o valor <Char>
-*     "=destroi"    - chama a função ARV_DestruirArvore( )
+*     "=criar"          - chama a função TRF_CriarTarefa( )
+*     "=destruir"       - chama a função TRF_DestruirTarefa( )
+*     "=conectar"       - chama a função TRF_ConectarTarefas( )
+*     "=alterar"        - chama a função TRF_AlterarTarefa( )
+*     "=consultarnome"  - chama a função TRF_ConsultarNomeTarefa( )
+*     "=consultardesc"  - chama a função TRF_ConsultarDescricaoTarefa( )
 *
 ***************************************************************************/
 
@@ -60,7 +51,7 @@
 
 #define STRING_DIM 100
 
-/* Vetor de árvores para serem usados nos testes */
+/* Vetor de tarefas para serem usados nos testes */
 
 void * tarefas[10];
 
@@ -69,11 +60,11 @@ void * tarefas[10];
 
 /***********************************************************************
 *
-*  $FC Função: TARV Efetuar operações de teste específicas para árvore
+*  $FC Função: TTRF Efetuar operações de teste específicas para tarefa
 *
 *  $ED Descrição da função
 *     Efetua os diversos comandos de teste específicos para o módulo
-*     árvore sendo testado.
+*     tarefa sendo testado.
 *
 *  $EP Parâmetros
 *     $P ComandoTeste - String contendo o comando
@@ -97,13 +88,13 @@ void * tarefas[10];
       int  TarefaObtidaAux = 12;
       char NomeObtido[STRING_DIM];
       char DescricaoObtida[STRING_DIM];
-      char * NomeConsultado = (char*)malloc(sizeof(char)*100);
-      char * DescricaoConsultada = (char*)malloc(sizeof(char)*100);
+      char * NomeConsultado = (char*)malloc(sizeof(char)*STRING_DIM);
+      char * DescricaoConsultada = (char*)malloc(sizeof(char)*STRING_DIM);
       int  NumLidos = -1 ;
 
       TST_tpCondRet Ret ;
 
-      /* Testar ARV Criar árvore */
+      /* Testar TRF Criar tarefa */
 
          if ( strcmp( ComandoTeste , CRIAR_TRF_CMD ) == 0 )
          {
@@ -128,9 +119,9 @@ void * tarefas[10];
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
 
-         } /* fim ativa: Testar ARV Criar árvore */
+         } /* fim ativa: Testar TRF Criar tarefa */
 
-      /* Testar ARV Destruir árvore */
+      /* Testar TRF Destruir tarefa */
 
          else if ( strcmp( ComandoTeste , DESTRUIR_TRF_CMD ) == 0 )
          {
@@ -148,7 +139,9 @@ void * tarefas[10];
 
             return TST_CondRetOK ;
 
-         } /* fim ativa: Testar ARV Destruir árvore */
+         } /* fim ativa: Testar TRF Destruir tarefa */
+
+      /* Testar TRF Conectar tarefas */
 
          else if ( strcmp( ComandoTeste, CONECTAR_TRF_CMD ) == 0 )
          {
@@ -171,7 +164,10 @@ void * tarefas[10];
              
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
-         }
+
+         } /* fim ativa: Testar TRF Conectar tarefas */
+
+      /* Testar TRF Alterar tarefa */
 
          else if ( strcmp( ComandoTeste, ALTERAR_TRF_CMD ) == 0 )
          {
@@ -194,7 +190,10 @@ void * tarefas[10];
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
-         }
+
+         } /* fim ativa: Testar TRF Alterar tarefas */
+
+      /* Testar TRF Consultar nome de tarefa */
 
          else if ( strcmp( ComandoTeste, CONSULTAR_NOME_TRF_CMD ) == 0 )
          {
@@ -217,7 +216,10 @@ void * tarefas[10];
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
-         }
+
+         } /* fim ativa: Testar TRF Consultar nome de tarefa */
+
+    /* Testar TRF Consultar descricao de tarefa */
 
          else if ( strcmp( ComandoTeste, CONSULTAR_DESC_TRF_CMD ) == 0 )
          {
@@ -240,11 +242,12 @@ void * tarefas[10];
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
-         }
+
+         } /* fim ativa: Testar TRF Consultar descricao de tarefa */
 
       return TST_CondRetNaoConhec ;	
 
-   } /* Fim função: TARV Efetuar operações de teste específicas para árvore */
+   } /* Fim função: TTRF Efetuar operações de teste específicas para tarefa */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
 
