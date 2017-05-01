@@ -44,7 +44,11 @@
 
        TRF_CondRetFaltouMemoria = 1,
 
-       TRF_CondRetAcessoInvalidoVetor = 2
+       TRF_CondRetAcessoInvalidoVetor = 2,
+
+       TRF_CondRetConexaoJaExistente = 3,
+
+       TRF_CondRetConexaoInvalida = 4
 
    } TRF_tpCondRet ;
 

@@ -212,7 +212,7 @@ void * tarefas[10];
 				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
 			}
 
-            printf("%s \n", NomeConsultado);
+            printf("\n %s \n", NomeConsultado);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
@@ -237,7 +237,7 @@ void * tarefas[10];
 				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
 			}
 
-            printf("%s \n", DescricaoConsultada);
+            printf("\n %s \n", DescricaoConsultada);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );

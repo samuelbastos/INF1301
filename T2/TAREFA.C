@@ -124,11 +124,18 @@
    {
        LIS_tpCondRet retornoSucessor;
        LIS_tpCondRet retornoPredecessor;
+       LIS_tpCondRet procuraListaDoSucessor;
+       LIS_tpCondRet procuraListaDoPredecessor;
+
        tpTarefa * pTarefaSucessora = (*ptTarefaSucessora);
        tpTarefa * pTarefaPredecessora = (*ptTarefaPredecessora);
 
        retornoSucessor = LIS_InserirElementoApos( pTarefaSucessora->tarefasPredecessoras , (void *) pTarefaPredecessora);
        retornoPredecessor = LIS_InserirElementoApos( pTarefaPredecessora->tarefasSucessoras , (void *) pTarefaSucessora);
+
+        //Apenas checa se realmente foram conectadas as tarefas
+        procuraListaDoSucessor = LIS_ProcurarValor( pTarefaSucessora->tarefasPredecessoras ,(void *) pTarefaPredecessora);
+        procuraListaDoPredecessor = LIS_ProcurarValor( pTarefaPredecessora->tarefasSucessoras, (void*) pTarefaSucessora );
         
        return TRF_CondRetOK;
 
@@ -188,10 +195,16 @@
 
    static TRF_tpCondRet DesconectaTarefas( tpTarefa ** ptTarefa )
    {
-       LIS_tpCondRet retPred;
-       LIS_tpCondRet retSuc;
+       LIS_tpCondRet retPred = LIS_CondRetOK;
+       LIS_tpCondRet retSuc = LIS_CondRetOK;
+       LIS_tpCondRet retSucPre = LIS_CondRetOK;
+       LIS_tpCondRet retPreSuc = LIS_CondRetOK;
+
        tpTarefa * pTarefaCorrentePred;
        tpTarefa * pTarefaCorrenteSuc;
+       tpTarefa * pTarefaCorrenteSucPred;
+       tpTarefa * pTarefaCorrentePredSuc;
+
        int numPassos = 1;
        tpTarefa * pTarefa = (*ptTarefa);
 
@@ -203,13 +216,20 @@
 
            while(retPred != LIS_CondRetFimLista)
            {
-               if(pTarefaCorrentePred->id == pTarefa->id)
+               pTarefaCorrentePred = (tpTarefa *)LIS_ObterValor( pTarefa->tarefasPredecessoras );
+
+               while(retPreSuc != LIS_CondRetFimLista)
                {
-                   LIS_ExcluirElemento( pTarefaCorrentePred->tarefasSucessoras );
-                   break;
+                   pTarefaCorrentePredSuc = (tpTarefa *)LIS_ObterValor( pTarefaCorrentePred->tarefasSucessoras );
+
+                   if(pTarefaCorrentePredSuc->id == pTarefa->id)
+                   {
+                       LIS_ExcluirElemento( pTarefaCorrentePred->tarefasSucessoras );
+                       break;
+                   }
                }
            
-              retPred = LIS_AvancarElementoCorrente( pTarefaCorrentePred->tarefasSucessoras , numPassos );
+              retPred = LIS_AvancarElementoCorrente( pTarefa->tarefasPredecessoras , numPassos );
            }
        }
 
@@ -221,15 +241,25 @@
 
            while(retSuc != LIS_CondRetFimLista)
            {
-               if(pTarefaCorrenteSuc->id == pTarefa->id)
+               pTarefaCorrenteSuc = (tpTarefa *)LIS_ObterValor( pTarefa->tarefasSucessoras );
+
+               while(retSucPre != LIS_CondRetFimLista)
                {
-                   LIS_ExcluirElemento( pTarefaCorrenteSuc->tarefasPredecessoras );
-                   break;
+                   pTarefaCorrenteSucPred = (tpTarefa *)LIS_ObterValor( pTarefaCorrenteSuc->tarefasPredecessoras );
+
+                   if(pTarefaCorrenteSucPred->id == pTarefa->id)
+                   {
+                       LIS_ExcluirElemento(pTarefaCorrenteSuc->tarefasPredecessoras);
+                       break;
+                   }
+
+                   retSucPre = LIS_AvancarElementoCorrente( pTarefaCorrenteSuc->tarefasPredecessoras , numPassos );
                }
 
-               retSuc = LIS_AvancarElementoCorrente( pTarefaCorrenteSuc->tarefasPredecessoras , numPassos );
+               retSuc = LIS_AvancarElementoCorrente( pTarefa->tarefasSucessoras , numPassos );
            }
        }
+
        return TRF_CondRetOK;
    }
 

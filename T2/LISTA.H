@@ -97,6 +97,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
                /* Faltou memória ao tentar criar um elemento de lista */
 
          LIS_CondRetHaElemento
+              /* Há elemento na lista */
 
    } LIS_tpCondRet ;
 
