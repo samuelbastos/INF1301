@@ -141,7 +141,10 @@ void * tarefas[10];
                return TST_CondRetParm ;
             } /* if */
 
-            TRF_DestruirTarefa( &tarefas[TarefaObtida] ) ;
+            if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+            {
+                TRF_DestruirTarefa( &tarefas[TarefaObtida] ) ;
+            }
 
             return TST_CondRetOK ;
 
@@ -212,8 +215,6 @@ void * tarefas[10];
 				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
 			}
 
-            printf("\n %s \n", NomeConsultado);
-
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
          }
@@ -236,8 +237,6 @@ void * tarefas[10];
 			{
 				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
 			}
-
-            printf("\n %s \n", DescricaoConsultada);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar árvore." );
