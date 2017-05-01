@@ -1,0 +1,62 @@
+== Cria tarefa 0
+=criar 0 "Tarefa0" "Descricao tarefa1" 0	
+
+==Cria tarefa 0
+=criar 0 "Tarefa0" "sadsad" 0
+
+== Cria tarefa 1
+=criar 1 "Tarefa1" "Hue" 0
+
+== Conecta Tarefa 0 e Tarefa 1
+=conectar 0 1 0
+
+== Destroi tarefa 1
+=destruir 1
+
+== Altera Tarefa 0
+=alterar 0 "Hue1" "Hue2" 0
+
+== Consulta Nome da Tarefa 0
+=consultarnome 0 0
+
+== Consulta Descricao da Tarefa 0
+=consultardesc 0 0
+
+==Cria tarefa2
+=criar 2 "Tarefa2" "ola" 0
+
+==Conecta tarefa2 a tarefa 0 (2 suc/0 pred)
+=conectar 2 0 0
+
+== Cria tarefa 1
+=criar 1 "Tarefa1" "Hue" 0
+
+== Conecta Tarefa 1 a tarefa 2
+=conectar 1 2 0
+
+==Altera Tarefa 2
+=alterar 2 "TesteNome" "TesteDesc" 0
+
+==Altera Tarefa 1
+=alterar 1 "Teste1Nome" "Teste1Desc" 0
+
+==Consulta Nome Tarefa1
+=consultarnome 1 0
+
+==Consulta Descricao Tarefa1
+=consultardesc 1 0
+
+==Consulta Nome Tarefa2
+=consultarnome 2 0
+
+==Consulta Descricao Tarefa2
+=consultardesc 2 0
+
+==Destroi Tarefa0
+=destruir 0
+
+==Destroi Tarefa1
+=destruir 1
+
+==Destroi Tarefa2
+=destruir 2
