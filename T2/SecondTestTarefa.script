@@ -1,0 +1,206 @@
+== Cria tarefa 0
+=criar 0 "Tarefa0" "Descricao tarefa1" 0	
+
+==Cria tarefa 0
+=criar 0 "Tarefa0" "sadsad" 0
+
+== Cria tarefa 1
+=criar 1 "Tarefa1" "Hue" 0
+
+== Conecta Tarefa 0 e Tarefa 1
+=conectar 0 1 0
+
+== Destroi tarefa 1
+=destruir 1
+
+== Altera Tarefa 0
+=alterar 0 "Hue1" "Hue2" 0
+
+== Consulta Nome da Tarefa 0
+=consultarnome 0 0
+
+== Consulta Descricao da Tarefa 0
+=consultardesc 0 0
+
+==Cria tarefa2
+=criar 2 "Tarefa2" "ola" 0
+
+==Conecta tarefa2 a tarefa 0 (2 suc/0 pred)
+=conectar 2 0 0
+
+== Cria tarefa 1
+=criar 1 "Tarefa1" "Hue" 0
+
+== Conecta Tarefa 1 a tarefa 2
+=conectar 1 2 0
+
+==Altera Tarefa 2
+=alterar 2 "TesteNome" "TesteDesc" 0
+
+==Altera Tarefa 1
+=alterar 1 "Teste1Nome" "Teste1Desc" 0
+
+==Consulta Nome Tarefa1
+=consultarnome 1 0
+
+==Consulta Descricao Tarefa1
+=consultardesc 1 0
+
+==Consulta Nome Tarefa2
+=consultarnome 2 0
+
+==Consulta Descricao Tarefa2
+=consultardesc 2 0
+
+==Destroi Tarefa0
+=destruir 0
+
+==Destroi Tarefa1
+=destruir 1
+
+==Destroi Tarefa2
+=destruir 2
+
+== Cria Tarefa 0
+=criar 0 "Tarefa0" "hue0" 0
+
+== Cria Tarefa 1
+=criar 1 "Tarefa1" "hue1" 0
+
+== Cria Tarefa 2
+=criar 2 "TArefa2" "hue2" 0
+
+== Conecta 1 em 2 
+=conectar 2 1 0
+
+== Conecta  0 em 2
+=conectar 2 0 0
+
+== Conecta 2 em 1
+=conectar 1 2 0
+
+== Conecta 0 em 1
+=conectar 1 0 0
+
+==Conecta 2 em 0
+=conectar 0 2 0
+
+==Conecta 1 em 0
+=conectar 0 1 0
+
+== Conecta 1 em 2 (SEGUNDA)
+=conectar 2 1 0
+
+== Conecta  0 em 2 (SEGUNDA)
+=conectar 2 0 0
+
+== Conecta 2 em 1 (SEGUNDA)
+=conectar 1 2 0
+
+== Conecta 0 em 1 (SEGUNDA)
+=conectar 1 0 0
+
+==Conecta 2 em 0 (SEGUNDA)
+=conectar 0 2 0
+
+==Conecta 1 em 0 (SEGUNDA)
+=conectar 0 1 0
+
+== Deleta 2
+=destruir 2
+
+== Delete tarefa inexistente 7
+=destruir 7
+
+==Conecta tarefa inexistente 7 com tarefa existente 0
+=conectar 7 0 0
+
+==Conecta Tarefa inexistente 8 com tarefa existente 0
+=conectar 8 0 0
+
+==Conecta tarefas inexistentes 7 e 8
+=conectar 7 8 0
+
+==Consulta nome tarefa inexistente 2
+=consultarnome 2 0
+
+==Consulta descricao tarefa inexistente 2
+=consultardesc 2 0
+
+==Alterar tarefa inexistente 2
+=alterar 2 "teste" "teste" 0
+
+==Conecta tarefa fora do dominio do vetor de tarefas
+=conectar 11 1 0
+
+==Conecta tarefa fora do dominio do vetor de tarefas
+=conectar 1 12 0
+
+==Conecta tarefas fora do dominio do vetor de tarefas
+=conectar 11 12 0
+
+==Consulta nome tarefa fora do dominio do vetor de tarefas
+=consultarnome 12 0
+
+==Consulta descricao tarefa fora do dominio do vetor de tarefas
+=consultardesc 12 0
+
+==Alterar descricao de tarefa fora do dominio do vetor de tarefas
+=alterar 12 "teste2" "teste1" 0 
+
+==Destroi tarefa 0 (CHECKPOINT)
+=destruir 0
+
+==Destroi tarefa 1
+=destruir 1
+
+==Alterar tarefa inexistente 0
+=alterar 0 "teste" "teste" 0
+
+==Alterar tarefa inexistente 1
+=alterar 1 "teste" "teste" 0
+
+== Cria Tarefa 0 (INVERSO)
+=criar 0 "Tarefa0" "hue0" 0
+
+== Cria Tarefa 1 (INVERSO)
+=criar 1 "Tarefa1" "hue1" 0
+
+== Cria Tarefa 2 (INVERSO)
+=criar 2 "Tarefa2" "hue2" 0
+
+== Cria Tarefa 3 (INVERSO)
+=criar 3 "Tarefa3" "hue3" 0
+
+== Conecta 1 em 2 (INVERSO)
+=conectar 1 2 0
+
+== Conecta  0 em 2 (INVERSO)
+=conectar 0 2 0
+
+== Conecta 2 em 1 (INVERSO) 
+=conectar 2 1 0
+
+== Conecta 0 em 1 (INVERSO)
+=conectar 0 1 0
+
+==Conecta 2 em 0 (INVERSO) 
+=conectar 2 0 0
+
+==Conecta 1 em 0 (INVERSO)
+=conectar 1 0 0
+
+==Conecta 3 em 2 (INVERSO)
+=conectar 3 2 0
+
+== Deleta 2 (INVERSO)
+=destruir 2
+
+== Deleta 0 (INVERSO)
+=destruir 0
+
+== Deleta 1 (INVERSO)
+=destruir 1
+
+== Deleta 3 (INVERSO)
+=destruir 3
