@@ -48,7 +48,9 @@
 
        TRF_CondRetConexaoJaExistente = 3,
 
-       TRF_CondRetConexaoInvalida = 4
+       TRF_CondRetConexaoInvalida = 4,
+
+       TRF_CondRetTarefaInexistente = 5
 
    } TRF_tpCondRet ;
 

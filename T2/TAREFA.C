@@ -76,8 +76,8 @@
       LIS_EsvaziarLista( pTarefa->tarefasPredecessoras );
       LIS_EsvaziarLista( pTarefa->tarefasSucessoras );
       pTarefa->id = idAtual;
-      pTarefa->nome = (char*)malloc(strlen(novoNome));
-      pTarefa->descricao = (char*)malloc(strlen(novaDescricao));
+      pTarefa->nome = (char*)malloc(strlen(novoNome)+1);
+      pTarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
       strcpy(pTarefa->nome, novoNome);
       strcpy(pTarefa->descricao, novaDescricao);
 
@@ -97,6 +97,7 @@
    void TRF_DestruirTarefa( tpTarefa ** ptTarefa )
    {
      tpTarefa * pTarefa = (*ptTarefa);
+
      if ( ptTarefa != NULL)
      {
         if ( pTarefa != NULL )
@@ -107,9 +108,11 @@
           LIS_DestruirLista( pTarefa->tarefasPredecessoras );
           LIS_EsvaziarLista( pTarefa->tarefasSucessoras );
           LIS_DestruirLista( pTarefa->tarefasSucessoras );
-
+          free(pTarefa->nome);
+          free(pTarefa->descricao);
           free( pTarefa );
           (*ptTarefa) = NULL;
+
         } /* if */
      }
 
@@ -126,16 +129,41 @@
        LIS_tpCondRet retornoPredecessor;
        LIS_tpCondRet procuraListaDoSucessor;
        LIS_tpCondRet procuraListaDoPredecessor;
+       LIS_tpCondRet procuraListaDoSucessorInverso;
+       LIS_tpCondRet procuraListaDoPredecessorInverso;
 
        tpTarefa * pTarefaSucessora = (*ptTarefaSucessora);
        tpTarefa * pTarefaPredecessora = (*ptTarefaPredecessora);
 
+       if(pTarefaSucessora == NULL || pTarefaPredecessora == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
+
+       IrInicioLista( pTarefaSucessora->tarefasPredecessoras ) ;
+       IrInicioLista( pTarefaPredecessora->tarefasSucessoras ) ;
+
+       procuraListaDoSucessor = LIS_ProcurarValor( pTarefaSucessora->tarefasPredecessoras ,(void *) pTarefaPredecessora);
+       procuraListaDoPredecessor = LIS_ProcurarValor( pTarefaPredecessora->tarefasSucessoras, (void*) pTarefaSucessora );
+
+       if(procuraListaDoSucessor == LIS_CondRetOK && procuraListaDoPredecessor == LIS_CondRetOK)
+       {
+           return TRF_CondRetConexaoJaExistente;
+       }
+
+       IrInicioLista( pTarefaPredecessora->tarefasPredecessoras ) ;
+       IrInicioLista( pTarefaSucessora->tarefasSucessoras ) ;
+
+       procuraListaDoSucessorInverso = LIS_ProcurarValor( pTarefaPredecessora->tarefasPredecessoras ,(void *) pTarefaSucessora);
+       procuraListaDoPredecessorInverso = LIS_ProcurarValor( pTarefaSucessora->tarefasSucessoras ,(void *) pTarefaPredecessora);
+
+       if(procuraListaDoSucessorInverso == LIS_CondRetOK &&  procuraListaDoPredecessorInverso == LIS_CondRetOK)
+       {
+           return TRF_CondRetConexaoInvalida;
+       }
+
        retornoSucessor = LIS_InserirElementoApos( pTarefaSucessora->tarefasPredecessoras , (void *) pTarefaPredecessora);
        retornoPredecessor = LIS_InserirElementoApos( pTarefaPredecessora->tarefasSucessoras , (void *) pTarefaSucessora);
-
-        //Apenas checa se realmente foram conectadas as tarefas
-        procuraListaDoSucessor = LIS_ProcurarValor( pTarefaSucessora->tarefasPredecessoras ,(void *) pTarefaPredecessora);
-        procuraListaDoPredecessor = LIS_ProcurarValor( pTarefaPredecessora->tarefasSucessoras, (void*) pTarefaSucessora );
         
        return TRF_CondRetOK;
 
@@ -151,8 +179,15 @@
    {
        tpTarefa * pTarefa = (*ptTarefa);
 
-       pTarefa->nome = (char*)malloc(strlen(novoNome));
-       pTarefa->descricao = (char*)malloc(strlen(novaDescricao));
+       if (pTarefa == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
+
+       pTarefa->nome = NULL;
+       pTarefa->descricao = NULL;
+       pTarefa->nome = (char*)malloc(strlen(novoNome)+1);
+       pTarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
        strcpy(pTarefa->nome, novoNome);
        strcpy(pTarefa->descricao, novaDescricao);
 
@@ -169,6 +204,11 @@
    {
        tpTarefa * pTarefa = (*ptTarefa);
 
+       if (pTarefa == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
+
        *nomeConsultado = (char*)malloc(strlen(pTarefa->nome));
        strcpy(*nomeConsultado, pTarefa->nome);
 
@@ -184,6 +224,11 @@
    TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( tpTarefa ** ptTarefa, char ** descricaoConsultada ) 
    {
        tpTarefa * pTarefa = (*ptTarefa);
+
+       if (pTarefa == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
 
        *descricaoConsultada = (char*)malloc(strlen(pTarefa->descricao));
        strcpy(*descricaoConsultada, pTarefa->descricao);
@@ -208,6 +253,8 @@
        int numPassos = 1;
        tpTarefa * pTarefa = (*ptTarefa);
 
+       int flag = 0;
+
        if(LIS_EstaVazia(pTarefa->tarefasPredecessoras) != LIS_CondRetListaVazia)
        {
            IrInicioLista(pTarefa->tarefasPredecessoras);
@@ -220,13 +267,23 @@
 
                while(retPreSuc != LIS_CondRetFimLista)
                {
+                   //não está no inicio da lista
+                   if(flag == 1)
+                   {
+                       IrInicioLista(pTarefaCorrentePred->tarefasSucessoras);
+                       flag = 0;
+                   }
+
                    pTarefaCorrentePredSuc = (tpTarefa *)LIS_ObterValor( pTarefaCorrentePred->tarefasSucessoras );
 
                    if(pTarefaCorrentePredSuc->id == pTarefa->id)
                    {
                        LIS_ExcluirElemento( pTarefaCorrentePred->tarefasSucessoras );
+                       flag = 1;
                        break;
                    }
+
+                   retPreSuc = LIS_AvancarElementoCorrente( pTarefaCorrentePred->tarefasSucessoras , numPassos );
                }
            
               retPred = LIS_AvancarElementoCorrente( pTarefa->tarefasPredecessoras , numPassos );
@@ -245,11 +302,19 @@
 
                while(retSucPre != LIS_CondRetFimLista)
                {
+                   //não está no inicio da lista
+                   if(flag == 1)
+                   {
+                       IrInicioLista(pTarefaCorrenteSuc->tarefasPredecessoras);
+                       flag = 0;
+                   }
+
                    pTarefaCorrenteSucPred = (tpTarefa *)LIS_ObterValor( pTarefaCorrenteSuc->tarefasPredecessoras );
 
                    if(pTarefaCorrenteSucPred->id == pTarefa->id)
                    {
                        LIS_ExcluirElemento(pTarefaCorrenteSuc->tarefasPredecessoras);
+                       flag = 1;
                        break;
                    }
 
