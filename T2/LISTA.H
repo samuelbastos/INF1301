@@ -7,7 +7,7 @@
 *  Arquivo gerado:              LISTA.h
 *  Letras identificadoras:      LIS
 *
-*  Projeto: T1 INF1301 2017.1
+*  Projeto: T2 INF1301 2017.1
 *  Autores: avs Arndt Von Staa
 *			mv  Maurício Vieira
 *           sb  Samuel Bastos
@@ -346,7 +346,24 @@ typedef struct LIS_tagLista * LIS_tppLista ;
    LIS_tpCondRet LIS_ProcurarValor( LIS_tppLista pLista ,
                                     void * pValor        ) ;
 
-   LIS_tpCondRet LIS_EstaVazia( LIS_tppLista pLista ) ;
+/***********************************************************************
+*
+*  $FC Função: LIS  &Verificar Vazia
+*
+*  $ED Descrição da função
+*      Verifica se a lista em questão se encontra vazia
+*
+*  $EP Parâmetros
+*     pLista    - ponteiro para a lista na qual será
+*                 verificada existência de conteúdo.
+*
+*  $FV Valor retornado
+*     LIS_CondRetListaVazia;
+*     LIS_CondRetHaElemento;
+*
+***********************************************************************/
+
+   LIS_tpCondRet LIS_VerificarVazia( LIS_tppLista pLista ) ;
 
 #undef LISTA_EXT
 

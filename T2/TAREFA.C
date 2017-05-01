@@ -270,7 +270,7 @@
 
        int flag = 0;
 
-       if(LIS_EstaVazia(pTarefa->tarefasPredecessoras) != LIS_CondRetListaVazia)
+       if(LIS_VerificarVazia(pTarefa->tarefasPredecessoras) != LIS_CondRetListaVazia)
        {
            IrInicioLista(pTarefa->tarefasPredecessoras);
            pTarefaCorrentePred = (tpTarefa *)LIS_ObterValor( pTarefa->tarefasPredecessoras );
@@ -304,7 +304,7 @@
            }
        }
 
-       if(LIS_EstaVazia(pTarefa->tarefasSucessoras) != LIS_CondRetListaVazia)
+       if(LIS_VerificarVazia(pTarefa->tarefasSucessoras) != LIS_CondRetListaVazia)
        {
            IrInicioLista(pTarefa->tarefasSucessoras);
            pTarefaCorrenteSuc = (tpTarefa *)LIS_ObterValor( pTarefa->tarefasSucessoras );

@@ -7,7 +7,7 @@
 *  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\LISTA.BSW
 *
-*  Projeto: T1 INF1301 2017.1
+*  Projeto: T2 INF1301 2017.1
 *  Autores: avs Arndt Von Staa
 *			mv  Maurício Vieira
 *           sb  Samuel Bastos
@@ -474,13 +474,19 @@
 
    } /* Fim função: LIS  &Procurar elemento contendo valor */
 
-   LIS_tpCondRet LIS_EstaVazia( LIS_tppLista pLista ) 
+/***************************************************************************
+*
+*  Função: LIS  &Verificar Vazia
+*  ****/
+
+   LIS_tpCondRet LIS_VerificarVazia( LIS_tppLista pLista ) 
    {
        if (pLista->numElem == 0)
            return LIS_CondRetListaVazia;
        else
            return LIS_CondRetHaElemento;
-   }
+
+   } /* Fim função: LIS  &Verificar Vazia */
 
 
 /*****  Código das funções encapsuladas no módulo  *****/
