@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: Módulo árvore
+*  $MCI Módulo de implementação: Módulo tarefa
 *
 *  Arquivo gerado:              TAREFA.C
 *  Letras identificadoras:      TRF
@@ -7,7 +7,7 @@
 *  Nome da base de software:    Exemplo de teste automatizado
 *  Arquivo da base de software: D:\AUTOTEST\PROJETOS\SIMPLES.BSW
 *
-*  Projeto: T1 INF1301 2017.1
+*  Projeto: T2 INF1301 2017.1
 *  Autores: mv Maurício Vieira
 *           sb Samuel Bastos
 *
@@ -24,11 +24,11 @@
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: ARV Descritor do nó da árvore
+*  $TC Tipo de dados: TRF Descritor da estrutura de uma tarefa
 *
 *
 *  $ED Descrição do tipo
-*     Descreve a organização do nó
+*     Descreve a estrutura de uma tarefa
 *
 ***********************************************************************/
 
@@ -49,7 +49,10 @@
    } tpTarefa ;
 
    static int  idAtual = 0;
-   static TRF_tpCondRet DesconectaTarefas( tpTarefa ** ptTarefa ) ;
+
+/***** Protótipos das funções encapuladas no módulo *****/
+
+   static void DesconectarTarefas( tpTarefa ** ptTarefa ) ;
 
 /***************************************************************************
 *
@@ -102,7 +105,7 @@
      {
         if ( pTarefa != NULL )
         {
-          DesconectaTarefas( ptTarefa );
+          DesconectarTarefas( ptTarefa );
 
           LIS_EsvaziarLista( pTarefa->tarefasPredecessoras );
           LIS_DestruirLista( pTarefa->tarefasPredecessoras );
@@ -214,7 +217,7 @@
 
        return TRF_CondRetOK ;
 
-   } /* Fim função: TRF Consultar tarefa */
+   } /* Fim função: TRF Consultar nome da tarefa */
 
 /***************************************************************************
 *
@@ -235,10 +238,22 @@
 
        return TRF_CondRetOK ;
 
-   } /* Fim função: TRF Consultar tarefa */
+   } /* Fim função: TRF Consultar descricao da tarefa */
 
+/*****  Código das funções encapsuladas no módulo  *****/
 
-   static TRF_tpCondRet DesconectaTarefas( tpTarefa ** ptTarefa )
+/***********************************************************************
+*
+*  $FC Função: TRF Desconectar Tarefas
+*
+*  $EP Parâmetros
+*     $P ptTarefa - ponteiro passado por referência que aponta para a 
+*                   tarefa que será desconectada de todas as tarefas
+*                   as quais a mesma está conectada
+*
+***********************************************************************/
+
+   static void DesconectarTarefas( tpTarefa ** ptTarefa )
    {
        LIS_tpCondRet retPred = LIS_CondRetOK;
        LIS_tpCondRet retSuc = LIS_CondRetOK;
@@ -267,7 +282,6 @@
 
                while(retPreSuc != LIS_CondRetFimLista)
                {
-                   //não está no inicio da lista
                    if(flag == 1)
                    {
                        IrInicioLista(pTarefaCorrentePred->tarefasSucessoras);
@@ -302,7 +316,6 @@
 
                while(retSucPre != LIS_CondRetFimLista)
                {
-                   //não está no inicio da lista
                    if(flag == 1)
                    {
                        IrInicioLista(pTarefaCorrenteSuc->tarefasPredecessoras);
@@ -324,8 +337,6 @@
                retSuc = LIS_AvancarElementoCorrente( pTarefa->tarefasSucessoras , numPassos );
            }
        }
-
-       return TRF_CondRetOK;
    }
 
 /********** Fim do módulo de implementação: Módulo tarefa **********/
