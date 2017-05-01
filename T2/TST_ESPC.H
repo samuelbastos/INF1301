@@ -125,13 +125,22 @@
                *   no início do desenvolvimento. Esta incompleteza poderá ser
                *   sinalizada com esta condição de retorno. */
 
-         TST_CondRetMemoria
+         TST_CondRetMemoria ,
                /* Faltou memória para executar o comando
                *
                *$ED Descrição
                *   Esta condição deve ser retornada caso tenha ocorrido algum erro
                *   quando o módulo de teste específico tentar alocar memória ou
                *   outro recurso. */
+
+		TST_CondRetAcessoInvalidoVetor
+			   /* Comando tentou acessar uma posição fora do vetor de recursos
+			   *  alocado para o módulo de testes específicos
+			   *
+			   *$ED Descrição
+			   *   Esta condição deve ser retornada caso tenha ocorrido algum erro
+			   *   quando o módulo de teste específico tenta acessar o vetor de 
+			   *   recursos interno */
 
    } TST_tpCondRet ;
 

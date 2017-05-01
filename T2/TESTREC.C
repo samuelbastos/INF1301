@@ -122,7 +122,16 @@ void * recursos[10];
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = REC_CriarRecurso( &recursos[RecursoObtido], NomeObtido ) ;
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				CondRetObtido = REC_CriarRecurso(&recursos[RecursoObtido], NomeObtido);
+			}
+			else
+			{
+				CondRetObtido = TST_CondRetAcessoInvalidoVetor;
+				return TST_CompararInt(CondRetEsperada, CondRetObtido,
+					"Acesso Invalido ao vetor de recursos.");
+			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao criar recurso." );
@@ -141,7 +150,16 @@ void * recursos[10];
 				return TST_CondRetParm;
 			} /* if */
 
-            REC_DestruirRecurso( &recursos[RecursoObtido]) ;
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				REC_DestruirRecurso(&recursos[RecursoObtido]);
+			}
+			else
+			{
+				CondRetObtido = TST_CondRetAcessoInvalidoVetor;
+				return TST_CompararInt(TST_CondRetOK, CondRetObtido,
+					"Acesso Invalido ao vetor de recursos.");
+			}
 
             return TST_CondRetOK ;
 
