@@ -69,7 +69,7 @@
 
 /* Vetor de recursos para serem usados nos testes */
 
-void * recursos[10];
+tpRecurso * recursos[10];
 
 
 /*****  Código das funções exportadas pelo módulo  *****/

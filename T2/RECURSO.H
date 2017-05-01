@@ -44,11 +44,17 @@
 
    typedef enum {
 
-         REC_CondRetOK = 0 ,
-               /* Executou correto */
+		REC_CondRetOK = 0 ,
+			/* Executou correto */
 
-         REC_CondRetFaltouMemoria = 1
-               /* Faltou memória ao alocar dados */
+		REC_CondRetFaltouMemoria = 1,
+			/* Faltou memória ao alocar dados */
+
+		REC_CondRetRecursoNaoExiste = 2,
+			/* O recurso não existe */
+
+		REC_CondRetNomeInvalido = 3
+			/* O nome é invalido */
 
    } REC_tpCondRet ;
    
@@ -70,9 +76,14 @@
 *  $ED Descrição da função
 *     Cria uma instância do tipo Recurso
 *
+*  $EP Parâmetros
+*     $P ptRecurso - ponteiro que vai armazenar o recurso que foi criado
+*	  $P novoNome - nome que deverá ser colocado dentro do recurso
+*
 *  $FV Valor retornado
 *     REC_CondRetOK
 *     REC_CondRetFaltouMemoria
+*	  REC_CondRetNomeInvalido
 *
 ***********************************************************************/
 
@@ -92,24 +103,25 @@
    void REC_DestruirRecurso( tpRecurso ** ptRecurso ) ;
 
 
-///***********************************************************************
-//*
-//*  $FC Função: ARV Adicionar filho à esquerda
-//*
-//*  $EP Parâmetros
-//*     $P ValorParm - valor a ser inserido no novo nó.
-//*
-//*  $FV Valor retornado
-//*     ARV_CondRetOK
-//*     ARV_CondRetErroEstrutura
-//*     ARV_CondRetFaltouMemoria
-//*     ARV_CondRetNaoEhFolha     - caso não seja folha para a esquerda
-//*
-//***********************************************************************/
-//
-//   REC_tpCondRet ARV_InserirEsquerda( char ValorParm ) ;
-//
-//
+/***********************************************************************
+*
+*  $FC Função: REC Alterar nome do recurso
+*
+*  $EP Parâmetros
+*	  $P ptRecurso - recurso que terá o nome alterado
+*	  $P novoNome - nome que deverá ser colocado dentro do recurso no lugar
+*					do nome atual
+*
+*  $FV Valor retornado
+*     REC_CondRetOK
+*     REC_CondRetFaltouMemoria
+*	  REC_CondRetRecursoNaoExiste
+*	  REC_CondRetNomeInvalido
+*
+***********************************************************************/
+
+   REC_tpCondRet REC_AlterarNome(tpRecurso * ptRecurso, char * novoNome);
+
 ///***********************************************************************
 //*
 //*  $FC Função: ARV Adicionar filho à direita
