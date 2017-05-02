@@ -165,6 +165,8 @@
            return TRF_CondRetConexaoInvalida;
        }
 
+       IrFinalLista( pTarefaSucessora->tarefasPredecessoras ) ;
+       IrFinalLista( pTarefaPredecessora->tarefasSucessoras ) ;
        retornoSucessor = LIS_InserirElementoApos( pTarefaSucessora->tarefasPredecessoras , (void *) pTarefaPredecessora);
        retornoPredecessor = LIS_InserirElementoApos( pTarefaPredecessora->tarefasSucessoras , (void *) pTarefaSucessora);
         
