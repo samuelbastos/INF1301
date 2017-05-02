@@ -48,9 +48,11 @@
 
    } tpTarefa ;
 
+/***** Variáveis encapsuladas no módulo *****/
+
    static int  idAtual = 0;
 
-/***** Protótipos das funções encapuladas no módulo *****/
+/***** Protótipos das funções encapsuladas no módulo *****/
 
    static void DesconectarTarefas( tpTarefa ** ptTarefa ) ;
 
