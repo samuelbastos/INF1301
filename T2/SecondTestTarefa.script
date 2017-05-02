@@ -77,34 +77,34 @@
 =conectar 2 0 0
 
 == Conecta 2 em 1
-=conectar 1 2 0
+=conectar 1 2 4
 
 == Conecta 0 em 1
 =conectar 1 0 0
 
 ==Conecta 2 em 0
-=conectar 0 2 0
+=conectar 0 2 4
 
 ==Conecta 1 em 0
-=conectar 0 1 0
+=conectar 0 1 4
 
 == Conecta 1 em 2 (SEGUNDA)
-=conectar 2 1 0
+=conectar 2 1 3
 
 == Conecta  0 em 2 (SEGUNDA)
-=conectar 2 0 0
+=conectar 2 0 3
 
 == Conecta 2 em 1 (SEGUNDA)
-=conectar 1 2 0
+=conectar 1 2 4
 
 == Conecta 0 em 1 (SEGUNDA)
-=conectar 1 0 0
+=conectar 1 0 3
 
 ==Conecta 2 em 0 (SEGUNDA)
-=conectar 0 2 0
+=conectar 0 2 4
 
 ==Conecta 1 em 0 (SEGUNDA)
-=conectar 0 1 0
+=conectar 0 1 4
 
 == Deleta 2
 =destruir 2
@@ -113,40 +113,40 @@
 =destruir 7
 
 ==Conecta tarefa inexistente 7 com tarefa existente 0
-=conectar 7 0 0
+=conectar 7 0 5
 
 ==Conecta Tarefa inexistente 8 com tarefa existente 0
-=conectar 8 0 0
+=conectar 8 0 5
 
 ==Conecta tarefas inexistentes 7 e 8
-=conectar 7 8 0
+=conectar 7 8 5
 
 ==Consulta nome tarefa inexistente 2
-=consultarnome 2 0
+=consultarnome 2 5
 
 ==Consulta descricao tarefa inexistente 2
-=consultardesc 2 0
+=consultardesc 2 5
 
 ==Alterar tarefa inexistente 2
-=alterar 2 "teste" "teste" 0
+=alterar 2 "teste" "teste" 5
 
 ==Conecta tarefa fora do dominio do vetor de tarefas
-=conectar 11 1 0
+=conectar 11 1 2
 
 ==Conecta tarefa fora do dominio do vetor de tarefas
-=conectar 1 12 0
+=conectar 1 12 2
 
 ==Conecta tarefas fora do dominio do vetor de tarefas
-=conectar 11 12 0
+=conectar 11 12 2
 
 ==Consulta nome tarefa fora do dominio do vetor de tarefas
-=consultarnome 12 0
+=consultarnome 12 2
 
 ==Consulta descricao tarefa fora do dominio do vetor de tarefas
-=consultardesc 12 0
+=consultardesc 12 2
 
 ==Alterar descricao de tarefa fora do dominio do vetor de tarefas
-=alterar 12 "teste2" "teste1" 0 
+=alterar 12 "teste2" "teste1" 2 
 
 ==Destroi tarefa 0 (CHECKPOINT)
 =destruir 0
@@ -155,10 +155,10 @@
 =destruir 1
 
 ==Alterar tarefa inexistente 0
-=alterar 0 "teste" "teste" 0
+=alterar 0 "teste" "teste" 5
 
 ==Alterar tarefa inexistente 1
-=alterar 1 "teste" "teste" 0
+=alterar 1 "teste" "teste" 5
 
 == Cria Tarefa 0 (INVERSO)
 =criar 0 "Tarefa0" "hue0" 0
@@ -179,16 +179,16 @@
 =conectar 0 2 0
 
 == Conecta 2 em 1 (INVERSO) 
-=conectar 2 1 0
+=conectar 2 1 4
 
 == Conecta 0 em 1 (INVERSO)
 =conectar 0 1 0
 
 ==Conecta 2 em 0 (INVERSO) 
-=conectar 2 0 0
+=conectar 2 0 4
 
 ==Conecta 1 em 0 (INVERSO)
-=conectar 1 0 0
+=conectar 1 0 4
 
 ==Conecta 3 em 2 (INVERSO)
 =conectar 3 2 0
