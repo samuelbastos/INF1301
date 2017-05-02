@@ -108,7 +108,7 @@
 *  $FC Função: REC Alterar nome do recurso
 *
 *  $EP Parâmetros
-*	  $P ptRecurso - recurso que terá o nome alterado
+*	  $P ptRecurso - Recurso que terá o nome alterado
 *	  $P novoNome - nome que deverá ser colocado dentro do recurso no lugar
 *					do nome atual
 *
@@ -122,85 +122,86 @@
 
    REC_tpCondRet REC_AlterarNome(tpRecurso * ptRecurso, char * novoNome);
 
-///***********************************************************************
-//*
-//*  $FC Função: ARV Adicionar filho à direita
-//*
-//*  $EP Parâmetros
-//*     $P ValorParm - valor a ser inserido no novo nó
-//*
-//*  $FV Valor retornado
-//*     ARV_CondRetOK
-//*     ARV_CondRetErroEstrutura
-//*     ARV_CondRetFaltouMemoria
-//*     ARV_CondRetNaoEhFolha     - caso não seja folha para a direita
-//*
-//***********************************************************************/
-//
-//   REC_tpCondRet ARV_InserirDireita( char ValorParm ) ;
-//
-//
-///***********************************************************************
-//*
-//*  $FC Função: ARV Ir para nó pai
-//*
-//*  $FV Valor retornado
-//*     ARV_CondRetOK
-//*     ARV_CondRetArvoreNaoExiste
-//*     ARV_CondRetArvoreVazia
-//*     ARV_CondRetNoEhRaiz
-//*
-//***********************************************************************/
-//
-//   REC_tpCondRet ARV_IrPai( void ) ;
-//
-//
-///***********************************************************************
-//*
-//*  $FC Função: ARV Ir para nó à esquerda
-//*
-//*  $FV Valor retornado
-//*     ARV_CondRetOK
-//*     ARV_CondRetArvoreNaoExiste
-//*     ARV_CondRetArvoreVazia
-//*     ARV_CondRetNaoPossuiFilho   - nó corrente não possui filho à esquerda
-//*
-//***********************************************************************/
-//
-//   REC_tpCondRet ARV_IrNoEsquerda( void ) ;
-//
-//
-///***********************************************************************
-//*
-//*  $FC Função: ARV Ir para nó à direita
-//*
-//*  $FV Valor retornado
-//*     ARV_CondRetOK
-//*     ARV_CondRetArvoreNaoExiste
-//*     ARV_CondRetArvoreVazia
-//*     ARV_CondRetNaoPossuiFilho   - nó corrente não possui filho à direita
-//*
-//***********************************************************************/
-//
-//   REC_tpCondRet ARV_IrNoDireita( void ) ;
-//
-//
-///***********************************************************************
-//*
-//*  $FC Função: ARV Obter valor corrente
-//*
-//*  $EP Parâmetros
-//*     $P ValorParm - é o parâmetro que receberá o valor contido no nó.
-//*                    Este parâmetro é passado por referência.
-//*
-//*  $FV Valor retornado
-//*     ARV_CondRetOK
-//*     ARV_CondRetArvoreNaoExiste
-//*     ARV_CondRetArvoreVazia
-//*
-//***********************************************************************/
-//
-//   REC_tpCondRet ARV_ObterValorCorr( char * ValorParm ) ;
+
+/***********************************************************************
+*
+*  $FC Função: REC Marca o recurso como ocupado
+*
+*  $EP Parâmetros
+*     $P ptRecurso - Recurso que será marcada como ocupada
+*
+*  $FV Valor retornado
+*     REC_CondRetOK
+*	  REC_CondRetRecursoNaoExiste
+*
+***********************************************************************/
+
+   REC_tpCondRet REC_MarcarComoOcupada(tpRecurso * ptRecurso);
+
+
+/***********************************************************************
+*
+*  $FC Função: REC Marca recurso como disponível
+*
+*  $EP Parâmetros
+*     $P ptRecurso - Recurso que será marcada como disponível
+*
+*  $FV Valor retornado
+*     REC_CondRetOK
+*	  REC_CondRetRecursoNaoExiste
+*
+***********************************************************************/
+
+   REC_tpCondRet REC_MarcarComoDisponivel(tpRecurso * ptRecurso);
+
+
+/***********************************************************************
+*
+*  $FC Função: REC Consulta o Id do recurso
+*
+*  $EP Parâmetros
+*     $P ptRecurso - Recurso que será consultada
+*
+*  $FV Valor retornado
+*     REC_CondRetOK
+*	  REC_CondRetRecursoNaoExiste
+*
+***********************************************************************/
+
+   REC_tpCondRet REC_ConsultarId(tpRecurso * ptRecurso, int * id);
+
+
+/***********************************************************************
+*
+*  $FC Função: REC Consulta o nome do recurso
+*
+*  $EP Parâmetros
+*     $P ptRecurso - Recurso que será consultada
+*
+*  $FV Valor retornado
+*     REC_CondRetOK
+*     REC_CondRetFaltouMemoria
+*	  REC_CondRetRecursoNaoExiste
+*
+***********************************************************************/
+
+   REC_tpCondRet REC_ConsultarNome(tpRecurso * ptRecurso, char * nome);
+
+
+/***********************************************************************
+*
+*  $FC Função: REC Consulta a disponibilidade do Recurso
+*
+*  $EP Parâmetros
+*     $P ptRecurso - Recurso que será consultada
+*
+*  $FV Valor retornado
+*     REC_CondRetOK
+*	  REC_CondRetRecursoNaoExiste
+*
+***********************************************************************/
+
+   REC_tpCondRet REC_ConsultarDisponibilidade(tpRecurso * ptRecurso, int * estaDisponivel);
 
 #undef RECURSO_EXT
 

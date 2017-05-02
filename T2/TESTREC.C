@@ -57,15 +57,10 @@
 /* Tabela dos nomes dos comandos de teste específicos */
 
 #define     CRIAR_REC_CMD       "=criar"
-#define     INS_DIR_CMD         "=insdir"
-#define     INS_ESQ_CMD         "=insesq"
-#define     IR_PAI_CMD          "=irpai"
-#define     IR_ESQ_CMD          "=iresq"
-#define     IR_DIR_CMD          "=irdir"
-#define     OBTER_VAL_CMD       "=obter"
 #define     DESTROI_CMD         "=destruir"
+#define		ALTERAR_NOME_CMD	"=altnome"
 
-#define STRING_DIM 100
+#define		STRING_DIM 100
 
 /* Vetor de recursos para serem usados nos testes */
 

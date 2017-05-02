@@ -134,7 +134,7 @@ static int idAtual = 0;
 
 /***************************************************************************
 *
-*  Função: REC Alterar nome Recurso
+*  Função: REC Alterar nome do Recurso
 *  ****/
 
    REC_tpCondRet REC_AlterarNome(tpRecurso * ptRecurso, char * novoNome)
@@ -160,6 +160,102 @@ static int idAtual = 0;
 		return REC_CondRetOK;
 
    } /* Fim função: REC Alterar nome do Recurso */
+
+/***************************************************************************
+*
+*  Função: REC Marca o recurso como ocupado
+*  ****/
+
+   REC_tpCondRet REC_MarcarComoOcupada(tpRecurso * ptRecurso)
+   {
+	   if (ptRecurso == NULL)
+	   {
+		   return REC_CondRetRecursoNaoExiste;
+	   } /* if */
+	   
+	   ptRecurso->estaDisponivel = FALSE;
+
+	   return REC_CondRetOK;
+
+   } /* Fim função: REC Marca o recurso como ocupado */
+
+/***************************************************************************
+*
+*  Função: REC Marca recurso como disponível
+*  ****/
+
+   REC_tpCondRet REC_MarcarComoDisponivel(tpRecurso * ptRecurso)
+   {
+	   if (ptRecurso == NULL)
+	   {
+		   return REC_CondRetRecursoNaoExiste;
+	   } /* if */
+
+	   ptRecurso->estaDisponivel = TRUE;
+
+	   return REC_CondRetOK;
+
+   } /* Fim função: REC Marca recurso como disponível */
+
+/***************************************************************************
+*
+*  Função: REC Consulta o Id do recurso
+*  ****/
+
+   REC_tpCondRet REC_ConsultarId(tpRecurso * ptRecurso, int * id)
+   {
+	   if (ptRecurso == NULL)
+	   {
+		   return REC_CondRetRecursoNaoExiste;
+	   } /* if */
+
+	   (*id) = ptRecurso->id;
+
+	   return REC_CondRetOK;
+
+   } /* Fim função: REC Consulta o Id do recurso */
+
+/***************************************************************************
+*
+*  Função: REC Consulta o Id do recurso
+*  ****/
+
+   REC_tpCondRet REC_ConsultarNome(tpRecurso * ptRecurso, char * nome)
+   {
+	   if (ptRecurso == NULL)
+	   {
+		   return REC_CondRetRecursoNaoExiste;
+	   } /* if */
+
+	   free(nome);
+	   nome = (char*)malloc(strlen(ptRecurso->nome) * sizeof(char) + 1);
+	   if (nome == NULL)
+	   {
+		   return REC_CondRetFaltouMemoria;
+	   } /* if */
+	   strcpy(nome, ptRecurso->nome);
+
+	   return REC_CondRetOK;
+
+   } /* Fim função: REC Consulta o Id do recurso */
+
+/***************************************************************************
+*
+*  Função: REC Consulta a disponibilidade do Recurso
+*  ****/
+
+   REC_tpCondRet REC_ConsultarDisponibilidade(tpRecurso * ptRecurso, int * estaDisponivel)
+   {
+	   if (ptRecurso == NULL)
+	   {
+		   return REC_CondRetRecursoNaoExiste;
+	   } /* if */
+
+	   (*estaDisponivel) = ptRecurso->estaDisponivel;
+
+	   return REC_CondRetOK;
+
+   } /* Fim função: REC Consulta a disponibilidade do Recurso */
 
 
 #undef TRUE
