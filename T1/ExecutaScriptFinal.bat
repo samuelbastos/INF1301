@@ -1,1 +1,1 @@
-TRAB1.exe /sFinalTest.script > logFinal.log
+TRAB1.exe /sFinalTest.script > logFinalGerado.log

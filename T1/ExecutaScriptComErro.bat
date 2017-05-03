@@ -1,1 +1,1 @@
-TRAB1.exe /sOScriptQueQuebraTudo.script > logComErro.log
+TRAB1.exe /sErroNaoRecuperado.script > logComErroGerado.log

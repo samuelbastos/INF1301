@@ -18,3 +18,5 @@
 							Criação de scripts de testes para testar todas as condições de retorno de ambas as funcionalidades implementadas no dia
 							Compilação de todos os casos de testes produzidos pela dupla em um só script de testes
 
+04/04           4                     revisar especificações    Correções na documentação;
+                                                                Criação dos .bat e entrega final do trabalho

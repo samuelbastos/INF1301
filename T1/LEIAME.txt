@@ -3,21 +3,24 @@ Mauricio Pedro Silva Goncalves Vieira 131110
 Samuel Bastos de Souza Junior 1311416
 
 Para gerar o arquivo de .log que contem erros propositais no script siga os seguintes passos:
-1- extraia os arquivos "TRAB1.exe", "OScriptQueQuebraTudo.script" e "ExecutaScriptComErro.bat
+1- extraia os arquivos "TRAB1.exe", "ErroNaoRecuperado.script" e "ExecutaScriptComErro.bat
 2- caso os arquivos nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta
 3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "ExecutaScriptComErro.bat
-4- nesse momento deve ter um arquivo chamado "logComErroGerado.log" na pasta, dentro dele você encontrará os relatórios de execução dos testes
+4- nesse momento deve ter um arquivo chamado "logComErroGerado.log" na pasta, dentro dele você encontrará o relatório de execução dos testes
+5- clique duas vezes no arquivo "logComErroGerado.log" para ter acesso ao relatório de execução de testes
 
 ATENÇÃO- Se caso dentro da pasta que você quer rodar o programa já tiver o arquivo "TRAB1.exe" devido ao passo anterior, você não precisa nem descompactar nem mover novamente esse arquivo para dentro da pasta.
 Para gerar o arquivo de .log que contem erros propositais recuperados no script siga os seguintes passos:
-1- extraia os arquivos "TRAB1.exe", "ScriptDoErroRecuperado.script" e "ExecutaScriptComErroRecuperado.bat"
+1- extraia os arquivos "TRAB1.exe", "ErroRecuperado.script" e "ExecutaScriptComErroRecuperado.bat"
 2- caso os arquivos nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta.
 3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "ExecutaScriptComErroRecuperado.bat"
-4- nesse momento deve ter um arquivo chamado "logComErroRecuperadoGerado.log" na pasta, dentro dele você encontrará os relatórios de execução dos testes
+4- nesse momento deve ter um arquivo chamado "logComErroRecuperadoGerado.log" na pasta, dentro dele você encontrará o relatório de execução dos testes
+5- clique duas vezes no arquivo "logComErroRecuperadoGerado.log" para ter acesso ao relatório de execução de testes
 
 ATENÇÃO- Se caso dentro da pasta que você quer rodar o programa já tiver o arquivo "TRAB1.exe" devido ao passo anterior, você não precisa nem descompactar nem mover novamente esse arquivo para dentro da pasta.
 Para gerar o arquivo de .log que contem os testes finais do módulo árvore.c incluindo os testes de costura e de impressao da costura siga os seguintes passos:
 1- extraia os arquivos "TRAB1.exe", "FinalTest.script" e "ExecutaScriptFinal.bat"
 2- caso os arquivos nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta.
 3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "ExecutaScriptComErroRecuperado.bat"
-4- nesse momento deve ter um arquivo chamado "logComErroRecuperadoGerado.log" na pasta, dentro dele você encontrará os relatórios de execução dos testes
+4- nesse momento deve ter um arquivo chamado "logFinalGerado.log" na pasta, dentro dele você encontrará o relatório de execução dos testes
+5- clique duas vezes no arquivo "logFinalGerado.log" para ter acesso ao relatório de execução de testes
