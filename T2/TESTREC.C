@@ -21,18 +21,13 @@
 *     Comandos de teste específicos para testar o módulo recurso:
 *
 *     "=criar"  <i> <string> 
-*				- chama a função REC_CriarRecurso( <i>, <Char> )
-*     "=irpai"			
-*				- chama a função ARV_IrPai( )
-*     "=iresq"			
-*				- chama a função ARV_IrEsquerda( )
-*     "=irdir"			
-*				- chama a função ARV_IrDireita( )
-*     "=obter" <Char>
-*				- chama a função ARV_ObterValorCorr( ) e compara
-*				  o valor retornado com o valor <Char>
+*				- chama a função REC_CriarRecurso( <i>, <string> )
+
 *     "=destroi" <i>	
-*				- chama a função REC_DestruirRecurso( )
+*				- chama a função REC_DestruirRecurso( <i> )
+
+	  "=altnome" <i> <string>
+				- chama a função para alterar o nome REC_AlterarNome( <i>, <string> )
 *
 *	  Obs: notação: <i> é o valor do parâmetro que se encontra no comando
 *						de teste que é um inteiro e significa qual das ta-
@@ -46,6 +41,7 @@
 
 #include    <string.h>
 #include    <stdio.h>
+#include	<stdlib.h>
 
 #include    "TST_ESPC.H"
 
@@ -123,8 +119,7 @@ tpRecurso * recursos[10];
 			}
 			else
 			{
-				CondRetObtido = TST_CondRetAcessoInvalidoVetor;
-				return TST_CompararInt(CondRetEsperada, CondRetObtido,
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
 					"Acesso Invalido ao vetor de recursos.");
 			}
 
@@ -140,6 +135,32 @@ tpRecurso * recursos[10];
 
 			NumLidos = LER_LerParametros("i",
 								&RecursoObtido);
+			if (NumLidos != 1)
+			{
+				return TST_CondRetParm;
+			} /* if */
+
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				REC_DestruirRecurso(&recursos[RecursoObtido]);
+			}
+			else
+			{
+				return TST_CompararInt(TST_CondRetOK, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
+			}
+
+            return TST_CondRetOK ;
+
+         } /* fim ativa: Testar REC Destruir recurso */
+
+	/* Testar REC Alterar nome do recurso */
+
+         else if ( strcmp( ComandoTeste , ALTERAR_NOME_CMD ) == 0 )
+         {
+
+			NumLidos = LER_LerParametros("isi",
+								&RecursoObtido, NomeObtido, &CondRetEsperada);
 			if (NumLidos != 1)
 			{
 				return TST_CondRetParm;

@@ -66,7 +66,7 @@
    *
    ***********************************************************************/
 
-   typedef struct tgRecurso tpRecurso;
+   typedef struct tcRecurso tcRecurso;
 
 
 /***********************************************************************
@@ -87,7 +87,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_CriarRecurso(tpRecurso ** ptRecurso, char * novoNome) ;
+   REC_tpCondRet REC_CriarRecurso(tcRecurso ** ptRecurso, char * novoNome) ;
 
 
 /***********************************************************************
@@ -100,7 +100,7 @@
 *
 ***********************************************************************/
 
-   void REC_DestruirRecurso( tpRecurso ** ptRecurso ) ;
+   void REC_DestruirRecurso( tcRecurso ** ptRecurso ) ;
 
 
 /***********************************************************************
@@ -120,7 +120,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_AlterarNome(tpRecurso * ptRecurso, char * novoNome);
+   REC_tpCondRet REC_AlterarNome(tcRecurso * ptRecurso, char * novoNome);
 
 
 /***********************************************************************
@@ -136,7 +136,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_MarcarComoOcupada(tpRecurso * ptRecurso);
+   REC_tpCondRet REC_MarcarComoOcupada(tcRecurso * ptRecurso);
 
 
 /***********************************************************************
@@ -152,7 +152,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_MarcarComoDisponivel(tpRecurso * ptRecurso);
+   REC_tpCondRet REC_MarcarComoDisponivel(tcRecurso * ptRecurso);
 
 
 /***********************************************************************
@@ -168,7 +168,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_ConsultarId(tpRecurso * ptRecurso, int * id);
+   REC_tpCondRet REC_ConsultarId(tcRecurso * ptRecurso, int * id);
 
 
 /***********************************************************************
@@ -185,7 +185,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_ConsultarNome(tpRecurso * ptRecurso, char * nome);
+   REC_tpCondRet REC_ConsultarNome(tcRecurso * ptRecurso, char ** pNome);
 
 
 /***********************************************************************
@@ -201,7 +201,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_ConsultarDisponibilidade(tpRecurso * ptRecurso, int * estaDisponivel);
+   REC_tpCondRet REC_ConsultarDisponibilidade(tcRecurso * ptRecurso, int * estaDisponivel);
 
 #undef RECURSO_EXT
 

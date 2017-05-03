@@ -45,11 +45,6 @@ static int idAtual = 0;
 
    typedef struct tgRecurso {
 
-		int id;
-				/* 
-			     *	Sequencial que identifica unicamente um Recurso
-			     */
-
 		char * nome;
 				/*
 				 *	Nome do Recurso
@@ -63,6 +58,32 @@ static int idAtual = 0;
 				 */
 
    } tpRecurso ;
+
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: ARV Descritor da cabeça de uma árvore
+*
+*
+*  $ED Descrição do tipo
+*     A cabe‡a da árvore é o ponto de acesso para uma determinada árvore.
+*     Por intermédio da referência para o nó corrente e do ponteiro
+*     pai pode-se navegar a árvore sem necessitar de uma pilha.
+*     Pode-se, inclusive, operar com a árvore em forma de co-rotina.
+*
+***********************************************************************/
+
+   typedef struct tcRecurso {
+
+		int id;
+			/* 
+			*	Sequencial que identifica unicamente um Recurso
+			*/
+
+         tpRecurso * recurso ;
+               /* Ponteiro para a estrutura recurso */
+
+   } tcRecurso ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -220,8 +241,9 @@ static int idAtual = 0;
 *  Função: REC Consulta o Id do recurso
 *  ****/
 
-   REC_tpCondRet REC_ConsultarNome(tpRecurso * ptRecurso, char * nome)
+   REC_tpCondRet REC_ConsultarNome(tpRecurso * ptRecurso, char ** pNome)
    {
+	   char * nome = (*pNome);
 	   if (ptRecurso == NULL)
 	   {
 		   return REC_CondRetRecursoNaoExiste;
@@ -234,6 +256,8 @@ static int idAtual = 0;
 		   return REC_CondRetFaltouMemoria;
 	   } /* if */
 	   strcpy(nome, ptRecurso->nome);
+
+	   (*pNome) = nome;
 
 	   return REC_CondRetOK;
 
