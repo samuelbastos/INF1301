@@ -52,15 +52,20 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_REC_CMD       "=criar"
-#define     DESTROI_CMD         "=destruir"
-#define		ALTERAR_NOME_CMD	"=altnome"
+#define     CRIAR_REC_CMD			"=criar"		//DONE
+#define     DESTROI_CMD				"=destruir"		//DONE
+#define		ALTERAR_NOME_CMD		"=altnome"		//DONE
+#define		MARCAR_OCUPADO_CMD		"=marcocup"		//DONE
+#define		MARCAR_DISPONIVEL_CMD	"=marcdisp"		//DONE
+#define		CONSULTA_ID_CMD			"=conid"
+#define		CONSULTA_NOME_CMD		"=connome"		//DONE
+#define		CONSULTA_DISP_CMD		"=condisp"		//DONE
 
 #define		STRING_DIM 100
 
 /* Vetor de recursos para serem usados nos testes */
 
-tpRecurso * recursos[10];
+tcRecurso * recursos[10];
 
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -94,6 +99,10 @@ tpRecurso * recursos[10];
       char ValorDado     = '\0' ;
 
 	  int RecursoObtido = 11;
+	  int idObtido;
+	  int idConsultado;
+	  int DisponibilidadeObtida;
+	  int DisponibilidadeConsultada;
 	  char NomeObtido[STRING_DIM];
 	  char * NomeConsultado = (char*)malloc(sizeof(char) * 100);
 
@@ -161,25 +170,175 @@ tpRecurso * recursos[10];
 
 			NumLidos = LER_LerParametros("isi",
 								&RecursoObtido, NomeObtido, &CondRetEsperada);
-			if (NumLidos != 1)
+			if (NumLidos != 3)
 			{
 				return TST_CondRetParm;
 			} /* if */
 
 			if (RecursoObtido < 10 && RecursoObtido >= 0)
 			{
-				REC_DestruirRecurso(&recursos[RecursoObtido]);
+				CondRetObtido = REC_AlterarNome(recursos[RecursoObtido], NomeObtido);
 			}
 			else
 			{
-				CondRetObtido = TST_CondRetAcessoInvalidoVetor;
-				return TST_CompararInt(TST_CondRetOK, CondRetObtido,
+				return TST_CompararInt(TST_CondRetOK, TST_CondRetAcessoInvalidoVetor,
 					"Acesso Invalido ao vetor de recursos.");
 			}
 
-            return TST_CondRetOK ;
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado alterar nome." );
 
-         } /* fim ativa: Testar REC Destruir recurso */
+         } /* fim ativa: REC Alterar nome do recurso */
+
+	/* Testar REC Marca o recurso como ocupado */
+
+         else if ( strcmp( ComandoTeste , MARCAR_OCUPADO_CMD ) == 0 )
+         {
+
+			NumLidos = LER_LerParametros("ii",
+								&RecursoObtido, &CondRetEsperada);
+			if (NumLidos != 2)
+			{
+				return TST_CondRetParm;
+			} /* if */
+
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				CondRetObtido = REC_MarcarComoOcupada(recursos[RecursoObtido]);
+			}
+			else
+			{
+				return TST_CompararInt(TST_CondRetOK, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
+			}
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao marcar recurso como ocupado" );
+
+         } /* fim ativa: REC Marca o recurso como ocupado */
+
+	/* Testar REC Marca recurso como disponível */
+
+         else if ( strcmp( ComandoTeste , MARCAR_DISPONIVEL_CMD ) == 0 )
+         {
+
+			NumLidos = LER_LerParametros("ii",
+								&RecursoObtido, &CondRetEsperada);
+			if (NumLidos != 2)
+			{
+				return TST_CondRetParm;
+			} /* if */
+
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				CondRetObtido = REC_MarcarComoDisponivel(recursos[RecursoObtido]);
+			}
+			else
+			{
+				return TST_CompararInt(TST_CondRetOK, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
+			}
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao marcar recurso como disponivel" );
+
+         } /* fim ativa: REC Marca recurso como disponível */
+
+	/* Testar REC Consulta o Id do recurso */
+
+         else if ( strcmp( ComandoTeste , CONSULTA_ID_CMD ) == 0 )
+         {
+
+			NumLidos = LER_LerParametros("iii",
+								&RecursoObtido, &idObtido, &CondRetEsperada);
+			if (NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			} /* if */
+
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				CondRetObtido = REC_ConsultarId(recursos[RecursoObtido], &idConsultado);
+				if (CondRetEsperada == REC_CondRetOK && idObtido != idConsultado)
+				{
+					return TST_CompararInt(TST_CondRetOK, TST_CondRetErro,
+						"Id encontrado não foi o esperado.");
+				}
+			}
+			else
+			{
+				return TST_CompararInt(TST_CondRetOK, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
+			}
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao consultar o id." );
+
+         } /* fim ativa: REC Consulta o Id do recurso */
+
+	/* Testar REC Consulta o nome do recurso */
+
+         else if ( strcmp( ComandoTeste , CONSULTA_NOME_CMD ) == 0 )
+         {
+
+			NumLidos = LER_LerParametros("isi",
+								&RecursoObtido, NomeObtido, &CondRetEsperada);
+			if (NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			} /* if */
+
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				CondRetObtido = REC_ConsultarNome(recursos[RecursoObtido], &NomeConsultado);
+				if (CondRetEsperada == REC_CondRetOK && strcmp(NomeConsultado,NomeObtido) != 0)
+				{
+					return TST_CompararInt(TST_CondRetOK, TST_CondRetErro,
+						"Nome obtido não é o mesmo do encontrado.");
+				}
+			}
+			else
+			{
+				return TST_CompararInt(TST_CondRetOK, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
+			}
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao consultar nome." );
+
+         } /* fim ativa: REC Consulta o nome do recurso */
+
+	/* Testar REC Consulta a disponibilidade do Recurso */
+
+         else if ( strcmp( ComandoTeste , CONSULTA_DISP_CMD ) == 0 )
+         {
+
+			NumLidos = LER_LerParametros("iii",
+								&RecursoObtido, &DisponibilidadeObtida, &CondRetEsperada);
+			if (NumLidos != 3)
+			{
+				return TST_CondRetParm;
+			} /* if */
+
+			if (RecursoObtido < 10 && RecursoObtido >= 0)
+			{
+				CondRetObtido = REC_ConsultarDisponibilidade(recursos[RecursoObtido], &DisponibilidadeConsultada);
+				if (CondRetEsperada == REC_CondRetOK && DisponibilidadeObtida != DisponibilidadeConsultada)
+				{
+					return TST_CompararInt(TST_CondRetOK, TST_CondRetErro,
+						"Disponibilidade encontrada não foi a esperada.");
+				}
+			}
+			else
+			{
+				return TST_CompararInt(TST_CondRetOK, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
+			}
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao consultar a disponibilidade." );
+
+         } /* fim ativa: REC Consulta a disponibilidade do Recurso */
 
       return TST_CondRetNaoConhec ;
 
