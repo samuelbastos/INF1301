@@ -1,0 +1,113 @@
+
+
+LES - Laboratório de Engenharia de Software DI/PUC-Rio
+      Arcabouço de teste de módulos C  (c) 2006
+
+---------------------------------------------
+      Construto sob teste: TRAB1.exe
+
+      Arquivo de teste:    ErroNaoRecuperado.script
+
+
+    1  == Arvore nao existe, nao pode ir a esquerda
+    4  == Arvore nao existe, nao pode ir a direita
+    7  == Verificar ObterValorCorr relativo a arvore inexistente
+   10  == arvore vazia, nao consegue ir ao pai
+   13  == Tenta acessar pai de uma arvore inexistente
+!!!    0  Linha:    14  // Erro proposital nao recuperado; Nao pode acessar pai de arvore inexistente; Raiz nao tem pai. 
+>>>    1  Linha:    15  Retorno errado ao ir para pai. Deveria ser: 0  É: 4
+   17  == Criar arvore (sempre consegue criar, mesmo se ja houver arvore (sobrescreve))
+   20  == Verificar se a arvore criada esta vazia
+   26  == Insere no inicial
+   29  == Volta ao pai (nao consegue, ja eh raiz)
+   32  == Insere a esquerda no
+   35  == Volta ao pai
+   38  == Insere no a esquerda (ja existe, nao vai conseguir)
+   41  == Insere no a direita
+   44  == Volta para o pai
+   47  == Tenta buscar pai do no raiz
+   50  == Volta ao no esquerdo
+   53  == Tenta ir a folhas inexistentes
+   57  == Insere no a direita e esquerda e volta para pai
+   63  == Tenta fazer insercao de nos que ja existem
+   67  == Vai para esquerda e obtem valor
+   71  == Percorre a arvore inteira
+   87  == Insere mais duas folhas ao atual
+   92  == Vai a direita/esquerda (nao tem filho)
+   96  == Insere no a direita
+   99  == Costura e imprime arvore 0
+Nós da Arvore na ordem em que foram costurados: c d e q 
+
+  103  == Destroi arvore
+  106  == Cria arvore nova
+  109  == Insere primeiro no
+  112  == Insere no a direita e esquerda
+  118  == Checa valores
+  126  == Costura e imprime arvore 1
+Nós da Arvore na ordem em que foram costurados: b c 
+
+  130  == Destroi nova arvore
+  133  == Cria mais 8 arvores
+  143  == (ARVORE_ALEATORIA)Verificar se a arvore criada esta vazia
+  149  == (ARVORE_ALEATORIA)Insere no inicial
+  152  == (ARVORE_ALEATORIA)Volta ao pai (nao consegue, ja eh raiz)
+  155  == (ARVORE_ALEATORIA)Insere a esquerda no
+  158  == (ARVORE_ALEATORIA)Volta ao pai
+  161  == (ARVORE_ALEATORIA)Insere no a esquerda (ja existe, nao vai conseguir)
+  164  == Insere no a direita
+  167  == (ARVORE_ALEATORIA)Volta para o pai
+  170  == (ARVORE_ALEATORIA)Tenta buscar pai do no raiz
+  173  == (ARVORE_ALEATORIA)Volta ao no esquerdo
+  176  == (ARVORE_ALEATORIA)Tenta ir a folhas inexistentes
+  181  == (ARVORE_ALEATORIA)Insere no a direita e esquerda e volta para pai
+  187  == (ARVORE_ALEATORIA)Tenta fazer insercao de nos que ja existem
+  191  == Costura e imprime arvore 7
+Nós da Arvore na ordem em que foram costurados: c d x 
+
+  195  == Destroi todas as arvores
+  205  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Verificar se a arvore criada esta vazia
+  211  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Insere no inicial
+  214  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Volta ao pai (nao consegue, ja eh raiz)
+  217  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Insere a esquerda no
+  220  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR) Volta ao pai
+  225  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Verificar se a arvore criada esta vazia
+  231  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Insere no inicial
+  234  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Volta ao pai (nao consegue, ja eh raiz)
+  237  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Insere a esquerda no
+  240  == (OPERACAO EM ARVORE QUE ESTA FORA DO VETOR - NEGATIVO) Volta ao pai
+  243  == (MESMOS TESTES INICIAIS EM CIMA DE ARVORE DESTRUIDA) Arvore nao existe, nao pode ir a esquerda
+  246  == (MESMOS TESTES INICIAIS EM CIMA DE ARVORE DESTRUIDA) Arvore nao existe, nao pode ir a direita
+  249  == (MESMOS TESTES INICIAIS EM CIMA DE ARVORE DESTRUIDA) Verificar ObterValorCorr relativo a arvore inexistente
+  252  == (MESMOS TESTES INICIAIS EM CIMA DE ARVORE DESTRUIDA) Arvore vazia, nao consegue ir ao pai
+  255  == (MESMOS TESTES INICIAIS EM CIMA DE ARVORE DESTRUIDA) Criar arvore (sempre consegue criar, mesmo se ja houver arvore (sobrescreve))
+  258  == (MESMOS TESTES INICIAIS EM CIMA DE ARVORE DESTRUIDA) Verificar se a arvore criada esta vazia
+  264  == Cria Arvore Para Teste de Costura
+Nós da Arvore na ordem em que foram costurados: j k m p y z 
+
+  286  == Cria Arvore com folhas fora de ordem alfabetica Para Teste de Costura
+Nós da Arvore na ordem em que foram costurados: c k l p y z 
+
+  308  == Simula mesma Arvore de Costura anterior mas costura, depois adiciona um no e costura novamente
+Nós da Arvore na ordem em que foram costurados: c k l p y z 
+
+Nós da Arvore na ordem em que foram costurados: c k l p s y 
+
+  333  == Tenta costurar uma arvore que nao existe
+  336  == Tenta costurar uma arvore vazia
+  340  == Costura e imprime uma arvore de um unico no
+Nós da Arvore na ordem em que foram costurados: w 
+
+  345  == Tenta imprimir uma arvore que nao existe
+  348  == Tenta imprimir uma arvore vazia
+  352  == Tenta imprimir uma arvore de um unico no nao costurada
+  356  == Tenta imprimir uma arvore de varios nos nao costurada
+
+!!! Número de linhas lidas:         370
+!!! Número de casos de teste:        74
+!!! Número comandos corretos:       218
+!!! Número de falhas encontradas:     1
+
+!!! Foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0
