@@ -19,7 +19,7 @@
 *     explorar tarefas.
 *     A cada momento o módulo admite no máximo duas tarefas (no caso de conectar
 *     tarefas).
-*     Tarefas possuem um listas de suas sucessoras e predecessoras
+*     Tarefas possuem listas de suas sucessoras e predecessoras
 *     Ao iniciar a execução do programa não existe tarefa.
 *
 ***************************************************************************/
@@ -69,8 +69,8 @@
 *     Caso já exista uma tarefa, esta será destruída.
 *
 *  $EP Parâmetros
-*     $P ptTarefa      - ponteiro passado por referência para apontar para a 
-*				         tarefa criada
+*     $P ctTarefa      - ponteiro passado por referência para apontar para a 
+*				         cabeça da tarefa a ser criada
 *     $P novoNome      - nome da tarefa a ser criada 
 *     $P novaDescricao - descricao da tarefa a ser criada
 *
@@ -80,32 +80,32 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_CriarTarefa( void ** ptTarefa, char * novoNome, char * novaDescricao ) ;
+   TRF_tpCondRet TRF_CriarTarefa( void ** ctTarefa, char * novoNome, char * novaDescricao ) ;
 
 /***********************************************************************
 *
 *  $FC Função: TRF Destruir tarefa
 *
 *  $EP Parâmetros
-*     $P ptTarefa - ponteiro passado por referência que aponta para a 
-*                   tarefa que será destruida
+*     $P ctTarefa - ponteiro passado por referência que aponta para a 
+*                   cabeça da tarefa que será destruida
 *
 *  $ED Descrição da função
 *    Destroi a tarefa passada por por referência. 
 *
 ***********************************************************************/
 
-   void TRF_DestruirTarefa( void ** ptTarefa ) ;
+   void TRF_DestruirTarefa( void ** ctTarefa ) ;
 
 /***********************************************************************
 *
 *  $FC Função: TRF Conectar tarefas
 *
 *  $EP Parâmetros
-*     $P ptTarefaSucessora    - ponteiro passado por referência que aponta para a 
-*				                tarefa que será conectada como sucessora
-*     $P ptTarefaPredecessora - ponteiro passado por referência que aponta para a 
-*				                tarefa que será conectada como predecessora
+*     $P ctTarefaSucessora    - ponteiro passado por referência que aponta para a 
+*				                cabeça da tarefa que será conectada como sucessora
+*     $P ctTarefaPredecessora - ponteiro passado por referência que aponta para a 
+*				                cabeça da tarefa que será conectada como predecessora
 * 
 *  $FV Valor retornado
 *     TRF_CondRetOK
@@ -114,15 +114,15 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_ConectarTarefas( void ** ptTarefaSucessora, void ** ptTarefaPredecessora ) ;
+   TRF_tpCondRet TRF_ConectarTarefas( void ** ctTarefaSucessora, void ** ctTarefaPredecessora ) ;
 
 /***********************************************************************
 *
 *  $FC Função: TRF Alterar tarefa
 *
 *  $EP Parâmetros
-*     $P pTarefa        - ponteiro passado por referência que aponta 
-*                         a tarefa a ser alterada
+*     $P cTarefa        - ponteiro passado por referência que aponta 
+*                         para cabeça tarefa a ser alterada
 *     $P novoNome       - novo nome da tarefa 
 *     $P novaDescricao  - nova descricao da tarefa
 *
@@ -132,15 +132,15 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_AlterarTarefa( void ** ptTarefa, char * novoNome, char * novaDescricao  ) ;
+   TRF_tpCondRet  TRF_AlterarTarefa( void ** ctTarefa, char * novoNome, char * novaDescricao  ) ;
 
 /***********************************************************************
 *
 *  $FC Função: TRF Consultar nome da tarefa
 *
 *  $EP Parâmetros
-*     $P pTarefa              - ponteiro passado por referência que aponta 
-*                               a tarefa a ser alterada
+*     $P cTarefa              - ponteiro passado por referência que aponta 
+*                               para cabeça da tarefa a ser alterada
 *     $P nomeConsultado       - nome da tarefa passado por referencia
 *
 *  $FV Valor retornado
@@ -149,15 +149,15 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarNomeTarefa( void ** ptTarefa, char ** nomeConsultado ) ;
+   TRF_tpCondRet  TRF_ConsultarNomeTarefa( void ** ctTarefa, char ** nomeConsultado ) ;
 
 /***********************************************************************
 *
 *  $FC Função: TRF Consultar descricao da tarefa
 *
 *  $EP Parâmetros
-*     $P pTarefa              - ponteiro passado por referência que aponta 
-*                               a tarefa a ser alterada
+*     $P cTarefa              - ponteiro passado por referência que aponta 
+*                               para cabeça da tarefa a ser alterada
 *     $P nomeConsultado       - descricao da tarefa passada por referencia
 *
 *  $FV Valor retornado
@@ -166,7 +166,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( void ** ptTarefa, char ** descricaoConsultada ) ;
+   TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( void ** ctTarefa, char ** descricaoConsultada ) ;
 
 #undef TAREFA_EXT
 
