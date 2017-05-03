@@ -46,19 +46,26 @@
        TRF_CondRetFaltouMemoria = 1,
             /* Faltou memória ao alocar os dados */
 
-       TRF_CondRetAcessoInvalidoVetor = 2,
-            /* Acesso invalido ao vetor de tarefas */
-
-       TRF_CondRetConexaoJaExistente = 3,
+       TRF_CondRetConexaoJaExistente = 2,
             /* Tarefas já conectadas */
 
-       TRF_CondRetConexaoInvalida = 4,
+       TRF_CondRetConexaoInvalida = 3,
             /* Conexão inválida de tarefas  */
 
-       TRF_CondRetTarefaInexistente = 5
+       TRF_CondRetTarefaInexistente = 4
             /* Tarefas não alocada */
 
    } TRF_tpCondRet ;
+
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: REC cabeça de uma estrutura de recurso
+*
+*
+***********************************************************************/
+
+   typedef struct tcTarefa tcTarefa;
 
 /***********************************************************************
 *
@@ -80,7 +87,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_CriarTarefa( void ** ctTarefa, char * novoNome, char * novaDescricao ) ;
+   TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao ) ;
 
 /***********************************************************************
 *
@@ -95,7 +102,7 @@
 *
 ***********************************************************************/
 
-   void TRF_DestruirTarefa( void ** ctTarefa ) ;
+   void TRF_DestruirTarefa( tcTarefa ** ctTarefa ) ;
 
 /***********************************************************************
 *
@@ -114,7 +121,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_ConectarTarefas( void ** ctTarefaSucessora, void ** ctTarefaPredecessora ) ;
+   TRF_tpCondRet TRF_ConectarTarefas( tcTarefa ** ctTarefaSucessora, void ** ctTarefaPredecessora ) ;
 
 /***********************************************************************
 *
@@ -132,7 +139,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_AlterarTarefa( void ** ctTarefa, char * novoNome, char * novaDescricao  ) ;
+   TRF_tpCondRet  TRF_AlterarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao  ) ;
 
 /***********************************************************************
 *
@@ -149,7 +156,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarNomeTarefa( void ** ctTarefa, char ** nomeConsultado ) ;
+   TRF_tpCondRet  TRF_ConsultarNomeTarefa( tcTarefa ** ctTarefa, char ** nomeConsultado ) ;
 
 /***********************************************************************
 *
@@ -166,7 +173,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( void ** ctTarefa, char ** descricaoConsultada ) ;
+   TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( tcTarefa ** ctTarefa, char ** descricaoConsultada ) ;
 
 #undef TAREFA_EXT
 

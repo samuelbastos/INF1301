@@ -53,7 +53,7 @@
 
 /* Vetor de tarefas para serem usados nos testes */
 
-void * tarefas[10];
+tcTarefa * tarefas[10];
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -113,7 +113,8 @@ void * tarefas[10];
 			}
 			else
 			{
-				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -135,6 +136,11 @@ void * tarefas[10];
             if ( TarefaObtida < 10 && TarefaObtida >= 0 )
             {
                 TRF_DestruirTarefa( &tarefas[TarefaObtida] ) ;
+            }
+            else
+            {
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
             }
 
             return TST_CondRetOK ;
@@ -159,7 +165,8 @@ void * tarefas[10];
 			}
 			else
 			{
-				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
 			}
              
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -185,7 +192,8 @@ void * tarefas[10];
 			}
 			else
 			{
-				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -211,7 +219,8 @@ void * tarefas[10];
 			}
 			else
 			{
-				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
@@ -237,7 +246,8 @@ void * tarefas[10];
 			}
 			else
 			{
-				CondRetObtido = TRF_CondRetAcessoInvalidoVetor;
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de recursos.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
