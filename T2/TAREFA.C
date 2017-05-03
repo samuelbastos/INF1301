@@ -273,8 +273,8 @@
 *  $FC Função: TRF Desconectar Tarefas
 *
 *  $EP Parâmetros
-*     $P ptTarefa - ponteiro passado por referência que aponta para a 
-*                   tarefa que será desconectada de todas as tarefas
+*     $P ctTarefa - ponteiro passado por referência que aponta para a 
+*                   cabeça tarefa que será desconectada de todas as outras
 *                   as quais a mesma está conectada
 *
 ***********************************************************************/
