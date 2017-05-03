@@ -138,6 +138,7 @@
           free(cTarefa->tarefa->nome);
           free(cTarefa->tarefa->descricao);
           free( cTarefa->tarefa );
+          free( cTarefa );
           (*ctTarefa) = NULL;
 
         } /* if */
