@@ -47,21 +47,21 @@
 		REC_CondRetOK = 0 ,
 			/* Executou correto */
 
-		REC_CondRetFaltouMemoria = 1,
-			/* Faltou memória ao alocar dados */
-
-		REC_CondRetRecursoNaoExiste = 2,
+		REC_CondRetRecursoNaoExiste = 1,
 			/* O recurso não existe */
 
-		REC_CondRetNomeInvalido = 3
+		REC_CondRetNomeInvalido = 2,
 			/* O nome é invalido */
+
+		REC_CondRetFaltouMemoria = 3
+			/* Faltou memória ao alocar dados */
 
    } REC_tpCondRet ;
    
 
    /***********************************************************************
    *
-   *  $TC Tipo de dados: REC ponteiro para um Recurso
+   *  $TC Tipo de dados: REC cabeça de uma estrutura de recurso
    *
    *
    ***********************************************************************/
