@@ -52,15 +52,18 @@
        TRF_CondRetConexaoInvalida = 3,
             /* Conexão inválida de tarefas  */
 
-       TRF_CondRetTarefaInexistente = 4
+       TRF_CondRetTarefaInexistente = 4,
             /* Tarefas não alocada */
+
+       TRF_CondRetIdRecursoNaoCadastrado = 5
+            /* Id do recurso não cadastrado */
 
    } TRF_tpCondRet ;
 
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: REC cabeça de uma estrutura de recurso
+*  $TC Tipo de dados: TRF cabeça de uma estrutura de tarefa
 *
 *
 ***********************************************************************/
@@ -116,6 +119,7 @@
 * 
 *  $FV Valor retornado
 *     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
 *     TRF_CondRetConexaoJaExistente
 *     TRF_CondRetConexaoInvalida
 *
@@ -135,7 +139,7 @@
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
-*     TRF_CondRetTarefaInexistente;
+*     TRF_CondRetTarefaInexistente
 *
 ***********************************************************************/
 
@@ -147,12 +151,13 @@
 *
 *  $EP Parâmetros
 *     $P cTarefa              - ponteiro passado por referência que aponta 
-*                               para cabeça da tarefa a ser alterada
+*                               para cabeça da tarefa a ser consultada
+*                               nome
 *     $P nomeConsultado       - nome da tarefa passado por referencia
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
-*     TRF_CondRetTarefaInexistente;
+*     TRF_CondRetTarefaInexistente
 *
 ***********************************************************************/
 
@@ -164,16 +169,54 @@
 *
 *  $EP Parâmetros
 *     $P cTarefa              - ponteiro passado por referência que aponta 
-*                               para cabeça da tarefa a ser alterada
+*                               para cabeça da tarefa a ser consultada
+*                               descricao
 *     $P nomeConsultado       - descricao da tarefa passada por referencia
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
-*     TRF_CondRetTarefaInexistente;
+*     TRF_CondRetTarefaInexistente
 *
 ***********************************************************************/
 
    TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( tcTarefa ** ctTarefa, char ** descricaoConsultada ) ;
+
+/***********************************************************************
+*
+*  $FC Função: TRF Cadastrar id do recurso da tarefa
+*
+*  $EP Parâmetros
+*     $P cTarefa              - ponteiro passado por referência que aponta 
+*                               para cabeça da tarefa a se cadastrar id 
+*                               do recurso
+*     $P idRecurso            - id do recurso a ser cadastrado na tarefa
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet TRF_CadastrarIdRecurso( tcTarefa ** ctTarefa, int idRecurso ) ;
+
+/***********************************************************************
+*
+*  $FC Função: TRF Consultar id do recurso da tarefa
+*
+*  $EP Parâmetros
+*     $P cTarefa              - ponteiro passado por referência que aponta 
+*                               para cabeça da tarefa a ser consultada
+*                               id de recurso
+*     $P idRecurso            - ponteiro para o id do recurso da tarefa
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*     TRF_CondRetIdRecursoNaoCadastrado
+*
+***********************************************************************/
+
+   TRF_tpCondRet TRF_ConsultarIdRecurso( tcTarefa ** ctTarefa, int * idRecurso ) ;
 
 #undef TAREFA_EXT
 

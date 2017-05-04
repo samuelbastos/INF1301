@@ -25,6 +25,8 @@
 *     "=alterar"        - chama a função TRF_AlterarTarefa( )
 *     "=consultarnome"  - chama a função TRF_ConsultarNomeTarefa( )
 *     "=consultardesc"  - chama a função TRF_ConsultarDescricaoTarefa( )
+*     "=cadastraridrec" - chama a função TRF_CadastrarIdRecurso( )
+*     "=consultaridrec" - chama a função TRF_ConsultarIdRecurso( )
 *
 ***************************************************************************/
 
@@ -40,16 +42,18 @@
 #include    "tarefa.h"
 #include	"lista.h"
 
+#define STRING_DIM 100
+
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_TRF_CMD          "=criar"
-#define     DESTRUIR_TRF_CMD       "=destruir"
-#define     CONECTAR_TRF_CMD       "=conectar"
-#define     ALTERAR_TRF_CMD        "=alterar"
-#define     CONSULTAR_NOME_TRF_CMD "=consultarnome"
-#define     CONSULTAR_DESC_TRF_CMD "=consultardesc"
-
-#define STRING_DIM 100
+#define     CRIAR_TRF_CMD             "=criar"
+#define     DESTRUIR_TRF_CMD          "=destruir"
+#define     CONECTAR_TRF_CMD          "=conectar"
+#define     ALTERAR_TRF_CMD           "=alterar"
+#define     CONSULTAR_NOME_TRF_CMD    "=consultarnome"
+#define     CONSULTAR_DESC_TRF_CMD    "=consultardesc"
+#define     CADASTRAR_ID_REC_TRF_CMD  "=cadastraridrec"
+#define     CONSULTAR_ID_REC_TRF_CMD  "=consultaridrec"
 
 /* Vetor de tarefas para serem usados nos testes */
 
@@ -86,6 +90,7 @@ tcTarefa * tarefas[10];
       char ValorDado       = '\0' ;
 	  int  TarefaObtida    = 11  ;
       int  TarefaObtidaAux = 12;
+      int  idRecursoObtido = -1;
       char NomeObtido[STRING_DIM];
       char DescricaoObtida[STRING_DIM];
       char * NomeConsultado = (char*)malloc(sizeof(char)*STRING_DIM);
@@ -114,11 +119,11 @@ tcTarefa * tarefas[10];
 			else
 			{
 				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de recursos.");
+					"Acesso Invalido ao vetor de tarefas.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar árvore." );
+                                    "Retorno errado ao criar tarefa." );
 
          } /* fim ativa: Testar TRF Criar tarefa */
 
@@ -140,7 +145,7 @@ tcTarefa * tarefas[10];
             else
             {
 				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de recursos.");
+					"Acesso Invalido ao vetor de tarefas.");
             }
 
             return TST_CondRetOK ;
@@ -166,11 +171,11 @@ tcTarefa * tarefas[10];
 			else
 			{
 				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de recursos.");
+					"Acesso Invalido ao vetor de tarefas.");
 			}
              
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar árvore." );
+                                    "Retorno errado ao conectar tarefas." );
 
          } /* fim ativa: Testar TRF Conectar tarefas */
 
@@ -193,11 +198,11 @@ tcTarefa * tarefas[10];
 			else
 			{
 				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de recursos.");
+					"Acesso Invalido ao vetor de tarefas.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar árvore." );
+                                    "Retorno errado ao alterar tarefa." );
 
          } /* fim ativa: Testar TRF Alterar tarefas */
 
@@ -220,11 +225,11 @@ tcTarefa * tarefas[10];
 			else
 			{
 				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de recursos.");
+					"Acesso Invalido ao vetor de tarefas.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar árvore." );
+                                    "Retorno errado ao consultar nome da tarefa." );
 
          } /* fim ativa: Testar TRF Consultar nome de tarefa */
 
@@ -247,13 +252,67 @@ tcTarefa * tarefas[10];
 			else
 			{
 				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de recursos.");
+					"Acesso Invalido ao vetor de tarefas.");
 			}
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar árvore." );
+                                    "Retorno errado ao consultar descricao da tarefa." );
 
          } /* fim ativa: Testar TRF Consultar descricao de tarefa */
+
+      /* Testar TRF Cadastrar id do recurso da tarefa */
+
+         else if ( strcmp( ComandoTeste, CADASTRAR_ID_REC_TRF_CMD ) == 0 )
+         {
+            NumLidos = LER_LerParametros( "iii" ,
+                               &TarefaObtida, &idRecursoObtido, &CondRetEsperada ) ;
+
+            if ( NumLidos != 3 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+			{
+				CondRetObtido = TRF_CadastrarIdRecurso(&tarefas[TarefaObtida], idRecursoObtido);
+			}
+			else
+			{
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de tarefas.");
+			}
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao cadastrar id do recurso da tarefa." );
+
+         } /* fim ativa: TRF Cadastrar id do recurso da tarefa */
+
+      /* Testar TRF Consultar id do recurso da tarefa */
+
+         else if ( strcmp( ComandoTeste, CONSULTAR_ID_REC_TRF_CMD ) == 0 )
+         {
+            NumLidos = LER_LerParametros( "ii" ,
+                               &TarefaObtida, &CondRetEsperada ) ;
+
+            if ( NumLidos != 2 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+			{
+				CondRetObtido = TRF_ConsultarIdRecurso(&tarefas[TarefaObtida], &idRecursoObtido);
+			}
+			else
+			{
+				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+					"Acesso Invalido ao vetor de tarefas.");
+			}
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao consultar id do recurso da tarefa." );
+
+         } /* fim ativa: TRF Consultar id do recurso da tarefa */
 
       return TST_CondRetNaoConhec ;	
 

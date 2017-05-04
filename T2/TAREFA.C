@@ -38,7 +38,7 @@
 
        char * descricao;
 
-       void * recurso;
+       int idRecurso;
                 
        LIS_tppLista tarefasPredecessoras ;
         
@@ -52,7 +52,7 @@
 *
 *
 *  $ED Descrição do tipo
-*     A cabeça da tarefa é o ponto de acesso para uma determinada árvore.
+*     A cabeça da tarefa é o ponto de acesso para uma determinada tarefa.
 *     Nela é guardada o ponteiro da tarefa em si e sua id.
 *
 ***********************************************************************/
@@ -104,6 +104,7 @@
       cTarefa->id = idAtual;
       pTarefa->nome = (char*)malloc(strlen(novoNome)+1);
       pTarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
+      pTarefa->idRecurso = -1;
       strcpy(pTarefa->nome, novoNome);
       strcpy(pTarefa->descricao, novaDescricao);
 
@@ -266,6 +267,51 @@
        return TRF_CondRetOK ;
 
    } /* Fim função: TRF Consultar descricao da tarefa */
+   
+/***************************************************************************
+*
+*  Função: TRF Cadastrar id do recurso da tarefa
+*  ****/
+
+   TRF_tpCondRet TRF_CadastrarIdRecurso( tcTarefa ** ctTarefa, int idRecurso )
+   {
+       tcTarefa * cTarefa = (*ctTarefa);
+
+       if (cTarefa == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
+
+       cTarefa->tarefa->idRecurso = idRecurso;
+
+       return TRF_CondRetOK ;
+
+   } /* Fim função: TRF Cadastrar id do recurso da tarefa */
+
+/***************************************************************************
+*
+*  Função: TRF Consultar id do recurso da tarefa
+*  ****/
+
+   TRF_tpCondRet TRF_ConsultarIdRecurso( tcTarefa ** ctTarefa, int* idRecurso )
+   {
+       tcTarefa * cTarefa = (*ctTarefa);
+
+       if (cTarefa == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
+
+       if(cTarefa->tarefa->idRecurso == -1)
+       {
+           return TRF_CondRetIdRecursoNaoCadastrado;
+       }
+
+       *idRecurso = cTarefa->tarefa->idRecurso; 
+
+       return TRF_CondRetOK ;
+
+   } /* Fim função: TRF Consultar id do recurso da tarefa */
 
 /*****  Código das funções encapsuladas no módulo  *****/
 
