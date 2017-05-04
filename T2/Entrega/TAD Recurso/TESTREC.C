@@ -52,14 +52,14 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_REC_CMD			"=criar"		//DONE
-#define     DESTROI_CMD				"=destruir"		//DONE
-#define		ALTERAR_NOME_CMD		"=altnome"		//DONE
-#define		MARCAR_OCUPADO_CMD		"=marcocup"		//DONE
-#define		MARCAR_DISPONIVEL_CMD	"=marcdisp"		//DONE
+#define     CRIAR_REC_CMD			"=criar"
+#define     DESTROI_CMD				"=destruir"
+#define		ALTERAR_NOME_CMD		"=altnome"
+#define		MARCAR_OCUPADO_CMD		"=marcocup"
+#define		MARCAR_DISPONIVEL_CMD	"=marcdisp"
 #define		CONSULTA_ID_CMD			"=conid"
-#define		CONSULTA_NOME_CMD		"=connome"		//DONE
-#define		CONSULTA_DISP_CMD		"=condisp"		//DONE
+#define		CONSULTA_NOME_CMD		"=connome"
+#define		CONSULTA_DISP_CMD		"=condisp"
 
 #define		STRING_DIM 100
 
