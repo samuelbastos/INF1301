@@ -130,24 +130,6 @@
 ==Alterar tarefa inexistente 2
 =alterar 2 "teste" "teste" 4
 
-==Conecta tarefa fora do dominio do vetor de tarefas
-=conectar 11 1 2
-
-==Conecta tarefa fora do dominio do vetor de tarefas
-=conectar 1 12 2
-
-==Conecta tarefas fora do dominio do vetor de tarefas
-=conectar 11 12 2
-
-==Consulta nome tarefa fora do dominio do vetor de tarefas
-=consultarnome 12 2
-
-==Consulta descricao tarefa fora do dominio do vetor de tarefas
-=consultardesc 12 2
-
-==Alterar descricao de tarefa fora do dominio do vetor de tarefas
-=alterar 12 "teste2" "teste1" 2 
-
 ==Destroi tarefa 0 (CHECKPOINT)
 =destruir 0
 
@@ -204,9 +186,3 @@
 
 == Deleta 3 (INVERSO)
 =destruir 3
-
-== Deleta tarefa fora do vetor de tarefas
-=destruir 11
-
-== Criar tarefa fora do vetor de tarefas
-=criar 12 "Tarefa12" "Descricao tarefa12" 0
