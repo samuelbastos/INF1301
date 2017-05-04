@@ -1,14 +1,14 @@
-Data        Horas Trabalhadas       TipoTarefa        Descrição da Tarefa Realizada
-24/04       1.5                     Documentação      Redação da Documentação de Requisitos
-                                                      Definição do modelo do Diagrama de Arquitetura
+Data    Horas Trabalhadas   TipoTarefa                                      Descrição da Tarefa Realizada
+24/04   1.5                 Projetar                                        Redação da Documentação de Requisitos
+                            Especificar os Módulos                          Definição do modelo do Diagrama de Arquitetura
                                                       
-25/04       0.5                     Documentação      Adição de mais requisitos funcionais, hipóteses e restrições a Documentação de Requisitos
+25/04   0.5                 Projetar                                        Adição de mais requisitos funcionais, hipóteses e restrições a Documentação de Requisitos
 
-26/04       0.5                     Documentação      Adição de mais requisitos funcionais, hipóteses e restrições a Documentação de Requisitos
+26/04   0.5                 Projetar                                        Adição de mais requisitos funcionais, hipóteses e restrições a Documentação de Requisitos
 
-01/05       6                       Implementação     Implementação das funções do módulo recurso
-                                                      Implementação do módulo de definição do módulo recurso
+01/05   6                   Codificar Módulo                                Implementação das funções do módulo recurso
+                            Codificar Módulo                                Implementação do módulo de definição do módulo recurso
 
-02/05       5                       Implementação     Implementação do módulo do arcabouço para testar o módulo recurso
-                                                      Criação do script de teste para testar o módulo recurso
-                                                      Ajustes nas funções do módulo recurso que apresentaram erros apontados pelo script de teste
+02/05   5                   Codificar Módulo                                Implementação do módulo do arcabouço para testar o módulo recurso
+                            Redigir Script de Teste                         Criação do script de teste para testar o módulo recurso
+                            Diagnosticar e Corrigir Problemas Encontrados   Ajustes nas funções do módulo recurso que apresentaram erros apontados pelo script de teste
