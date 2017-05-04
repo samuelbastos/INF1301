@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: Módulo árvore
+*  $MCI Módulo de implementação: Módulo Recurso
 *
 *  Arquivo gerado:              RECURSO.C
 *  Letras identificadoras:      REC
@@ -66,10 +66,7 @@ static int idAtual = 0;
 *
 *
 *  $ED Descrição do tipo
-*     A cabe‡a da árvore é o ponto de acesso para uma determinada árvore.
-*     Por intermédio da referência para o nó corrente e do ponteiro
-*     pai pode-se navegar a árvore sem necessitar de uma pilha.
-*     Pode-se, inclusive, operar com a árvore em forma de co-rotina.
+*     A cabeça de um recurso é o ponto de acesso para um determinado recurso.
 *
 ***********************************************************************/
 
@@ -298,5 +295,5 @@ static int idAtual = 0;
 #undef TRUE
 #undef FALSE
 
-/********** Fim do módulo de implementação: Módulo árvore **********/
+/********** Fim do módulo de implementação: Módulo Recurso **********/
 

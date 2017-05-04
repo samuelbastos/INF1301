@@ -19,12 +19,11 @@
 *  $ED Descrição do módulo
 *     Este módulo implementa um conjunto simples de funções para criar, alterar
 *	  consultar e destruir estruturas do tipo Recurso
-*     A árvore possui uma cabeça que contém uma referência para a raíz da
-*     árvore e outra para um nó corrente da árvore.
-*     A cada momento o módulo admite no máximo uma única árvore.
-*     Ao iniciar a execução do programa não existe árvore.
-*     A árvore poderá estar vazia. Neste caso a raiz e o nó corrente
-*     serão nulos, embora a cabeça esteja definida.
+*     O recurso possui uma cabeça que contém uma referência para a estrutura recurso
+*     O módulo admite a criação de mais de um recurso
+*     Ao iniciar a execução do programa não existe recurso.
+*     Se a cabeça de um recurso existir o ponteiro recurso dessa estrutura de cabeça
+*	  necessariamente precisa apontar para uma estrutura Recurso diferente de NULL
 *
 ***************************************************************************/
  
@@ -71,7 +70,7 @@
 
 /***********************************************************************
 *
-*  $FC Função: REC Criar árvore
+*  $FC Função: REC Criar recurso
 *
 *  $ED Descrição da função
 *     Cria uma instância do tipo Recurso
@@ -92,7 +91,7 @@
 
 /***********************************************************************
 *
-*  $FC Função: ARV Destruir recurso
+*  $FC Função: REC Destruir recurso
 *
 *  $ED Descrição da função
 *     Destroi o recurso liberando a memoria alocada para a variavel nome
@@ -161,6 +160,8 @@
 *
 *  $EP Parâmetros
 *     $P ptRecurso - Recurso que será consultada
+*	  $P id - ponteiro para o local de memoria onde o id do recurso será
+*			  armazenado para consulta externa
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
@@ -177,6 +178,8 @@
 *
 *  $EP Parâmetros
 *     $P ptRecurso - Recurso que será consultada
+*	  $P pNome - ponteiro para o local de memoria onde o nome do recurso 
+*				 será armazenado para consulta externa
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
@@ -194,6 +197,8 @@
 *
 *  $EP Parâmetros
 *     $P ptRecurso - Recurso que será consultada
+*	  $P id - ponteiro para o local de memoria onde a disponibilidade do 
+*			  recurso será armazenada para consulta externa
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
