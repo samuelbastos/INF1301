@@ -1,1 +1,1 @@
-TRAB2-1.exe /sRecursoTeste.script > logRecursoGerado.log
+TRAB2-1.EXE /sRecursoTeste.script > logRecursoGerado.log

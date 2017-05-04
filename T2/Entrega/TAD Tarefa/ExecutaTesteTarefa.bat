@@ -1,1 +1,1 @@
-TRAB2-2.exe /sTarefaTeste.script > logTarefaGerado.log
+TRAB2-2.EXE /sTarefaTeste.script > logTarefaGerado.log

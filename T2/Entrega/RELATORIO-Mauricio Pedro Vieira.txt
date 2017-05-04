@@ -1,4 +1,4 @@
-Data    Horas Trabalhadas   TipoTarefa                                      Descrição da Tarefa Realizada
+﻿Data    Horas Trabalhadas   TipoTarefa                                      Descrição da Tarefa Realizada
 24/04   1.5                 Projetar                                        Redação da Documentação de Requisitos
                             Especificar os Módulos                          Definição do modelo do Diagrama de Arquitetura
                                                       
@@ -12,3 +12,9 @@ Data    Horas Trabalhadas   TipoTarefa                                      Desc
 02/05   5                   Codificar Módulo                                Implementação do módulo do arcabouço para testar o módulo recurso
                             Redigir Script de Teste                         Criação do script de teste para testar o módulo recurso
                             Diagnosticar e Corrigir Problemas Encontrados   Ajustes nas funções do módulo recurso que apresentaram erros apontados pelo script de teste
+
+03/05	7		    Projetar					    Criação do Modelo Físico
+			    Projetar					    Especificar as assertivas estruturais do Modelo Físico
+			    Revisar especificações			    Correções na Documentação de Requisitos mais especificamente com os Requisitos Não Funcionais
+			    Revisar especificações			    Correções no Diagrama de Arquitetura e modificações consequentes nas interfaces
+			    Revisar código do módulo			    Revisão se a documentação do código estava de acordo com o conteúdo

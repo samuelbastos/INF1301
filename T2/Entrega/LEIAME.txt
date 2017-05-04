@@ -15,3 +15,5 @@ Para gerar o arquivo de .log que contem os resultados dos testes do módulo Taref
 3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "ExecutaTesteTarefa.bat"
 4- nesse momento deve aparecer um arquivo chamado "logTarefaGerado.log" na pasta, dentro dele você encontrará o relatório de execução dos testes do módulo Tarefa
 5- clique duas vezes no arquivo "logTarefaGerado.log" para ter acesso ao relatório de execução de testes
+
+Foram incluidos nos arquivos enviados os arquivos "Modelo Fisico.pdf" e "Exemplo Fisico.pdf", esses arquivos são as imagens contidas no documento "Modelo Físico Estrutural do Cronograma.pdf" para melhor visualização caso nesse documento as imagens não estejam grandes o suficiente.

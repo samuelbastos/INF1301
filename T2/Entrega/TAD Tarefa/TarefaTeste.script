@@ -154,33 +154,6 @@
 == Cria Tarefa 3 (INVERSO)
 =criar 3 "Tarefa3" "Descricao tarefa3" 0
 
-== Cadastra id do recurso da Tarefa 0
-=cadastraridrec 0 0 0
-
-== Consulta id do recurso da Tarefa 0
-=consultaridrec 0 0
-
-== Cadastra id do recurso da Tarefa 4 que nao existe
-=cadastraridrec 4 1 4	
-
-== Consulta id do recurso da Tarefa 4 que nao existe 
-=consultaridrec 4 4
-
-== Consulta id do recurso da tarefa 2 que nao foi cadastrado
-=consultaridrec 2 5
-
-== Cadastra id do recurso da Tarefa 1
-=cadastraridrec 1 77 0
-
-== Consulta id do recurso da Tarefa 1
-=consultaridrec 1 0
-
-== Cadastra id do recurso da Tarefa 2
-=cadastraridrec 2 99 0
-
-== Consulta id do recurso da Tarefa 2
-=consultaridrec 2 0
-
 == Conecta 1 em 2 (INVERSO)
 =conectar 1 2 0
 
