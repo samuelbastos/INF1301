@@ -41,21 +41,21 @@
 *
 ***********************************************************************/
 
-   typedef enum {
+				typedef enum {
 
-		REC_CondRetOK = 0 ,
-			/* Executou correto */
+								REC_CondRetOK = 0 ,
+												/* Executou correto */
 
-		REC_CondRetRecursoNaoExiste = 1,
-			/* O recurso não existe */
+								REC_CondRetRecursoNaoExiste = 1,
+												/* O recurso não existe */
 
-		REC_CondRetNomeInvalido = 2,
-			/* O nome é invalido */
+								REC_CondRetNomeInvalido = 2,
+												/* O nome é invalido */
 
-		REC_CondRetFaltouMemoria = 3
-			/* Faltou memória ao alocar dados */
+								REC_CondRetFaltouMemoria = 3
+												/* Faltou memória ao alocar dados */
 
-   } REC_tpCondRet ;
+				} REC_tpCondRet ;
    
 
    /***********************************************************************
@@ -82,7 +82,7 @@
 *  $FV Valor retornado
 *     REC_CondRetOK
 *     REC_CondRetFaltouMemoria
-*	  REC_CondRetNomeInvalido
+*					REC_CondRetNomeInvalido
 *
 ***********************************************************************/
 

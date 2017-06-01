@@ -135,13 +135,51 @@
 
 /***************************************************************************
 *
-*  Função: CRO Inserir uma nova tarefa na lista de tarefas
+*  Função: CRO Insere Tarefa
 *  ****/
 
-				CRO_tpCondRet CRO_InserirTarefa( tcCronograma ** ctCronograma, char * novoNome, char * novaDescricao )
+				CRO_tpCondRet CRO_InserirTarefa( tcCronograma * cCronograma, char * novoNome, char * novaDescricao )
 				{
+								tcTarefa * tarefaParaInserir;
+								TRF_tpCondRet tarefaCondRet;
+								LIS_tpCondRet lisCondRet;
 
-				}
+								tarefaCondRet = TRF_CriarTarefa( &tarefaParaInserir, novoNome, novaDescricao);
+								if (tarefaCondRet == TRF_CondRetFaltouMemoria)
+												return CRO_CondRetFaltouMemoria;
+
+								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaTarefas, tarefaParaInserir);
+								if (lisCondRet == LIS_CondRetFaltouMemoria)
+												return CRO_CondRetFaltouMemoria;
+
+								return CRO_CondRetOK;
+
+				} /* Fim função: CRO Insere Tarefa */
+
+/***************************************************************************
+*
+*  Função: CRO Insere Recurso
+*  ****/
+				
+				CRO_tpCondRet CRO_InserirRecurso( tcCronograma * cCronograma, char * novoNome)
+				{
+								tcRecurso * recursoParaInserir;
+								REC_tpCondRet recursoCondRet;
+								LIS_tpCondRet lisCondRet;
+
+								recursoCondRet = REC_CriarRecurso( &recursoParaInserir, novoNome);
+								if (recursoCondRet == REC_CondRetFaltouMemoria)
+												return CRO_CondRetFaltouMemoria;
+								else if (recursoCondRet == REC_CondRetNomeInvalido)
+												return CRO_NomeRecursoInvalido;
+
+								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaRecursos, recursoParaInserir);
+								if (lisCondRet == LIS_CondRetFaltouMemoria)
+												return CRO_CondRetFaltouMemoria;
+
+								return CRO_CondRetOK;
+
+				} /* Fim função: CRO Insere Recurso */
 
 
 /********** Fim do módulo de implementação: Módulo cronograma **********/

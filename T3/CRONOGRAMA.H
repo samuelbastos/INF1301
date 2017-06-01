@@ -37,15 +37,18 @@
 *
 ***********************************************************************/
 
-   typedef enum {
+				typedef enum {
 
-       CRO_CondRetOK = 0,
-            /* Executou correto */
+								CRO_CondRetOK = 0,
+												/* Executou correto */
 
-       CRO_CondRetFaltouMemoria = 1,
-            /* Faltou memória ao alocar os dados */
+								CRO_CondRetFaltouMemoria = 1,
+												/* Faltou memória ao alocar os dados */
 
-   } CRO_tpCondRet ;
+								CRO_NomeRecursoInvalido = 2,
+												/* Nome fornecido para recurso inválido */
+				   
+				} CRO_tpCondRet ;
 
 
 /***********************************************************************
@@ -70,8 +73,8 @@
 *				                   cabeça do cronograma a ser criado
 *
 *  $FV Valor retornado
-*     TRF_CondRetOK
-*     TRF_CondRetFaltouMemoria
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
@@ -94,20 +97,43 @@
 
 /***********************************************************************
 *
-*  $FC Função: CRO Inserir uma nova tarefa na lista de tarefas
+*  $FC Função: CRO Insere Tarefa
 *
 *  $EP Parâmetros
-*     $P ctCronograma - ponteiro passado por referência que aponta para a 
-*                       cabeça do cronograma que será destruido
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
 *     $P novoNome      - nome da tarefa a ser inserida
 *     $P novaDescricao - descricao da tarefa a ser inserida
 *
 *  $ED Descrição da função
-*    Destroi o cronograma passado por referência. 
+*    Insere uma nova tarefa na lista de tarefas do cronograma passado
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_InserirTarefa( tcCronograma ** ctCronograma, char * novoNome, char * novaDescricao );
+   CRO_tpCondRet CRO_InserirTarefa( tcCronograma * ctCronograma, char * novoNome, char * novaDescricao );
+
+/***********************************************************************
+*
+*  $FC Função: CRO Insere Recurso
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*     $P novoNome      - nome do recurso a ser inserido
+*
+*  $ED Descrição da função
+*    Insere um novo recurso na lista de recursos do cronograma passado
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
+*					CRO_NomeRecursoInvalido
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_InserirRecurso( tcCronograma * ctCronograma, char * novoNome);
 
 #undef CRONOGRAMA_EXT
 
