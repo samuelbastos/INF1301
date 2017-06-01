@@ -1,0 +1,86 @@
+==Criar um recurso
+=criar 0 "Recurso0" 0
+
+==Criar recurso com nome vazio
+=criar 0 "" 2
+
+==Criar recurso com nome espaço
+=criar 0 " " 2
+
+==Criar um recurso e destruir ele
+=criar 0 "Recurso0" 0
+=destruir 0
+
+==Consultar o id de um recurso existente
+=criar 0 "Recurso0" 0
+=conid 0 2 0
+
+==Consultar o id de um recurso não existente
+=criar 0 "Recurso0" 0
+=conid 1 0 1
+
+==Id retornado pelo recurso diferente do id esperado
+=criar 0 "Recurso0" 0
+=conid 0 1 0
+=recuperar
+
+==Consultar o nome de um recurso existente
+=criar 3 "Recurso0" 0
+=connome 3 "Recurso0" 0
+
+==Consultar o nome de um recurso não existente
+=criar 0 "Recurso0" 0
+=connome 1 "Recurso0" 1
+
+==Nome retornado pelo recurso diferente do nome esperado
+=criar 0 "Recurso0" 0
+=connome 0 "NomeErrado" 0
+=recuperar
+
+==Alterar o nome de um recurso com sucesso
+=criar 0 "Recurso0" 0
+=altnome 0 "NovoNome" 0
+=connome 0 "NovoNome" 0
+
+==Alterar o nome de um recurso inexistente
+=criar 0 "Recurso0" 0
+=altnome 1 "NovoNome" 1
+
+==Alterar o nome de um recurso com um nome invalido vazio
+=criar 0 "Recurso0" 0
+=altnome 0 "" 2
+
+==Alterar o nome de um recurso com um nome invalido espaço
+=criar 0 "Recurso0" 0
+=altnome 0 " " 2
+
+==Consultar a disponibilidade de um recurso existente
+=criar 0 "Recurso0" 0
+=condisp 0 0 0
+
+==Consultar a disponibilidade de um recurso não existente
+=criar 0 "Recurso0" 0
+=condisp 1 0 1
+
+==Disponibilidade retornada pelo recurso diferente da disponibilidade esperada
+=criar 0 "Recurso0" 0
+=condisp 0 1 0
+=recuperar
+
+==Marcar o recurso como ocupado com sucesso
+=criar 0 "Recurso0" 0
+=marcocup 0 0
+=condisp 0 0 0
+
+==Marcar um recurso inexistente como ocupado
+=criar 0 "Recurso0" 0
+=marcocup 5 1
+
+==Marcar o recurso como disponivel com sucesso
+=criar 0 "Recurso0" 0
+=marcdisp 0 0
+=condisp 0 1 0
+
+==Marcar um recurso inexistente como disponivel
+=criar 0 "Recurso0" 0
+=marcdisp 5 1

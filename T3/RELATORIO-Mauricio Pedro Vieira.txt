@@ -1,0 +1,3 @@
+﻿Data    Horas Trabalhadas	TipoTarefa                                      Descrição da Tarefa Realizada
+31/05				Especificação dos Módulos			Criação do Esqueleto do novo módulo de Cronograma
+                            	
