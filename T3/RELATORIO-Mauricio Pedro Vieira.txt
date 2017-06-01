@@ -1,3 +1,4 @@
 ﻿Data    Horas Trabalhadas	TipoTarefa                                      Descrição da Tarefa Realizada
-31/05				Especificação dos Módulos			Criação do Esqueleto do novo módulo de Cronograma
+31/05	2			Especificação dos Módulos			Criação do Esqueleto do novo módulo de Cronograma
+				Codificação dos Módulos				Código para inserir recursos e tarefas em suas respectivas listas dentro do módulo cronograma
                             	
