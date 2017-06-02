@@ -313,6 +313,65 @@
 
    } /* Fim função: TRF Consultar id do recurso da tarefa */
 
+/***************************************************************************
+*
+*  Função: TRF Imprime informações da Tarefa
+*  ****/
+			
+				TRF_tpCondRet TRF_ImprimeTarefa( tcTarefa * ctTarefa)
+				{
+								tcTarefa * tarefaAux = NULL;
+								if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
+								{
+												return TRF_CondRetTarefaInexistente;
+								}
+
+								printf("Tarefa: %s\n", ctTarefa->tarefa->nome);
+								printf("Id: %d\n", ctTarefa->id);
+								printf("Descricao: %s\n", ctTarefa->tarefa->descricao);
+
+								printf("Predecessoras: ");
+								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
+								{
+												printf("Não tem Tarefas predecessoras\n");
+								}
+								else
+								{
+												IrInicioLista(ctTarefa->tarefa->tarefasPredecessoras);
+												tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasPredecessoras);
+												printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+
+												while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasPredecessoras, 1) != LIS_CondRetFimLista)
+												{
+																printf(", ");
+																tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasPredecessoras);
+																printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+												}
+												printf("\n");
+								}
+
+								printf("Sucessoras: ");
+								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
+								{
+												printf("Não tem Tarefas sucessoras\n");
+								}
+								else
+								{
+												IrInicioLista(ctTarefa->tarefa->tarefasSucessoras);
+												tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+												printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+
+												while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasSucessoras, 1) != LIS_CondRetFimLista)
+												{
+																printf(", ");
+																tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+																printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+												}
+												printf("\n");
+								}
+
+				} /* Fim função: TRF Imprime informações da Tarefa */
+
 /*****  Código das funções encapsuladas no módulo  *****/
 
 /***********************************************************************

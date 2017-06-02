@@ -43,21 +43,19 @@ static int idAtual = 0;
 *
 ***********************************************************************/
 
-   typedef struct tgRecurso {
+				typedef struct tgRecurso {
 
-		char * nome;
-				/*
-				 *	Nome do Recurso
-				 */
+								char * nome;
+												/*	Nome do Recurso */
 
-		int estaDisponivel;
-				/*
-				 *	Variável que indica se o Recurso está atualmente ligado a
-				 *	alguma tarefa, seu valor será 1 quando ela estiver disponível
-				 *	e 0 quando não estiver
-				 */
+								int estaDisponivel;
+											/*
+												*	Variável que indica se o Recurso está atualmente ligado a
+												*	alguma tarefa, seu valor será 1 quando ela estiver disponível
+												*	e 0 quando não estiver
+												*/
 
-   } tpRecurso ;
+				} tpRecurso ;
 
 
 /***********************************************************************
@@ -70,15 +68,15 @@ static int idAtual = 0;
 *
 ***********************************************************************/
 
-   typedef struct tcRecurso {
+				typedef struct tcRecurso {
 
-		int id;
-			/* Sequencial que identifica unicamente um Recurso */
+								int id;
+												/* Sequencial que identifica unicamente um Recurso */
 
-        tpRecurso * recurso ;
-            /* Ponteiro para a estrutura recurso */
+								tpRecurso * recurso ;
+												/* Ponteiro para a estrutura recurso */
 
-   } tcRecurso ;
+				} tcRecurso ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -286,6 +284,24 @@ static int idAtual = 0;
 	   } /* if */
 
 	   (*estaDisponivel) = ptRecurso->recurso->estaDisponivel;
+
+	   return REC_CondRetOK;
+
+   } /* Fim função: REC Consulta a disponibilidade do Recurso */
+
+/***************************************************************************
+*
+*  Função: REC Consulta a disponibilidade do Recurso
+*  ****/
+
+   REC_tpCondRet REC_ImprimeRecurso(tcRecurso * ptRecurso)
+   {
+	   if (ptRecurso == NULL || ptRecurso->recurso == NULL)
+	   {
+		   return REC_CondRetRecursoNaoExiste;
+	   } /* if */
+
+	   printf("Recurso: %s\nId: %d\n", ptRecurso->recurso->nome, ptRecurso->id);
 
 	   return REC_CondRetOK;
 

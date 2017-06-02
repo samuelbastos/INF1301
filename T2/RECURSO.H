@@ -202,11 +202,26 @@
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
-*	  REC_CondRetRecursoNaoExiste
+*	    REC_CondRetRecursoNaoExiste
 *
 ***********************************************************************/
 
    REC_tpCondRet REC_ConsultarDisponibilidade(tcRecurso * ptRecurso, int * estaDisponivel);
+
+/***********************************************************************
+*
+*  $FC Função: REC Imprime informações do Recurso
+*
+*  $EP Parâmetros
+*     $P ptRecurso - Recurso que terá suas informações impressas
+*
+*  $FV Valor retornado
+*     REC_CondRetOK
+*	    REC_CondRetRecursoNaoExiste
+*
+***********************************************************************/
+
+   REC_tpCondRet REC_ImprimeRecurso(tcRecurso * ptRecurso);
 
 #undef RECURSO_EXT
 

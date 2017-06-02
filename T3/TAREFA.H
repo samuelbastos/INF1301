@@ -218,6 +218,23 @@
 
    TRF_tpCondRet TRF_ConsultarIdRecurso( tcTarefa ** ctTarefa, int * idRecurso ) ;
 
+/***********************************************************************
+*
+*  $FC Função: TRF Imprime informações da Tarefa
+*
+*  $EP Parâmetros
+*     $P cTarefa              - ponteiro para a cabeça da tarefa que terá
+*																															suas informações impressas
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet TRF_ImprimeTarefa( tcTarefa * ctTarefa) ;
+
+
 #undef TAREFA_EXT
 
 /********** Fim do módulo de definição: Módulo tarefa **********/

@@ -19,14 +19,12 @@
 *  $EIU Interface com o usuário pessoa
 *     Comandos de teste específicos para testar o módulo tarefa:
 *
-*     "=criar"          - chama a função TRF_CriarTarefa( )
-*     "=destruir"       - chama a função TRF_DestruirTarefa( )
-*     "=conectar"       - chama a função TRF_ConectarTarefas( )
-*     "=alterar"        - chama a função TRF_AlterarTarefa( )
-*     "=consultarnome"  - chama a função TRF_ConsultarNomeTarefa( )
-*     "=consultardesc"  - chama a função TRF_ConsultarDescricaoTarefa( )
-*     "=cadastraridrec" - chama a função TRF_CadastrarIdRecurso( )
-*     "=consultaridrec" - chama a função TRF_ConsultarIdRecurso( )
+*     "=criar"          - chama a função CRO_CriarCronograma( )
+*     "=destruir"       - chama a função CRO_DestruirCronograma( )
+*     "=instrf"		       - chama a função CRO_InserirTarefa( )
+*     "=insrec"	        - chama a função CRO_InserirRecurso( )
+*					"=implisrec"						- chama a função CRO_ImprimeListaRecurso( )
+*					"=implistrf"						- chama a função CRO_ImprimeListaTarefa( )
 *
 ***************************************************************************/
 
@@ -39,25 +37,23 @@
 #include    "generico.h"
 #include    "lerparm.h"
 
-#include    "tarefa.h"
-#include	"lista.h"
+#include    "cronograma.h"
+#include				"lista.h"
 
 #define STRING_DIM 100
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     CRIAR_TRF_CMD             "=criar"
-#define     DESTRUIR_TRF_CMD          "=destruir"
-#define     CONECTAR_TRF_CMD          "=conectar"
-#define     ALTERAR_TRF_CMD           "=alterar"
-#define     CONSULTAR_NOME_TRF_CMD    "=consultarnome"
-#define     CONSULTAR_DESC_TRF_CMD    "=consultardesc"
-#define     CADASTRAR_ID_REC_TRF_CMD  "=cadastraridrec"
-#define     CONSULTAR_ID_REC_TRF_CMD  "=consultaridrec"
+#define     CRIAR_CRO_CMD															"=criar"
+#define     DESTRUIR_CRO_CMD												"=destruir"
+#define     INSERIR_REC_CRO_CMD         "=insrec"
+#define     INSERIR_TRF_CRO_CMD					    "=instrf"
+#define     IMPRIME_LIS_REC_CRO_CMD					"=implisrec"
+#define     IMPRIME_LIS_TRF_CRO_CMD					"=implistrf"
 
 /* Vetor de tarefas para serem usados nos testes */
 
-tcTarefa * tarefas[10];
+tcCronograma * cronogramas[10];
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -78,245 +74,190 @@ tcTarefa * tarefas[10];
 *
 ***********************************************************************/
 
-   TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
-   {
+				TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
+				{
 
-      TRF_tpCondRet CondRetObtido   = TRF_CondRetOK ;
-      TRF_tpCondRet CondRetEsperada = TRF_CondRetFaltouMemoria ;
-                                      /* inicializa para qualquer coisa */
+								CRO_tpCondRet CondRetObtido   = CRO_CondRetOK ;
+								CRO_tpCondRet CondRetEsperada = CRO_CondRetFaltouMemoria ;
+																																								/* inicializa para qualquer coisa */
 
-      char ValorEsperado   = '?'  ;
-      char ValorObtido     = '!'  ;
-      char ValorDado       = '\0' ;
-	  int  TarefaObtida    = 11  ;
-      int  TarefaObtidaAux = 12;
-      int  idRecursoObtido = -1;
-      char NomeObtido[STRING_DIM];
-      char DescricaoObtida[STRING_DIM];
-      char * NomeConsultado = (char*)malloc(sizeof(char)*STRING_DIM);
-      char * DescricaoConsultada = (char*)malloc(sizeof(char)*STRING_DIM);
-      int  NumLidos = -1 ;
+								char ValorEsperado   = '?'  ;
+								char ValorObtido     = '!'  ;
+								char ValorDado       = '\0' ;
+								int  CronogramaObtido  = 11  ;
+								int  TarefaObtidaAux = 12;
+								int  idRecursoObtido = -1;
+								char NomeObtido[STRING_DIM];
+								char DescricaoObtida[STRING_DIM];
+								char * NomeConsultado = (char*)malloc(sizeof(char)*STRING_DIM);
+								char * DescricaoConsultada = (char*)malloc(sizeof(char)*STRING_DIM);
+								int  NumLidos = -1 ;
 
-      TST_tpCondRet Ret ;
+								TST_tpCondRet Ret ;
 
-      /* Testar TRF Criar tarefa */
+								/* Testar CRO Criar Cronograma */
 
-         if ( strcmp( ComandoTeste , CRIAR_TRF_CMD ) == 0 )
-         {
+								if ( strcmp( ComandoTeste , CRIAR_CRO_CMD ) == 0 )
+								{
 
-            NumLidos = LER_LerParametros( "issi" ,
-                               &TarefaObtida, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
+												NumLidos = LER_LerParametros( "ii" ,
+																												&CronogramaObtido, &CondRetEsperada ) ;
 
-            if ( NumLidos != 4 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_CriarTarefa(&tarefas[TarefaObtida], NomeObtido, DescricaoObtida);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( CronogramaObtido < 10 && CronogramaObtido >= 0 )
+												{
+																CondRetObtido = CRO_CriarCronograma(&cronogramas[CronogramaObtido]);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																				"Acesso Invalido ao vetor de cronogramas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																"Retorno errado ao criar cronograma." );
 
-         } /* fim ativa: Testar TRF Criar tarefa */
+								} /* fim ativa: Testar CRO Criar Cronograma */
 
-      /* Testar TRF Destruir tarefa */
+								/* Testar CRO Destruir cronograma */
 
-         else if ( strcmp( ComandoTeste , DESTRUIR_TRF_CMD ) == 0 )
-         {
-			NumLidos = LER_LerParametros( "i", &TarefaObtida ) ;
+								else if ( strcmp( ComandoTeste , DESTRUIR_CRO_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "i", &CronogramaObtido ) ;
 
-			if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 1 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-            if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-            {
-                TRF_DestruirTarefa( &tarefas[TarefaObtida] ) ;
-            }
-            else
-            {
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-            }
+												if ( CronogramaObtido < 10 && CronogramaObtido >= 0 )
+												{
+																CRO_DestruirCronograma( &cronogramas[CronogramaObtido] ) ;
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																				"Acesso Invalido ao vetor de cronogramas.");
+												}
 
-            return TST_CondRetOK ;
+												return TST_CondRetOK ;
 
-         } /* fim ativa: Testar TRF Destruir tarefa */
+								} /* fim ativa: Testar CRO Destruir cronograma */
 
-      /* Testar TRF Conectar tarefas */
+								/* Testar CRO Insere Recurso */
 
-         else if ( strcmp( ComandoTeste, CONECTAR_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "iii", &TarefaObtida, &TarefaObtidaAux, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste , INSERIR_REC_CRO_CMD) == 0 )
+								{
 
-            if( NumLidos != 3 )
-            {
-                return TST_CondRetParm ;
-            } /* if */
+												NumLidos = LER_LerParametros( "isi" ,
+																																&CronogramaObtido, NomeObtido, &CondRetEsperada ) ;
+												if ( NumLidos != 3 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 && TarefaObtida != TarefaObtidaAux &&
-                 TarefaObtidaAux < 10 && TarefaObtidaAux >= 0)
-			{
-				CondRetObtido = TRF_ConectarTarefas(&tarefas[TarefaObtida], &tarefas[TarefaObtidaAux]);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
-             
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao conectar tarefas." );
+												if (CronogramaObtido < 10 && CronogramaObtido >= 0)
+												{
+																CondRetObtido = CRO_InserirRecurso(cronogramas[CronogramaObtido], NomeObtido);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de cronogramas.");
+												}
 
-         } /* fim ativa: Testar TRF Conectar tarefas */
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao inserir recurso na lista de recursos do cronograma." );
 
-      /* Testar TRF Alterar tarefa */
+								} /* fim ativa: Testar CRO Insere Recurso */
 
-         else if ( strcmp( ComandoTeste, ALTERAR_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "issi" ,
-                               &TarefaObtida, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
+								/* Testar CRO Insere Tarefa */
 
-            if ( NumLidos != 4 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+								else if ( strcmp( ComandoTeste , INSERIR_TRF_CRO_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "issi" ,
+																																&CronogramaObtido, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
+												if ( NumLidos != 4 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_AlterarTarefa(&tarefas[TarefaObtida], NomeObtido, DescricaoObtida);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( CronogramaObtido < 10 && CronogramaObtido >= 0 )
+												{
+																CondRetObtido = CRO_InserirTarefa(cronogramas[CronogramaObtido], NomeObtido, DescricaoObtida);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao alterar tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao inserir tarefa na lista de tarefas do tarefa." );
 
-         } /* fim ativa: Testar TRF Alterar tarefas */
+								} /* fim ativa: Testar CRO Insere Tarefa */
 
-      /* Testar TRF Consultar nome de tarefa */
+								/* Testar CRO Imprime Lista Recurso */
 
-         else if ( strcmp( ComandoTeste, CONSULTAR_NOME_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "ii" ,
-                               &TarefaObtida, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste , IMPRIME_LIS_REC_CRO_CMD) == 0 )
+								{
 
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												NumLidos = LER_LerParametros( "ii" ,
+																																&CronogramaObtido, &CondRetEsperada ) ;
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_ConsultarNomeTarefa(&tarefas[TarefaObtida], &NomeConsultado);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if (CronogramaObtido < 10 && CronogramaObtido >= 0)
+												{
+																CondRetObtido = CRO_ImprimeListaRecurso(cronogramas[CronogramaObtido]);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de cronogramas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao consultar nome da tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao imprimir lista de recursos do cronograma." );
 
-         } /* fim ativa: Testar TRF Consultar nome de tarefa */
+								} /* fim ativa: Testar CRO Imprime Lista Recurso */
 
-    /* Testar TRF Consultar descricao de tarefa */
+								/* Testar CRO Imprime Lista Tarefa */
 
-         else if ( strcmp( ComandoTeste, CONSULTAR_DESC_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "ii" ,
-                               &TarefaObtida, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste , IMPRIME_LIS_TRF_CRO_CMD) == 0 )
+								{
 
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												NumLidos = LER_LerParametros( "ii" ,
+																																&CronogramaObtido, &CondRetEsperada ) ;
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_ConsultarDescricaoTarefa(&tarefas[TarefaObtida], &DescricaoConsultada);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if (CronogramaObtido < 10 && CronogramaObtido >= 0)
+												{
+																CondRetObtido = CRO_ImprimeListaTarefa(cronogramas[CronogramaObtido]);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de cronogramas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao consultar descricao da tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao imprimir lista de tarefas do cronograma." );
 
-         } /* fim ativa: Testar TRF Consultar descricao de tarefa */
+								} /* fim ativa: Testar CRO Imprime Lista Tarefa */
 
-      /* Testar TRF Cadastrar id do recurso da tarefa */
+								return TST_CondRetNaoConhec ;	
 
-         else if ( strcmp( ComandoTeste, CADASTRAR_ID_REC_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "iii" ,
-                               &TarefaObtida, &idRecursoObtido, &CondRetEsperada ) ;
-
-            if ( NumLidos != 3 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_CadastrarIdRecurso(&tarefas[TarefaObtida], idRecursoObtido);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
-
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao cadastrar id do recurso da tarefa." );
-
-         } /* fim ativa: TRF Cadastrar id do recurso da tarefa */
-
-      /* Testar TRF Consultar id do recurso da tarefa */
-
-         else if ( strcmp( ComandoTeste, CONSULTAR_ID_REC_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "ii" ,
-                               &TarefaObtida, &CondRetEsperada ) ;
-
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_ConsultarIdRecurso(&tarefas[TarefaObtida], &idRecursoObtido);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
-
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao consultar id do recurso da tarefa." );
-
-         } /* fim ativa: TRF Consultar id do recurso da tarefa */
-
-      return TST_CondRetNaoConhec ;	
-
-   } /* Fim função: TTRF Efetuar operações de teste específicas para tarefa */
+				} /* Fim função: TTRF Efetuar operações de teste específicas para tarefa */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
 

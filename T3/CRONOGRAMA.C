@@ -148,6 +148,9 @@
 								if (tarefaCondRet == TRF_CondRetFaltouMemoria)
 												return CRO_CondRetFaltouMemoria;
 
+								if (cCronograma == NULL || cCronograma->cronograma == NULL)
+												return CRO_CronogramaNaoExiste;
+
 								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaTarefas, tarefaParaInserir);
 								if (lisCondRet == LIS_CondRetFaltouMemoria)
 												return CRO_CondRetFaltouMemoria;
@@ -173,6 +176,9 @@
 								else if (recursoCondRet == REC_CondRetNomeInvalido)
 												return CRO_NomeRecursoInvalido;
 
+								if (cCronograma == NULL || cCronograma->cronograma == NULL)
+												return CRO_CronogramaNaoExiste;
+
 								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaRecursos, recursoParaInserir);
 								if (lisCondRet == LIS_CondRetFaltouMemoria)
 												return CRO_CondRetFaltouMemoria;
@@ -180,6 +186,68 @@
 								return CRO_CondRetOK;
 
 				} /* Fim função: CRO Insere Recurso */
+
+/***************************************************************************
+*
+*  Função: CRO Imprime Lista Recurso
+*  ****/
+
+				CRO_tpCondRet CRO_ImprimeListaRecurso( tcCronograma * cCronograma)
+				{
+								tcRecurso * recursoCorrente = NULL;
+								if (cCronograma == NULL || cCronograma->cronograma == NULL)
+												return CRO_CronogramaNaoExiste;
+
+								if (LIS_VerificarVazia(cCronograma->cronograma->listaRecursos) == LIS_CondRetListaVazia)
+								{
+												printf("A lista de recursos está vazia\n");
+												return CRO_CondRetOK;
+								}
+
+								IrInicioLista(cCronograma->cronograma->listaRecursos);
+								recursoCorrente = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos);
+								REC_ImprimeRecurso(recursoCorrente);
+
+								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaRecursos, 1) != LIS_CondRetFimLista)
+								{
+												printf("\n");
+												recursoCorrente = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos);
+												REC_ImprimeRecurso(recursoCorrente);
+								}
+								printf("\n");
+
+				} /* Fim função: CRO Imprime Lista Recurso */
+
+/***************************************************************************
+*
+*  Função: CRO Imprime Lista Tarefas
+*  ****/
+
+				CRO_tpCondRet CRO_ImprimeListaTarefa( tcCronograma * cCronograma)
+				{
+								tcTarefa * tarefaCorrente = NULL;
+								if (cCronograma == NULL || cCronograma->cronograma == NULL)
+												return CRO_CronogramaNaoExiste;
+
+								if (LIS_VerificarVazia(cCronograma->cronograma->listaTarefas) == LIS_CondRetListaVazia)
+								{
+												printf("A lista de tarefas está vazia\n");
+												return CRO_CondRetOK;
+								}
+
+								IrInicioLista(cCronograma->cronograma->listaTarefas);
+								tarefaCorrente = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								TRF_ImprimeTarefa(tarefaCorrente);
+
+								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+								{
+												printf("\n");
+												tarefaCorrente = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+												TRF_ImprimeTarefa(tarefaCorrente);
+								}
+								printf("\n");
+
+				} /* Fim função: CRO Imprime Lista Tarefas */
 
 
 /********** Fim do módulo de implementação: Módulo cronograma **********/
