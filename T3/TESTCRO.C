@@ -46,10 +46,12 @@
 
 #define     CRIAR_CRO_CMD															"=criar"
 #define     DESTRUIR_CRO_CMD												"=destruir"
-#define     INSERIR_REC_CRO_CMD         "=insrec"
 #define     INSERIR_TRF_CRO_CMD					    "=instrf"
-#define     IMPRIME_LIS_REC_CRO_CMD					"=implisrec"
+#define     INSERIR_REC_CRO_CMD         "=insrec"
+#define     DELETAR_TRF_CRO_CMD					    "=deltrf"
+#define     DELETAR_REC_CRO_CMD         "=delrec"
 #define     IMPRIME_LIS_TRF_CRO_CMD					"=implistrf"
+#define     IMPRIME_LIS_REC_CRO_CMD					"=implisrec"
 
 /* Vetor de tarefas para serem usados nos testes */
 
@@ -86,6 +88,7 @@ tcCronograma * cronogramas[10];
 								char ValorDado       = '\0' ;
 								int  CronogramaObtido  = 11  ;
 								int  TarefaObtidaAux = 12;
+								int  idTarefaObtido = -1;
 								int  idRecursoObtido = -1;
 								char NomeObtido[STRING_DIM];
 								char DescricaoObtida[STRING_DIM];
@@ -148,6 +151,32 @@ tcCronograma * cronogramas[10];
 
 								} /* fim ativa: Testar CRO Destruir cronograma */
 
+								/* Testar CRO Insere Tarefa */
+
+								else if ( strcmp( ComandoTeste , INSERIR_TRF_CRO_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "issi" ,
+																																&CronogramaObtido, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
+												if ( NumLidos != 4 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
+
+												if ( CronogramaObtido < 10 && CronogramaObtido >= 0 )
+												{
+																CondRetObtido = CRO_InserirTarefa(cronogramas[CronogramaObtido], NomeObtido, DescricaoObtida);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																"Acesso Invalido ao vetor de tarefas.");
+												}
+
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao inserir tarefa na lista de tarefas do cronograma." );
+
+								} /* fim ativa: Testar CRO Insere Tarefa */
+
 								/* Testar CRO Insere Recurso */
 
 								else if ( strcmp( ComandoTeste , INSERIR_REC_CRO_CMD) == 0 )
@@ -175,47 +204,20 @@ tcCronograma * cronogramas[10];
 
 								} /* fim ativa: Testar CRO Insere Recurso */
 
-								/* Testar CRO Insere Tarefa */
+								/* Testar CRO Remover Tarefa */
 
-								else if ( strcmp( ComandoTeste , INSERIR_TRF_CRO_CMD ) == 0 )
+								else if ( strcmp( ComandoTeste , DELETAR_TRF_CRO_CMD ) == 0 )
 								{
-												NumLidos = LER_LerParametros( "issi" ,
-																																&CronogramaObtido, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
-												if ( NumLidos != 4 )
+												NumLidos = LER_LerParametros( "iii" ,
+																																&CronogramaObtido, &idTarefaObtido, &CondRetEsperada ) ;
+												if ( NumLidos != 3 )
 												{
 																return TST_CondRetParm ;
 												} /* if */
 
 												if ( CronogramaObtido < 10 && CronogramaObtido >= 0 )
 												{
-																CondRetObtido = CRO_InserirTarefa(cronogramas[CronogramaObtido], NomeObtido, DescricaoObtida);
-												}
-												else
-												{
-																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-																"Acesso Invalido ao vetor de tarefas.");
-												}
-
-												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-																																				"Retorno errado ao inserir tarefa na lista de tarefas do tarefa." );
-
-								} /* fim ativa: Testar CRO Insere Tarefa */
-
-								/* Testar CRO Imprime Lista Recurso */
-
-								else if ( strcmp( ComandoTeste , IMPRIME_LIS_REC_CRO_CMD) == 0 )
-								{
-
-												NumLidos = LER_LerParametros( "ii" ,
-																																&CronogramaObtido, &CondRetEsperada ) ;
-												if ( NumLidos != 2 )
-												{
-																return TST_CondRetParm ;
-												} /* if */
-
-												if (CronogramaObtido < 10 && CronogramaObtido >= 0)
-												{
-																CondRetObtido = CRO_ImprimeListaRecurso(cronogramas[CronogramaObtido]);
+																CondRetObtido = CRO_RemoveTarefa(cronogramas[CronogramaObtido], idTarefaObtido);
 												}
 												else
 												{
@@ -224,9 +226,36 @@ tcCronograma * cronogramas[10];
 												}
 
 												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-																																				"Retorno errado ao imprimir lista de recursos do cronograma." );
+																																				"Retorno errado ao remover tarefa na lista de tarefas do cronograma." );
 
-								} /* fim ativa: Testar CRO Imprime Lista Recurso */
+								} /* fim ativa: Testar CRO Remover Tarefa */
+
+								/* Testar CRO Remover Recurso */
+
+								else if ( strcmp( ComandoTeste , DELETAR_REC_CRO_CMD) == 0 )
+								{
+
+												NumLidos = LER_LerParametros( "iii" ,
+																																&CronogramaObtido, &idRecursoObtido, &CondRetEsperada ) ;
+												if ( NumLidos != 3 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
+
+												if (CronogramaObtido < 10 && CronogramaObtido >= 0)
+												{
+																CondRetObtido = CRO_RemoveRecurso(cronogramas[CronogramaObtido], idRecursoObtido);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de cronogramas.");
+												}
+
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao remover recurso na lista de recursos do cronograma." );
+
+								} /* fim ativa: Testar CRO Remover Recurso */
 
 								/* Testar CRO Imprime Lista Tarefa */
 
@@ -255,9 +284,36 @@ tcCronograma * cronogramas[10];
 
 								} /* fim ativa: Testar CRO Imprime Lista Tarefa */
 
+								/* Testar CRO Imprime Lista Recurso */
+
+								else if ( strcmp( ComandoTeste , IMPRIME_LIS_REC_CRO_CMD) == 0 )
+								{
+
+												NumLidos = LER_LerParametros( "ii" ,
+																																&CronogramaObtido, &CondRetEsperada ) ;
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
+
+												if (CronogramaObtido < 10 && CronogramaObtido >= 0)
+												{
+																CondRetObtido = CRO_ImprimeListaRecurso(cronogramas[CronogramaObtido]);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de cronogramas.");
+												}
+
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao imprimir lista de recursos do cronograma." );
+
+								} /* fim ativa: Testar CRO Imprime Lista Recurso */
+
 								return TST_CondRetNaoConhec ;	
 
-				} /* Fim função: TTRF Efetuar operações de teste específicas para tarefa */
+				} /* Fim função: TCRO Efetuar operações de teste específicas para cronograma */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
 

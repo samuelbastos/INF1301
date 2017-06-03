@@ -48,8 +48,14 @@
 								CRO_CronogramaNaoExiste = 2,
 												/* A estrutura de cronograma não existe */
 
-								CRO_NomeRecursoInvalido = 3
+								CRO_NomeRecursoInvalido = 3,
 												/* Nome fornecido para recurso inválido */
+
+								CRO_TarefaNaoEncontrada = 4,
+												/* Tarefa procurada nao encontrada na lista de tarefas */
+
+								CRO_RecursoNaoEncontrado = 5
+												/* Recurso procurado nao encontrado na lista de recursos */
   
 				} CRO_tpCondRet ;
 
@@ -142,13 +148,14 @@
 
 /***********************************************************************
 *
-*  $FC Função: CRO Imprime Lista Recurso
+*  $FC Função: CRO Remover Tarefa
 *
 *  $EP Parâmetros
 *     $P ctCronograma - ponteiro para a cabeça do cronograma
+*					$P idParaRemover - id da tarefa que se deseja remover
 *
 *  $ED Descrição da função
-*    Insere um novo recurso na lista de recursos do cronograma passado
+*    Remove uma tarefa da lista de tarefas do cronograma
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -156,7 +163,26 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_ImprimeListaRecurso( tcCronograma * cCronograma);
+   CRO_tpCondRet CRO_RemoveTarefa( tcCronograma * cCronograma, int idParaRemover );
+
+/***********************************************************************
+*
+*  $FC Função: CRO Remover Recurso
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*					$P idParaRemover - id do recurso que se deseja remover
+*
+*  $ED Descrição da função
+*    Remove um recurso da lista de recursos do cronograma
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_RemoveRecurso( tcCronograma * cCronograma, int idParaRemover );
 
 /***********************************************************************
 *
@@ -175,6 +201,24 @@
 ***********************************************************************/
 
    CRO_tpCondRet CRO_ImprimeListaTarefa( tcCronograma * cCronograma);
+
+/***********************************************************************
+*
+*  $FC Função: CRO Imprime Lista Recurso
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*
+*  $ED Descrição da função
+*    Insere um novo recurso na lista de recursos do cronograma passado
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_ImprimeListaRecurso( tcCronograma * cCronograma);
 
 #undef CRONOGRAMA_EXT
 

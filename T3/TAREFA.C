@@ -228,6 +228,26 @@
 
 /***************************************************************************
 *
+*  Função: TRF Consultar id da tarefa
+*  ****/
+			
+   TRF_tpCondRet  TRF_ConsultarIdTarefa( tcTarefa ** ctTarefa, int * idConsultado )
+			{
+							tcTarefa * cTarefa = (*ctTarefa);
+
+       if (cTarefa == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
+
+							(*idConsultado) = cTarefa->id;
+
+							return TRF_CondRetOK;
+
+			} /* Fim função: TRF Consultar id da tarefa */
+
+/***************************************************************************
+*
 *  Função: TRF Consultar Nome da Tarefa
 *  ****/
 

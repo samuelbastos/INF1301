@@ -85,75 +85,75 @@ static int idAtual = 0;
 *  Função: REC Criar Recurso
 *  ****/
 
-   REC_tpCondRet REC_CriarRecurso (tcRecurso ** ptRecurso, char * novoNome)
-   {
+				REC_tpCondRet REC_CriarRecurso (tcRecurso ** ptRecurso, char * novoNome)
+				{
 
-		tcRecurso * cabecaRecurso = (*ptRecurso);
-		tpRecurso * pRecurso;
-		if (novoNome == NULL || strcmp(novoNome, "") == 0 || strcmp(novoNome, " ") == 0)
-		{
-			return REC_CondRetNomeInvalido;
-		} /* if */
+								tcRecurso * cabecaRecurso = (*ptRecurso);
+								tpRecurso * pRecurso;
+								if (novoNome == NULL || strcmp(novoNome, "") == 0 || strcmp(novoNome, " ") == 0)
+								{
+												return REC_CondRetNomeInvalido;
+								} /* if */
 
-		if (cabecaRecurso != NULL && cabecaRecurso->recurso != NULL)
-		{
-			REC_DestruirRecurso(ptRecurso);
-		} /* if */
+								if (cabecaRecurso != NULL && cabecaRecurso->recurso != NULL)
+								{
+												REC_DestruirRecurso(ptRecurso);
+								} /* if */
 
-		cabecaRecurso = (tcRecurso *) malloc (sizeof(tcRecurso));
-		if (cabecaRecurso == NULL)
-		{
-			return REC_CondRetFaltouMemoria;
-		} /* if */
+								cabecaRecurso = (tcRecurso *) malloc (sizeof(tcRecurso));
+								if (cabecaRecurso == NULL)
+								{
+												return REC_CondRetFaltouMemoria;
+								} /* if */
 
-		pRecurso = (tpRecurso *)malloc(sizeof(tpRecurso));
-		if (pRecurso == NULL)
-		{
-			return REC_CondRetFaltouMemoria;
-		} /* if */
-		pRecurso->nome = (char*) malloc (strlen(novoNome)*sizeof(char) + 1);
-		if (pRecurso->nome == NULL)
-		{
-			return REC_CondRetFaltouMemoria;
-		} /* if */
-		strcpy(pRecurso->nome, novoNome);
+								pRecurso = (tpRecurso *)malloc(sizeof(tpRecurso));
+								if (pRecurso == NULL)
+								{
+												return REC_CondRetFaltouMemoria;
+								} /* if */
+								pRecurso->nome = (char*) malloc (strlen(novoNome)*sizeof(char) + 1);
+								if (pRecurso->nome == NULL)
+								{
+												return REC_CondRetFaltouMemoria;
+								} /* if */
+								strcpy(pRecurso->nome, novoNome);
 
-		pRecurso->estaDisponivel = FALSE;
+								pRecurso->estaDisponivel = FALSE;
 
-		cabecaRecurso->id = idAtual;
-		idAtual++;
-		cabecaRecurso->recurso = pRecurso;
+								cabecaRecurso->id = idAtual;
+								idAtual++;
+								cabecaRecurso->recurso = pRecurso;
 
-		(*ptRecurso) = cabecaRecurso;
+								(*ptRecurso) = cabecaRecurso;
 
-		return REC_CondRetOK;
+								return REC_CondRetOK;
 
-   } /* Fim função: REC Criar Recurso */
+				} /* Fim função: REC Criar Recurso */
 
 /***************************************************************************
 *
 *  Função: REC Destruir Recurso
 *  ****/
 
-	void REC_DestruirRecurso (tcRecurso ** ptRecurso)
-	{
-		tcRecurso * cabecaRecurso = (*ptRecurso);
-	  
-		if (ptRecurso != NULL)
-		{
-			if (cabecaRecurso != NULL)
-			{
-				if (cabecaRecurso->recurso != NULL)
+				void REC_DestruirRecurso (tcRecurso ** ptRecurso)
 				{
-					free(cabecaRecurso->recurso->nome);
-					free(cabecaRecurso->recurso);
-				} /* if */
-				free(cabecaRecurso);
-				(*ptRecurso) = NULL;
-			} /* if */
-		} /* if */
+								tcRecurso * cabecaRecurso = (*ptRecurso);
+	  
+								if (ptRecurso != NULL)
+								{
+												if (cabecaRecurso != NULL)
+												{
+																if (cabecaRecurso->recurso != NULL)
+																{
+																				free(cabecaRecurso->recurso->nome);
+																				free(cabecaRecurso->recurso);
+																} /* if */
+																free(cabecaRecurso);
+																(*ptRecurso) = NULL;
+												} /* if */
+								} /* if */
 
-	} /* Fim função: REC Destruir Recurso */
+				} /* Fim função: REC Destruir Recurso */
 
 /***************************************************************************
 *
@@ -291,7 +291,7 @@ static int idAtual = 0;
 
 /***************************************************************************
 *
-*  Função: REC Consulta a disponibilidade do Recurso
+*  Função: REC Imprime informações do Recurso
 *  ****/
 
    REC_tpCondRet REC_ImprimeRecurso(tcRecurso * ptRecurso)
@@ -305,7 +305,7 @@ static int idAtual = 0;
 
 	   return REC_CondRetOK;
 
-   } /* Fim função: REC Consulta a disponibilidade do Recurso */
+   } /* Fim função: REC Imprime informações do Recurso */
 
 
 #undef TRUE

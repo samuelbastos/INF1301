@@ -147,6 +147,24 @@
 
 /***********************************************************************
 *
+*  $FC Função: TRF Consultar id da tarefa
+*
+*  $EP Parâmetros
+*     $P cTarefa              - ponteiro passado por referência que aponta 
+*                               para cabeça da tarefa a ser consultada
+*                               nome
+*     $P idConsultado									- id da tarefa passado por referencia
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet  TRF_ConsultarIdTarefa( tcTarefa ** ctTarefa, int * idConsultado ) ;
+
+/***********************************************************************
+*
 *  $FC Função: TRF Consultar nome da tarefa
 *
 *  $EP Parâmetros
