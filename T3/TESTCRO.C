@@ -50,6 +50,7 @@
 #define     INSERIR_REC_CRO_CMD         "=insrec"
 #define     DELETAR_TRF_CRO_CMD					    "=deltrf"
 #define     DELETAR_REC_CRO_CMD         "=delrec"
+#define					CONECTAR_TRF_CRO_CMD								"=conectartrf"
 #define     IMPRIME_LIS_TRF_CRO_CMD					"=implistrf"
 #define     IMPRIME_LIS_REC_CRO_CMD					"=implisrec"
 
@@ -89,6 +90,8 @@ tcCronograma * cronogramas[10];
 								int  CronogramaObtido  = 11  ;
 								int  TarefaObtidaAux = 12;
 								int  idTarefaObtido = -1;
+								int  idTarefaSucessora = -1;
+								int  idTarefaPredecessora = -1;
 								int  idRecursoObtido = -1;
 								char NomeObtido[STRING_DIM];
 								char DescricaoObtida[STRING_DIM];
@@ -256,6 +259,33 @@ tcCronograma * cronogramas[10];
 																																				"Retorno errado ao remover recurso na lista de recursos do cronograma." );
 
 								} /* fim ativa: Testar CRO Remover Recurso */
+
+								/* Testar CRO Conectar Tarefas */
+
+								else if ( strcmp( ComandoTeste , CONECTAR_TRF_CRO_CMD) == 0 )
+								{
+
+												NumLidos = LER_LerParametros( "iiii" ,
+																																&CronogramaObtido, &idTarefaSucessora, &idTarefaPredecessora, &CondRetEsperada ) ;
+												if ( NumLidos != 4 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
+
+												if (CronogramaObtido < 10 && CronogramaObtido >= 0)
+												{
+																CondRetObtido = CRO_ConectarTarefas(cronogramas[CronogramaObtido], idTarefaSucessora, idTarefaPredecessora);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de cronogramas.");
+												}
+
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao inserir recurso na lista de recursos do cronograma." );
+
+								} /* fim ativa: Testar CRO Insere Recurso */
 
 								/* Testar CRO Imprime Lista Tarefa */
 

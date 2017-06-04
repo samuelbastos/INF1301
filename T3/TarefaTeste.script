@@ -1,11 +1,11 @@
 == Cria tarefa 0
-=criar 0 "Tarefa0" "Descricao tarefa0" 0	
+=criar 0 "Tarefa0" "Descricao tarefa0" 4 0	
 
 ==Cria tarefa 0
-=criar 0 "Tarefa0" "Descricao tarefa0" 0
+=criar 0 "Tarefa0" "Descricao tarefa0" 3 0
 
 == Cria tarefa 1
-=criar 1 "Tarefa1" "Descricao tarefa1" 0
+=criar 1 "Tarefa1" "Descricao tarefa1" 4 0
 
 == Conecta Tarefa 0 e Tarefa 1
 =conectar 0 1 0
@@ -22,14 +22,20 @@
 == Consulta Descricao da Tarefa 0
 =consultardesc 0 0
 
+== Consulta Id da Tarefa 0
+=consultarid 0 0
+
+== Consulta Duracao da Tarefa 0
+=consultardur 0 0
+
 ==Cria tarefa2
-=criar 2 "Tarefa2" "Descricao tarefa2" 0
+=criar 2 "Tarefa2" "Descricao tarefa2" 4 0
 
 ==Conecta tarefa2 a tarefa 0 (2 suc/0 pred)
 =conectar 2 0 0
 
 == Cria tarefa 1
-=criar 1 "Tarefa1" "Descricao tarefa1" 0
+=criar 1 "Tarefa1" "Descricao tarefa1" 2 0
 
 == Conecta Tarefa 1 a tarefa 2
 =conectar 1 2 0
@@ -62,13 +68,13 @@
 =destruir 2
 
 == Cria Tarefa 0
-=criar 0 "Tarefa0" "Descricao tarefa0" 0
+=criar 0 "Tarefa0" "Descricao tarefa0" 1 0
 
 == Cria Tarefa 1
-=criar 1 "Tarefa1" "Descricao tarefa1" 0
+=criar 1 "Tarefa1" "Descricao tarefa1" 2 0
 
 == Cria Tarefa 2
-=criar 2 "Tarefa2" "Descricao tarefa2" 0
+=criar 2 "Tarefa2" "Descricao tarefa2" 1 0
 
 == Conecta 1 em 2 
 =conectar 2 1 0
@@ -127,6 +133,12 @@
 ==Consulta descricao tarefa inexistente 2
 =consultardesc 2 4
 
+==Consulta id tarefa inexistente 2
+=consultarid 2 4
+
+==Consulta duracao tarefa inexistente 2
+=consultardur 2 4
+
 ==Alterar tarefa inexistente 2
 =alterar 2 "teste" "teste" 4
 
@@ -143,16 +155,16 @@
 =alterar 1 "teste" "teste" 4
 
 == Cria Tarefa 0 (INVERSO)
-=criar 0 "Tarefa0" "Descricao tarefa0" 0
+=criar 0 "Tarefa0" "Descricao tarefa0" 4 0
 
 == Cria Tarefa 1 (INVERSO)
-=criar 1 "Tarefa1" "Descricao tarefa1" 0
+=criar 1 "Tarefa1" "Descricao tarefa1" 5 0
 
 == Cria Tarefa 2 (INVERSO)
-=criar 2 "Tarefa2" "Descricao tarefa2" 0
+=criar 2 "Tarefa2" "Descricao tarefa2" 2 0
 
 == Cria Tarefa 3 (INVERSO)
-=criar 3 "Tarefa3" "Descricao tarefa3" 0
+=criar 3 "Tarefa3" "Descricao tarefa3" 6 0
 
 == Cadastra id do recurso da Tarefa 0
 =cadastraridrec 0 0 0

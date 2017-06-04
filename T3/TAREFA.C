@@ -39,6 +39,8 @@
        char * descricao;
 
        int idRecurso;
+
+							int duracao;
                 
        LIS_tppLista tarefasPredecessoras ;
         
@@ -78,7 +80,7 @@
 *  Função: TRF Criar tarefa
 *  ****/
 
-   TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao )
+   TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao )
    {
 
       tcTarefa * cTarefa = (*ctTarefa);
@@ -104,6 +106,7 @@
       cTarefa->id = idAtual;
       pTarefa->nome = (char*)malloc(strlen(novoNome)+1);
       pTarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
+						pTarefa->duracao = duracao;
       pTarefa->idRecurso = -1;
       strcpy(pTarefa->nome, novoNome);
       strcpy(pTarefa->descricao, novaDescricao);
@@ -287,6 +290,26 @@
        return TRF_CondRetOK ;
 
    } /* Fim função: TRF Consultar descricao da tarefa */
+
+/***************************************************************************
+*
+*  Função: TRF Consultar duracao da tarefa
+*  ****/
+			
+   TRF_tpCondRet  TRF_ConsultarDuracaoTarefa( tcTarefa ** ctTarefa, int * duracaoConsultada )
+			{
+							tcTarefa * cTarefa = (*ctTarefa);
+
+       if (cTarefa == NULL)
+       {
+           return TRF_CondRetTarefaInexistente;
+       }
+
+							(*duracaoConsultada) = cTarefa->tarefa->duracao;
+
+							return TRF_CondRetOK;
+
+			} /* Fim função: TRF Consultar duracao da tarefa */
    
 /***************************************************************************
 *
@@ -371,7 +394,7 @@
 								}
 
 								printf("Sucessoras: ");
-								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
+								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasSucessoras) == LIS_CondRetListaVazia)
 								{
 												printf("Não tem Tarefas sucessoras\n");
 								}
@@ -389,6 +412,8 @@
 												}
 												printf("\n");
 								}
+
+								return TRF_CondRetOK;
 
 				} /* Fim função: TRF Imprime informações da Tarefa */
 

@@ -1,0 +1,48 @@
+== Cria Cronograma
+=criar 0 0
+
+== Destroi Cronograma
+=criar 1 0
+=destruir 1 0
+
+== Constroi Cronograma em um Cronograma já construido
+=criar 0 0
+
+== Insere Tarefa
+=instrf 0 "Tarefa1" "Documentar" 0
+
+== Insere Tarefa em Cronograma não existente
+=instrf 1 "Tarefa1" "Documentar" 2
+
+== Insere Recurso
+=insrec 0 "Recurso1" 0
+
+== Insere Recurso em Cronograma não existente
+=insrec 1 "Recurso2" 2
+
+== Insere Recurso com nome vazio
+=insrec 0 "" 3
+
+== Insere Recurso com nome inválido
+=insrec 0 " " 3
+
+== Remove Tarefa Existente
+=instrf 0 "Tarefa2" "Descricao Tarefa2" 0
+=implistrf 0 0
+=deltrf 0 2 0
+
+== Remove Tarefa Inexistente
+=deltrf 0 10 4
+
+== Remove Recurso Existente
+=insrec 0 "Recurso 2" 0
+=delrec 0 2 0
+
+== Remove Recurso Inexistente
+=delrec 0 10 5
+
+== Imprime Lista Tarefas
+=implistrf 0 0
+
+== Imprime Lista Recursos
+=implisrec 0 0

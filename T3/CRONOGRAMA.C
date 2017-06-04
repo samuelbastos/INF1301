@@ -26,7 +26,29 @@
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: TRF Descritor da estrutura de um cronograma
+*  $TC Tipo de dados: CRO Descritor da estrutura de um projeto de tarefa
+*
+*
+*  $ED Descrição do tipo
+*     Descreve a estrutura de uma tarefa dentro do cronograma
+*
+***********************************************************************/
+
+   typedef struct tpProjetoTarefa {
+                
+       tcTarefa * tarefa;
+
+							int folga;
+
+							int dataInicio;
+
+							int dataMaisTarde;
+
+   } tpProjetoTarefa ;
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: CRO Descritor da estrutura de um cronograma
 *
 *
 *  $ED Descrição do tipo
@@ -141,18 +163,18 @@
 *  Função: CRO Insere Tarefa
 *  ****/
 
-				CRO_tpCondRet CRO_InserirTarefa( tcCronograma * cCronograma, char * novoNome, char * novaDescricao )
+				CRO_tpCondRet CRO_InserirTarefa( tcCronograma * cCronograma, char * novoNome, char * novaDescricao, int duracao )
 				{
 								tcTarefa * tarefaParaInserir = NULL;
 								TRF_tpCondRet tarefaCondRet;
 								LIS_tpCondRet lisCondRet;
 
-								tarefaCondRet = TRF_CriarTarefa( &tarefaParaInserir, novoNome, novaDescricao);
+								tarefaCondRet = TRF_CriarTarefa( &tarefaParaInserir, novoNome, novaDescricao, duracao);
 								if (tarefaCondRet == TRF_CondRetFaltouMemoria)
 												return CRO_CondRetFaltouMemoria;
 
 								if (cCronograma == NULL || cCronograma->cronograma == NULL)
-												return CRO_CronogramaNaoExiste;
+												return CRO_CondRetCronogramaNaoExiste;
 
 								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaTarefas, tarefaParaInserir);
 								if (lisCondRet == LIS_CondRetFaltouMemoria)
@@ -177,10 +199,10 @@
 								if (recursoCondRet == REC_CondRetFaltouMemoria)
 												return CRO_CondRetFaltouMemoria;
 								else if (recursoCondRet == REC_CondRetNomeInvalido)
-												return CRO_NomeRecursoInvalido;
+												return CRO_CondRetNomeRecursoInvalido;
 
 								if (cCronograma == NULL || cCronograma->cronograma == NULL)
-												return CRO_CronogramaNaoExiste;
+												return CRO_CondRetCronogramaNaoExiste;
 
 								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaRecursos, recursoParaInserir);
 								if (lisCondRet == LIS_CondRetFaltouMemoria)
@@ -199,6 +221,11 @@
 				{
 								tcTarefa * tarefaCorrente = NULL;
 								int * idTarefaCorrente = (int *) malloc(sizeof(int));
+								if (idTarefaCorrente == NULL)
+												return CRO_CondRetFaltouMemoria;
+
+								if (cCronograma == NULL || cCronograma->cronograma == NULL)
+												return CRO_CondRetCronogramaNaoExiste;
 
 								IrInicioLista(cCronograma->cronograma->listaTarefas);
 								tarefaCorrente = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
@@ -220,7 +247,7 @@
 												}
 								}
 
-								return CRO_TarefaNaoEncontrada;
+								return CRO_CondRetTarefaNaoEncontrada;
 
 				} /* Fim função: CRO Remover Tarefa */
 
@@ -233,6 +260,11 @@
 				{
 								tcRecurso * recursoCorrente = NULL;
 								int * idRecursoCorrente = (int *) malloc(sizeof(int));
+								if (idRecursoCorrente == NULL)
+												CRO_CondRetFaltouMemoria;
+
+								if (cCronograma == NULL || cCronograma->cronograma == NULL)
+												return CRO_CondRetCronogramaNaoExiste;
 								
 								IrInicioLista(cCronograma->cronograma->listaRecursos);
 								recursoCorrente = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos);
@@ -254,9 +286,62 @@
 												}
 								}
 
-								return CRO_RecursoNaoEncontrado;
+								return CRO_CondRetRecursoNaoEncontrado;
 
 				} /* Fim função: CRO Remover Recurso */
+
+/***************************************************************************
+*
+*  Função: CRO Conectar Tarefas
+*  ****/
+
+				CRO_tpCondRet CRO_ConectarTarefas( tcCronograma * cCronograma, int idTarefaSucessora, int idTarefaPredecessora )
+				{
+								TRF_tpCondRet condRet;
+								tcTarefa * tarefaAux = NULL;
+								tcTarefa * tarefaSucessora = NULL;
+								tcTarefa * tarefaPredecessora = NULL;
+								int * idTarefaAux = (int *) malloc(sizeof(int));
+								if (idTarefaAux == NULL)
+												return CRO_CondRetFaltouMemoria;
+
+								if (cCronograma == NULL || cCronograma->cronograma == NULL)
+												return CRO_CondRetCronogramaNaoExiste;
+
+								if (idTarefaSucessora == idTarefaPredecessora)
+												return CRO_CondRetConectarTarefaComElaMesma;
+
+								IrInicioLista(cCronograma->cronograma->listaTarefas);
+								tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								TRF_ConsultarIdTarefa(&tarefaAux, idTarefaAux);
+								if ( *idTarefaAux == idTarefaSucessora )
+												tarefaSucessora = tarefaAux;
+								else if ( *idTarefaAux == idTarefaPredecessora )
+												tarefaPredecessora = tarefaAux;
+								
+
+								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+								{
+												tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+												TRF_ConsultarIdTarefa(&tarefaAux, idTarefaAux);
+												if ( *idTarefaAux == idTarefaSucessora )
+																tarefaSucessora = tarefaAux;
+												else if ( *idTarefaAux == idTarefaPredecessora )
+																tarefaPredecessora = tarefaAux;
+								}
+
+								if (tarefaSucessora == NULL || tarefaPredecessora == NULL)
+												return CRO_CondRetTarefaNaoEncontrada;
+
+								condRet = TRF_ConectarTarefas(&tarefaSucessora, &tarefaPredecessora);
+								if (condRet = TRF_CondRetConexaoJaExistente)
+												return CRO_CondRetConexaoJaExistente;
+								if (condRet = TRF_CondRetConexaoInvalida)
+												return CRO_CondRetConexaoInvalida;
+
+								return CRO_CondRetOK;
+
+				} /* Fim função: CRO Imprime Lista Tarefas */
 
 /***************************************************************************
 *
@@ -267,7 +352,7 @@
 				{
 								tcTarefa * tarefaCorrente = NULL;
 								if (cCronograma == NULL || cCronograma->cronograma == NULL)
-												return CRO_CronogramaNaoExiste;
+												return CRO_CondRetCronogramaNaoExiste;
 
 								if (LIS_VerificarVazia(cCronograma->cronograma->listaTarefas) == LIS_CondRetListaVazia)
 								{
@@ -304,7 +389,7 @@
 				{
 								tcRecurso * recursoCorrente = NULL;
 								if (cCronograma == NULL || cCronograma->cronograma == NULL)
-												return CRO_CronogramaNaoExiste;
+												return CRO_CondRetCronogramaNaoExiste;
 
 								if (LIS_VerificarVazia(cCronograma->cronograma->listaRecursos) == LIS_CondRetListaVazia)
 								{

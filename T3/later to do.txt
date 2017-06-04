@@ -1,0 +1,6 @@
+TO DO
+- teste pra ver se o retorno da funcao de consulta é o esperado
+- ponto extra
+- tirar os testes de imprimir dos scripts
+- criar funcao para alterar duracao
+- destruicao cronograma

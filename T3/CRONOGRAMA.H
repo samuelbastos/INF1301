@@ -45,17 +45,26 @@
 								CRO_CondRetFaltouMemoria = 1,
 												/* Faltou memória ao alocar os dados */
 												
-								CRO_CronogramaNaoExiste = 2,
+								CRO_CondRetCronogramaNaoExiste = 2,
 												/* A estrutura de cronograma não existe */
 
-								CRO_NomeRecursoInvalido = 3,
+								CRO_CondRetNomeRecursoInvalido = 3,
 												/* Nome fornecido para recurso inválido */
 
-								CRO_TarefaNaoEncontrada = 4,
+								CRO_CondRetTarefaNaoEncontrada = 4,
 												/* Tarefa procurada nao encontrada na lista de tarefas */
 
-								CRO_RecursoNaoEncontrado = 5
+								CRO_CondRetRecursoNaoEncontrado = 5,
 												/* Recurso procurado nao encontrado na lista de recursos */
+
+								CRO_CondRetConectarTarefaComElaMesma = 6,
+												/* Usuario tentou conectar uma tarefa nela mesma */
+
+								CRO_CondRetConexaoJaExistente = 7,
+												/* Conexao que esta tentando ser criada já existe */
+
+								CRO_CondRetConexaoInvalida = 8
+												/* Conexao que esta tentando ser criada é inválida */
   
 				} CRO_tpCondRet ;
 
@@ -118,7 +127,7 @@
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
-*			  CRO_CronogramaNaoExiste
+*			  CRO_CondRetCronogramaNaoExiste
 *     CRO_CondRetFaltouMemoria
 *
 ***********************************************************************/
@@ -138,9 +147,9 @@
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
-*					CRO_CronogramaNaoExiste
+*					CRO_CondRetCronogramaNaoExiste
 *     CRO_CondRetFaltouMemoria
-*					CRO_NomeRecursoInvalido
+*					CRO_CondRetNomeRecursoInvalido
 *
 ***********************************************************************/
 
@@ -160,6 +169,7 @@
 *  $FV Valor retornado
 *     CRO_CondRetOK
 *     CRO_CondRetFaltouMemoria
+*					CRO_CondRetCronogramaNaoExiste
 *
 ***********************************************************************/
 
@@ -179,10 +189,36 @@
 *  $FV Valor retornado
 *     CRO_CondRetOK
 *     CRO_CondRetFaltouMemoria
+*					CRO_CondRetCronogramaNaoExiste
 *
 ***********************************************************************/
 
    CRO_tpCondRet CRO_RemoveRecurso( tcCronograma * cCronograma, int idParaRemover );
+
+/***********************************************************************
+*
+*  $FC Função: CRO Conectar Tarefas
+*
+*  $EP Parâmetros
+*     $P ctCronograma											- ponteiro para a cabeça do cronograma
+*					$P idTarefaSucessora						-	id da tarefa que será a sucessora
+*					$P idTarefaPredecessora			- id da tarefa que será a predecessora
+*
+*  $ED Descrição da função
+*    Conecta duas tarefas
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
+*			  CRO_CondRetCronogramaNaoExiste
+*			  CRO_CondRetTarefaNaoEncontrada
+*					CRO_CondRetConectarTarefaComElaMesma
+*			  CRO_CondRetConexaoJaExistente
+*					CRO_CondRetConexaoInvalida
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_ConectarTarefas( tcCronograma * cCronograma, int idTarefaSucessora, int idTarefaPredecessora );
 
 /***********************************************************************
 *

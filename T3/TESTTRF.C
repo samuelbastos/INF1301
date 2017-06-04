@@ -50,8 +50,10 @@
 #define     DESTRUIR_TRF_CMD          "=destruir"
 #define     CONECTAR_TRF_CMD          "=conectar"
 #define     ALTERAR_TRF_CMD           "=alterar"
+#define     CONSULTAR_ID_TRF_CMD						"=consultarid"
 #define     CONSULTAR_NOME_TRF_CMD    "=consultarnome"
 #define     CONSULTAR_DESC_TRF_CMD    "=consultardesc"
+#define     CONSULTAR_DUR_TRF_CMD     "=consultardur"
 #define     CADASTRAR_ID_REC_TRF_CMD  "=cadastraridrec"
 #define     CONSULTAR_ID_REC_TRF_CMD  "=consultaridrec"
 
@@ -78,245 +80,303 @@ tcTarefa * tarefas[10];
 *
 ***********************************************************************/
 
-   TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
-   {
+				TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
+				{
 
-      TRF_tpCondRet CondRetObtido   = TRF_CondRetOK ;
-      TRF_tpCondRet CondRetEsperada = TRF_CondRetFaltouMemoria ;
-                                      /* inicializa para qualquer coisa */
+								TRF_tpCondRet CondRetObtido   = TRF_CondRetOK ;
+								TRF_tpCondRet CondRetEsperada = TRF_CondRetFaltouMemoria ;
+								/* inicializa para qualquer coisa */
 
-      char ValorEsperado   = '?'  ;
-      char ValorObtido     = '!'  ;
-      char ValorDado       = '\0' ;
-	  int  TarefaObtida    = 11  ;
-      int  TarefaObtidaAux = 12;
-      int  idRecursoObtido = -1;
-      char NomeObtido[STRING_DIM];
-      char DescricaoObtida[STRING_DIM];
-      char * NomeConsultado = (char*)malloc(sizeof(char)*STRING_DIM);
-      char * DescricaoConsultada = (char*)malloc(sizeof(char)*STRING_DIM);
-      int  NumLidos = -1 ;
+								char ValorEsperado   = '?'  ;
+								char ValorObtido     = '!'  ;
+								char ValorDado       = '\0' ;
+								int  TarefaObtida    = 11  ;
+								int  TarefaObtidaAux = 12;
+								int  idConsultado = -1;
+								int  duracaoConsultada = -1;
+								int  idRecursoObtido = -1;
+								int  duracaoObtida = -1;
+								char NomeObtido[STRING_DIM];
+								char DescricaoObtida[STRING_DIM];
+								char * NomeConsultado = (char*)malloc(sizeof(char)*STRING_DIM);
+								char * DescricaoConsultada = (char*)malloc(sizeof(char)*STRING_DIM);
+								int  NumLidos = -1 ;
 
-      TST_tpCondRet Ret ;
+								TST_tpCondRet Ret ;
 
-      /* Testar TRF Criar tarefa */
+								/* Testar TRF Criar tarefa */
 
-         if ( strcmp( ComandoTeste , CRIAR_TRF_CMD ) == 0 )
-         {
+								if ( strcmp( ComandoTeste , CRIAR_TRF_CMD ) == 0 )
+								{
 
-            NumLidos = LER_LerParametros( "issi" ,
-                               &TarefaObtida, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
+												NumLidos = LER_LerParametros( "issii" ,
+																																												&TarefaObtida, NomeObtido, DescricaoObtida, &duracaoObtida, &CondRetEsperada ) ;
 
-            if ( NumLidos != 4 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 5 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_CriarTarefa(&tarefas[TarefaObtida], NomeObtido, DescricaoObtida);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																CondRetObtido = TRF_CriarTarefa(&tarefas[TarefaObtida], NomeObtido, DescricaoObtida, duracaoObtida);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao criar tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao criar tarefa." );
 
-         } /* fim ativa: Testar TRF Criar tarefa */
+								} /* fim ativa: Testar TRF Criar tarefa */
 
-      /* Testar TRF Destruir tarefa */
+								/* Testar TRF Destruir tarefa */
 
-         else if ( strcmp( ComandoTeste , DESTRUIR_TRF_CMD ) == 0 )
-         {
-			NumLidos = LER_LerParametros( "i", &TarefaObtida ) ;
+								else if ( strcmp( ComandoTeste , DESTRUIR_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "i", &TarefaObtida ) ;
 
-			if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 1 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-            if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-            {
-                TRF_DestruirTarefa( &tarefas[TarefaObtida] ) ;
-            }
-            else
-            {
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-            }
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																TRF_DestruirTarefa( &tarefas[TarefaObtida] ) ;
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CondRetOK ;
+												return TST_CondRetOK ;
 
-         } /* fim ativa: Testar TRF Destruir tarefa */
+								} /* fim ativa: Testar TRF Destruir tarefa */
 
-      /* Testar TRF Conectar tarefas */
+								/* Testar TRF Conectar tarefas */
 
-         else if ( strcmp( ComandoTeste, CONECTAR_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "iii", &TarefaObtida, &TarefaObtidaAux, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste, CONECTAR_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "iii", &TarefaObtida, &TarefaObtidaAux, &CondRetEsperada ) ;
 
-            if( NumLidos != 3 )
-            {
-                return TST_CondRetParm ;
-            } /* if */
+												if( NumLidos != 3 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 && TarefaObtida != TarefaObtidaAux &&
-                 TarefaObtidaAux < 10 && TarefaObtidaAux >= 0)
-			{
-				CondRetObtido = TRF_ConectarTarefas(&tarefas[TarefaObtida], &tarefas[TarefaObtidaAux]);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 && TarefaObtida != TarefaObtidaAux &&
+																				TarefaObtidaAux < 10 && TarefaObtidaAux >= 0)
+												{
+																CondRetObtido = TRF_ConectarTarefas(&tarefas[TarefaObtida], &tarefas[TarefaObtidaAux]);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
              
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao conectar tarefas." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao conectar tarefas." );
 
-         } /* fim ativa: Testar TRF Conectar tarefas */
+								} /* fim ativa: Testar TRF Conectar tarefas */
 
-      /* Testar TRF Alterar tarefa */
+								/* Testar TRF Alterar tarefa */
 
-         else if ( strcmp( ComandoTeste, ALTERAR_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "issi" ,
-                               &TarefaObtida, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste, ALTERAR_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "issi" ,
+												&TarefaObtida, NomeObtido, DescricaoObtida, &CondRetEsperada ) ;
 
-            if ( NumLidos != 4 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 4 )
+												{
+												return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_AlterarTarefa(&tarefas[TarefaObtida], NomeObtido, DescricaoObtida);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+												CondRetObtido = TRF_AlterarTarefa(&tarefas[TarefaObtida], NomeObtido, DescricaoObtida);
+												}
+												else
+												{
+												return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+												"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao alterar tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+												"Retorno errado ao alterar tarefa." );
 
-         } /* fim ativa: Testar TRF Alterar tarefas */
+								} /* fim ativa: Testar TRF Alterar tarefas */
 
-      /* Testar TRF Consultar nome de tarefa */
+								/* Testar TRF Consultar id da tarefa */
 
-         else if ( strcmp( ComandoTeste, CONSULTAR_NOME_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "ii" ,
-                               &TarefaObtida, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste, CONSULTAR_ID_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "ii" ,
+												&TarefaObtida, &CondRetEsperada ) ;
 
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_ConsultarNomeTarefa(&tarefas[TarefaObtida], &NomeConsultado);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																CondRetObtido = TRF_ConsultarIdTarefa(&tarefas[TarefaObtida], &idConsultado);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao consultar nome da tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao consultar id da tarefa." );
 
-         } /* fim ativa: Testar TRF Consultar nome de tarefa */
+								} /* fim ativa: Testar TRF Consultar id da tarefa */
 
-    /* Testar TRF Consultar descricao de tarefa */
+								/* Testar TRF Consultar nome de tarefa */
 
-         else if ( strcmp( ComandoTeste, CONSULTAR_DESC_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "ii" ,
-                               &TarefaObtida, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste, CONSULTAR_NOME_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "ii" ,
+												&TarefaObtida, &CondRetEsperada ) ;
 
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_ConsultarDescricaoTarefa(&tarefas[TarefaObtida], &DescricaoConsultada);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																CondRetObtido = TRF_ConsultarNomeTarefa(&tarefas[TarefaObtida], &NomeConsultado);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao consultar descricao da tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao consultar nome da tarefa." );
 
-         } /* fim ativa: Testar TRF Consultar descricao de tarefa */
+								} /* fim ativa: Testar TRF Consultar nome de tarefa */
 
-      /* Testar TRF Cadastrar id do recurso da tarefa */
+								/* Testar TRF Consultar descricao de tarefa */
 
-         else if ( strcmp( ComandoTeste, CADASTRAR_ID_REC_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "iii" ,
-                               &TarefaObtida, &idRecursoObtido, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste, CONSULTAR_DESC_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "ii" ,
+												&TarefaObtida, &CondRetEsperada ) ;
 
-            if ( NumLidos != 3 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_CadastrarIdRecurso(&tarefas[TarefaObtida], idRecursoObtido);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																CondRetObtido = TRF_ConsultarDescricaoTarefa(&tarefas[TarefaObtida], &DescricaoConsultada);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao cadastrar id do recurso da tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao consultar descricao da tarefa." );
 
-         } /* fim ativa: TRF Cadastrar id do recurso da tarefa */
+								} /* fim ativa: Testar TRF Consultar descricao de tarefa */
 
-      /* Testar TRF Consultar id do recurso da tarefa */
+								/* Testar TRF Consultar duracao da tarefa */
 
-         else if ( strcmp( ComandoTeste, CONSULTAR_ID_REC_TRF_CMD ) == 0 )
-         {
-            NumLidos = LER_LerParametros( "ii" ,
-                               &TarefaObtida, &CondRetEsperada ) ;
+								else if ( strcmp( ComandoTeste, CONSULTAR_DUR_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "ii" ,
+												&TarefaObtida, &CondRetEsperada ) ;
 
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
 
-			if ( TarefaObtida < 10 && TarefaObtida >= 0 )
-			{
-				CondRetObtido = TRF_ConsultarIdRecurso(&tarefas[TarefaObtida], &idRecursoObtido);
-			}
-			else
-			{
-				return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
-					"Acesso Invalido ao vetor de tarefas.");
-			}
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																CondRetObtido = TRF_ConsultarDuracaoTarefa(&tarefas[TarefaObtida], &duracaoConsultada);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao consultar id do recurso da tarefa." );
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao consultar id da tarefa." );
 
-         } /* fim ativa: TRF Consultar id do recurso da tarefa */
+								} /* fim ativa: Testar TRF Consultar duracao da tarefa */
 
-      return TST_CondRetNaoConhec ;	
 
-   } /* Fim função: TTRF Efetuar operações de teste específicas para tarefa */
+								/* Testar TRF Cadastrar id do recurso da tarefa */
+
+								else if ( strcmp( ComandoTeste, CADASTRAR_ID_REC_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "iii" ,
+												&TarefaObtida, &idRecursoObtido, &CondRetEsperada ) ;
+
+												if ( NumLidos != 3 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
+
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																CondRetObtido = TRF_CadastrarIdRecurso(&tarefas[TarefaObtida], idRecursoObtido);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
+
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao cadastrar id do recurso da tarefa." );
+
+								} /* fim ativa: TRF Cadastrar id do recurso da tarefa */
+
+								/* Testar TRF Consultar id do recurso da tarefa */
+
+								else if ( strcmp( ComandoTeste, CONSULTAR_ID_REC_TRF_CMD ) == 0 )
+								{
+												NumLidos = LER_LerParametros( "ii" ,
+												&TarefaObtida, &CondRetEsperada ) ;
+
+												if ( NumLidos != 2 )
+												{
+																return TST_CondRetParm ;
+												} /* if */
+
+												if ( TarefaObtida < 10 && TarefaObtida >= 0 )
+												{
+																CondRetObtido = TRF_ConsultarIdRecurso(&tarefas[TarefaObtida], &idRecursoObtido);
+												}
+												else
+												{
+																return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor,
+																																								"Acesso Invalido ao vetor de tarefas.");
+												}
+
+												return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+																																				"Retorno errado ao consultar id do recurso da tarefa." );
+
+												} /* fim ativa: TRF Consultar id do recurso da tarefa */
+
+								return TST_CondRetNaoConhec ;	
+
+				} /* Fim função: TTRF Efetuar operações de teste específicas para tarefa */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
 

@@ -90,7 +90,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao ) ;
+   TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao ) ;
 
 /***********************************************************************
 *
@@ -125,7 +125,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_ConectarTarefas( tcTarefa ** ctTarefaSucessora, void ** ctTarefaPredecessora ) ;
+   TRF_tpCondRet TRF_ConectarTarefas( tcTarefa ** ctTarefaSucessora, tcTarefa ** ctTarefaPredecessora ) ;
 
 /***********************************************************************
 *
@@ -198,6 +198,24 @@
 ***********************************************************************/
 
    TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( tcTarefa ** ctTarefa, char ** descricaoConsultada ) ;
+
+/***********************************************************************
+*
+*  $FC Função: TRF Consultar duracao da tarefa
+*
+*  $EP Parâmetros
+*     $P cTarefa              - ponteiro passado por referência que aponta 
+*                               para cabeça da tarefa a ser consultada
+*                               nome
+*     $P duracaoConsultada				- duracao da tarefa passado por referencia
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet  TRF_ConsultarDuracaoTarefa( tcTarefa ** ctTarefa, int * duracaoConsultada ) ;
 
 /***********************************************************************
 *
