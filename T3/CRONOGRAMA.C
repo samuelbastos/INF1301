@@ -335,9 +335,9 @@
 												return CRO_CondRetTarefaNaoEncontrada;
 
 								condRet = TRF_ConectarTarefas(&tarefaSucessora, &tarefaPredecessora);
-								if (condRet = TRF_CondRetConexaoJaExistente)
+								if (condRet == TRF_CondRetConexaoJaExistente)
 												return CRO_CondRetConexaoJaExistente;
-								if (condRet = TRF_CondRetConexaoInvalida)
+								if (condRet == TRF_CondRetConexaoInvalida)
 												return CRO_CondRetConexaoInvalida;
 
 								return CRO_CondRetOK;
