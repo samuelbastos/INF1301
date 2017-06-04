@@ -242,6 +242,7 @@
 												TRF_ConsultarIdTarefa(&tarefaCorrente, idTarefaCorrente);
 												if ( (*idTarefaCorrente) == idParaRemover)
 												{
+																TRF_DestruirTarefa(&tarefaCorrente);
 																LIS_ExcluirElemento(cCronograma->cronograma->listaTarefas);
 																return CRO_CondRetOK;
 												}
