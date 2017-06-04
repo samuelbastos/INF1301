@@ -32,21 +32,25 @@
 *
 ***********************************************************************/
 
-   typedef struct tgTarefa {
+				typedef struct tgTarefa {
 
-       char * nome;
+						char * nome;
 
-       char * descricao;
+						char * descricao;
 
-       int idRecurso;
+						int idRecurso;
 
-							int duracao;
+						int duracao;
+
+						int dataMarcada;
+
+						int dataMaisTarde;
                 
-       LIS_tppLista tarefasPredecessoras ;
+						LIS_tppLista tarefasPredecessoras ;
         
-       LIS_tppLista tarefasSucessoras;
+						LIS_tppLista tarefasSucessoras;
 
-   } tpTarefa ;
+				} tpTarefa ;
 
 /***********************************************************************
 *
@@ -107,6 +111,8 @@
       pTarefa->nome = (char*)malloc(strlen(novoNome)+1);
       pTarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
 						pTarefa->duracao = duracao;
+						pTarefa->dataMarcada = -1;
+						pTarefa->dataMaisTarde = -1;
       pTarefa->idRecurso = -1;
       strcpy(pTarefa->nome, novoNome);
       strcpy(pTarefa->descricao, novaDescricao);
@@ -416,6 +422,42 @@
 								return TRF_CondRetOK;
 
 				} /* Fim função: TRF Imprime informações da Tarefa */
+
+/***************************************************************************
+*
+*  Função: TRF Checa se a lista de predecessores está vazia
+*  ****/
+			
+				TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras)
+				{
+								if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
+										return TRF_CondRetTarefaInexistente;
+
+								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
+										*temPredecessoras = 1;
+								else
+										*temPredecessoras = 0;
+
+								return TRF_CondRetOK;
+				} /* Fim função: TRF Checa se a lista de predecessores está vazia */
+
+/***************************************************************************
+*
+*  Função: TRF Checa se a lista de sucessoras está vazia
+*  ****/
+			
+				TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras)
+				{
+								if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
+										return TRF_CondRetTarefaInexistente;
+
+								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasSucessoras) == LIS_CondRetListaVazia)
+										*temSucessoras = 1;
+								else
+										*temSucessoras = 0;
+
+								return TRF_CondRetOK;
+				} /* Fim função: TRF Checa se a lista de predecessores está vazia */
 
 /*****  Código das funções encapsuladas no módulo  *****/
 

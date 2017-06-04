@@ -26,28 +26,6 @@
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: CRO Descritor da estrutura de um projeto de tarefa
-*
-*
-*  $ED Descrição do tipo
-*     Descreve a estrutura de uma tarefa dentro do cronograma
-*
-***********************************************************************/
-
-   typedef struct tpProjetoTarefa {
-                
-       tcTarefa * tarefa;
-
-							int folga;
-
-							int dataInicio;
-
-							int dataMaisTarde;
-
-   } tpProjetoTarefa ;
-
-/***********************************************************************
-*
 *  $TC Tipo de dados: CRO Descritor da estrutura de um cronograma
 *
 *
@@ -165,7 +143,6 @@
 
 				CRO_tpCondRet CRO_InserirTarefa( tcCronograma * cCronograma, char * novoNome, char * novaDescricao, int duracao )
 				{
-								tpProjetoTarefa * projetoParaInserir = NULL;
 								tcTarefa * tarefaParaInserir = NULL;
 								TRF_tpCondRet tarefaCondRet;
 								LIS_tpCondRet lisCondRet;
@@ -177,16 +154,7 @@
 								if (cCronograma == NULL || cCronograma->cronograma == NULL)
 												return CRO_CondRetCronogramaNaoExiste;
 
-								projetoParaInserir = (tpProjetoTarefa *) malloc (sizeof(tpProjetoTarefa));
-								if (projetoParaInserir == NULL)
-										return CRO_CondRetFaltouMemoria;
-
-								projetoParaInserir->tarefa = tarefaParaInserir;
-								projetoParaInserir->dataInicio = -1;
-								projetoParaInserir->dataMaisTarde = -1;
-								projetoParaInserir->folga = -1;
-
-								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaTarefas, projetoParaInserir);
+								lisCondRet = LIS_InserirElementoApos(cCronograma->cronograma->listaTarefas, tarefaParaInserir);
 								if (lisCondRet == LIS_CondRetFaltouMemoria)
 												return CRO_CondRetFaltouMemoria;
 
@@ -229,7 +197,7 @@
 				
 				CRO_tpCondRet CRO_RemoveTarefa( tcCronograma * cCronograma, int idParaRemover )
 				{
-								tpProjetoTarefa * projetoTarefaCorrente = NULL;
+								tcTarefa * tarefaCorrente = NULL;
 								int * idTarefaCorrente = (int *) malloc(sizeof(int));
 								if (idTarefaCorrente == NULL)
 												return CRO_CondRetFaltouMemoria;
@@ -238,22 +206,22 @@
 												return CRO_CondRetCronogramaNaoExiste;
 
 								IrInicioLista(cCronograma->cronograma->listaTarefas);
-								projetoTarefaCorrente = (tpProjetoTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
-								TRF_ConsultarIdTarefa(&projetoTarefaCorrente->tarefa, idTarefaCorrente);
+								tarefaCorrente = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								TRF_ConsultarIdTarefa(&tarefaCorrente, idTarefaCorrente);
 								if ( (*idTarefaCorrente) == idParaRemover)
 								{
-												TRF_DestruirTarefa(&projetoTarefaCorrente->tarefa);
+												TRF_DestruirTarefa(&tarefaCorrente);
 												LIS_ExcluirElemento(cCronograma->cronograma->listaTarefas);
 												return CRO_CondRetOK;
 								}
 
 								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
 								{
-												projetoTarefaCorrente = (tpProjetoTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
-												TRF_ConsultarIdTarefa(&projetoTarefaCorrente->tarefa, idTarefaCorrente);
+												tarefaCorrente = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+												TRF_ConsultarIdTarefa(&tarefaCorrente, idTarefaCorrente);
 												if ( (*idTarefaCorrente) == idParaRemover)
 												{
-																TRF_DestruirTarefa(&projetoTarefaCorrente->tarefa);
+																TRF_DestruirTarefa(&tarefaCorrente);
 																LIS_ExcluirElemento(cCronograma->cronograma->listaTarefas);
 																return CRO_CondRetOK;
 												}
@@ -310,7 +278,6 @@
 				CRO_tpCondRet CRO_ConectarTarefas( tcCronograma * cCronograma, int idTarefaSucessora, int idTarefaPredecessora )
 				{
 								TRF_tpCondRet condRet;
-								tpProjetoTarefa * projetoTarefaAux = NULL;
 								tcTarefa * tarefaAux = NULL;
 								tcTarefa * tarefaSucessora = NULL;
 								tcTarefa * tarefaPredecessora = NULL;
@@ -325,8 +292,7 @@
 												return CRO_CondRetConectarTarefaComElaMesma;
 
 								IrInicioLista(cCronograma->cronograma->listaTarefas);
-								projetoTarefaAux = (tpProjetoTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
-								tarefaAux = projetoTarefaAux->tarefa;
+								tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
 								TRF_ConsultarIdTarefa(&tarefaAux, idTarefaAux);
 								if ( *idTarefaAux == idTarefaSucessora )
 												tarefaSucessora = tarefaAux;
@@ -336,8 +302,7 @@
 
 								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
 								{
-												projetoTarefaAux = (tpProjetoTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
-												tarefaAux = projetoTarefaAux->tarefa;
+												tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
 												TRF_ConsultarIdTarefa(&tarefaAux, idTarefaAux);
 												if ( *idTarefaAux == idTarefaSucessora )
 																tarefaSucessora = tarefaAux;
@@ -365,7 +330,7 @@
 
 				CRO_tpCondRet CRO_ImprimeListaTarefa( tcCronograma * cCronograma)
 				{
-								tpProjetoTarefa * projetoTarefaCorrente = NULL;
+								tcTarefa * tarefaCorrente = NULL;
 								if (cCronograma == NULL || cCronograma->cronograma == NULL)
 												return CRO_CondRetCronogramaNaoExiste;
 
@@ -380,14 +345,14 @@
 								}
 
 								IrInicioLista(cCronograma->cronograma->listaTarefas);
-								projetoTarefaCorrente = (tpProjetoTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
-								TRF_ImprimeTarefa(projetoTarefaCorrente->tarefa);
+								tarefaCorrente = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								TRF_ImprimeTarefa(tarefaCorrente);
 
 								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
 								{
 												printf("\n");
-												projetoTarefaCorrente = (tpProjetoTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
-												TRF_ImprimeTarefa(projetoTarefaCorrente->tarefa);
+												tarefaCorrente = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+												TRF_ImprimeTarefa(tarefaCorrente);
 								}
 								printf("\n");
 
@@ -431,5 +396,17 @@
 								return CRO_CondRetOK;
 
 				} /* Fim função: CRO Imprime Lista Recurso */
+
+/***************************************************************************
+*
+*  Função: CRO Calcula Caminho Critico
+*  ****/
+
+				CRO_tpCondRet CRO_CaminhoCritico( tcCronograma * cCronograma)
+				{
+								
+								return CRO_CondRetOK;
+
+				} /* Fim função: CRO Calcula Caminho Critico */
 
 /********** Fim do módulo de implementação: Módulo cronograma **********/

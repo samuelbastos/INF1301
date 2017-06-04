@@ -4,3 +4,4 @@ TO DO
 - tirar os testes de imprimir dos scripts
 - criar funcao para alterar duracao
 - destruicao cronograma
+- atualizar funçoes da interface de acesso TAREFA e CRONOGRAMA e RECURSO

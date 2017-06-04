@@ -270,6 +270,42 @@
 
    TRF_tpCondRet TRF_ImprimeTarefa( tcTarefa * ctTarefa) ;
 
+/***********************************************************************
+*
+*  $FC Função: TRF Checa se a lista de predecessores está vazia
+*
+*  $EP Parâmetros
+*     $P cTarefa            - ponteiro para a cabeça da tarefa que terá
+*																													suas informações impressas
+*					$P temPredecessores			- variavel na qual sera retornado se a tarefa possui
+*																													predecessores 1 para se estiver vazio e 0 caso contrario
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras) ;
+
+/***********************************************************************
+*
+*  $FC Função: TRF Checa se a lista de sucessores está vazia
+*
+*  $EP Parâmetros
+*     $P cTarefa            - ponteiro para a cabeça da tarefa que terá
+*																													suas informações impressas
+*					$P temSucessores						- variavel na qual sera retornado se a tarefa possui
+*																													sucessores 1 para se estiver vazio e 0 caso contrario
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras) ;
+
 
 #undef TAREFA_EXT
 

@@ -256,6 +256,25 @@
 
    CRO_tpCondRet CRO_ImprimeListaRecurso( tcCronograma * cCronograma);
 
+/***********************************************************************
+*
+*  $FC Função: CRO Calcula Caminho Critico
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*
+*  $ED Descrição da função
+*					Calcula o caminho critico e o imprime na tela baseado nos recursos e
+*			tarefas inseridos nas listas do respectivo cronograma
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_CaminhoCritico( tcCronograma * cCronograma);
+
 #undef CRONOGRAMA_EXT
 
 /********** Fim do módulo de definição: Módulo cronograma **********/
