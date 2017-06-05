@@ -24,6 +24,9 @@
 #include "RECURSO.H"
 #undef CRONOGRAMA_OWN
 
+#define TRUE 1
+#define FALSE 0
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: CRO Descritor da estrutura de um cronograma
@@ -116,15 +119,48 @@
 				void CRO_DestruirCronograma( tcCronograma ** ctCronograma )
 				{
 								tcCronograma * cCronograma = (*ctCronograma);
+                tcTarefa * tarefa = NULL;
+                tcRecurso * recurso = NULL;
+                LIS_tpCondRet recursoListaCondRet;
+                LIS_tpCondRet tarefaListaCondRet;
 
 								if ( ctCronograma != NULL)
 								{
 												if ( cCronograma != NULL )
 												{
-																LIS_EsvaziarLista( cCronograma->cronograma->listaRecursos );
-																LIS_DestruirLista( cCronograma->cronograma->listaRecursos );
-																LIS_EsvaziarLista( cCronograma->cronograma->listaTarefas );
-																LIS_DestruirLista( cCronograma->cronograma->listaTarefas );
+                                IrInicioLista(cCronograma->cronograma->listaTarefas);
+                                tarefa = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+                                IrInicioLista(cCronograma->cronograma->listaRecursos);
+                                recurso = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos); 
+
+                                recursoListaCondRet = LIS_VerificarVazia(cCronograma->cronograma->listaRecursos);
+                                tarefaListaCondRet = LIS_VerificarVazia(cCronograma->cronograma->listaTarefas);
+
+                                if (recursoListaCondRet == LIS_CondRetListaVazia && tarefaListaCondRet == LIS_CondRetListaVazia)
+                                {
+                                    LIS_DestruirLista( cCronograma->cronograma->listaRecursos );
+                                    LIS_DestruirLista( cCronograma->cronograma->listaTarefas );
+                                }
+                                else
+                                {
+                                    while(LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+                                    {
+						                            tarefa = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+                                        TRF_DestruirTarefa(&tarefa);
+                                    }
+
+                                    while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaRecursos, 1) != LIS_CondRetFimLista)
+                                    {
+                                        recurso = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos);
+                                        REC_DestruirRecurso(&recurso);
+                                    }
+
+																    LIS_EsvaziarLista( cCronograma->cronograma->listaRecursos );
+																    LIS_DestruirLista( cCronograma->cronograma->listaRecursos );
+																    LIS_EsvaziarLista( cCronograma->cronograma->listaTarefas );
+																    LIS_DestruirLista( cCronograma->cronograma->listaTarefas );
+                                }
+
 																free(cCronograma->cronograma);
 
 												} /* if */
@@ -336,7 +372,7 @@
 
 								if (LIS_VerificarVazia(cCronograma->cronograma->listaTarefas) == LIS_CondRetListaVazia)
 								{
-												printf("A lista de tarefas está vazia\n");
+												printf("A lista de tarefas esta vazia\n");
 												return CRO_CondRetOK;
 								}
 								else
@@ -404,9 +440,232 @@
 
 				CRO_tpCondRet CRO_CaminhoCritico( tcCronograma * cCronograma)
 				{
+								TRF_tpCondRet condRet;
+								tcTarefa * tarefaInicial = NULL;
+								tcTarefa * tarefaFinal = NULL;
+								tcTarefa * tarefaAux = NULL;
+								int estaVazia;
+
+                if (cCronograma == NULL || cCronograma->cronograma == NULL)
+								    return CRO_CondRetCronogramaNaoExiste;
+				
+								condRet = TRF_CriarTarefa(&tarefaInicial, "Tarefa Origem", "Primeira tarefa", 0);
+								if (condRet == TRF_CondRetFaltouMemoria)
+										return CRO_CondRetFaltouMemoria;
+
+								condRet = TRF_CriarTarefa(&tarefaFinal, "Tarefa Final", "Ultima tarefa", 0);
+								if (condRet == TRF_CondRetFaltouMemoria)
+										return CRO_CondRetFaltouMemoria;
+								
+								// Adiciona a primeira tarefa e ultima tarefa ao grafo
+
+                
+                if (LIS_VerificarVazia( cCronograma->cronograma->listaTarefas ) == LIS_CondRetListaVazia)
+                    return CRO_NaoExisteNenhumaTarefa;
+
+								IrInicioLista(cCronograma->cronograma->listaTarefas);
+								tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								TRF_TemPredecessores(tarefaAux, &estaVazia);
+								if ( estaVazia == TRUE )
+										TRF_ConectarTarefas(&tarefaAux, &tarefaInicial);
+								TRF_TemSucessores(tarefaAux, &estaVazia);
+								if ( estaVazia == TRUE )
+										TRF_ConectarTarefas(&tarefaFinal, &tarefaAux);
+								
+
+								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+								{
+												tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+												TRF_TemPredecessores(tarefaAux, &estaVazia);
+												if ( estaVazia == TRUE )
+														TRF_ConectarTarefas(&tarefaAux, &tarefaInicial);
+												TRF_TemSucessores(tarefaAux, &estaVazia);
+												if ( estaVazia == TRUE )
+														TRF_ConectarTarefas(&tarefaFinal, &tarefaAux);
+								}
+
+								TRF_CalculaCaminhoCritico(tarefaInicial);
+                TRF_DestruirTarefa(&tarefaFinal);
+                TRF_ImprimeCaminhoCritico(tarefaInicial);
 								
 								return CRO_CondRetOK;
 
 				} /* Fim função: CRO Calcula Caminho Critico */
+
+
+/***************************************************************************
+*
+*  Função: CRO Altera Tarefa
+*  ****/
+
+        CRO_tpCondRet CRO_AlterarTarefa( tcCronograma * cCronograma, int idTarefa, char * novoNome, char * novaDescricao, int novaDuracao )
+        {
+            tcTarefa * tarefa = NULL;
+            int * idTarefaAux = (int *) malloc(sizeof(int));
+
+            int alterada = 0;
+
+            if (cCronograma == NULL || cCronograma->cronograma == NULL)
+						return CRO_CondRetCronogramaNaoExiste;
+
+            IrInicioLista(cCronograma->cronograma->listaTarefas);
+            tarefa = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+            TRF_ConsultarIdTarefa(&tarefa, idTarefaAux);
+
+						if ( *idTarefaAux == idTarefa )
+            {
+                TRF_AlterarTarefa(&tarefa, novoNome, novaDescricao, novaDuracao);
+                alterada = 1;
+            }
+
+            while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+            {
+								tarefa = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								TRF_ConsultarIdTarefa(&tarefa, idTarefaAux);
+								if ( *idTarefaAux == idTarefa )
+                {
+                    TRF_AlterarTarefa(&tarefa, novoNome, novaDescricao, novaDuracao);
+                    alterada = 1;
+                }
+            }
+
+            if(alterada == 0)
+                return CRO_CondRetTarefaNaoEncontrada;
+
+            return CRO_CondRetOK;
+        } /* Fim função: CRO Altera Tarefa */
+
+/***************************************************************************
+*
+*  Função: CRO Altera Recurso
+*  ****/
+
+        CRO_tpCondRet CRO_AlterarRecurso( tcCronograma * cCronograma, int idRecurso, char * novoNome )
+        {
+            tcRecurso * recurso = NULL;
+            int * idRecursoAux = (int*) malloc(sizeof(int));
+
+            int alterado = 0;
+
+            if (cCronograma == NULL || cCronograma->cronograma == NULL)
+						return CRO_CondRetCronogramaNaoExiste;
+
+            IrInicioLista(cCronograma->cronograma->listaRecursos);
+            recurso = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos);
+            REC_ConsultarId(recurso,idRecursoAux); 
+
+            if( *idRecursoAux == idRecurso)
+            {
+                REC_AlterarNome(recurso,novoNome);
+                alterado = 1;
+            }
+
+            while(LIS_AvancarElementoCorrente(cCronograma->cronograma->listaRecursos, 1) != LIS_CondRetFimLista)
+            {
+                recurso = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos);
+                REC_ConsultarId(recurso,idRecursoAux);
+                if( *idRecursoAux == idRecurso)
+                {
+                    REC_AlterarNome(recurso,novoNome);
+                    alterado = 1;
+                }
+            }
+
+            if(alterado == 0)
+                return CRO_CondRetRecursoNaoEncontrado;
+
+            return CRO_CondRetOK;
+        } /* Fim função: CRO Altera Recurso */
+
+/***************************************************************************
+*
+*  Função: CRO Gerar Cronograma
+*  ****/
+
+        CRO_tpCondRet CRO_GerarCronograma( tcCronograma * cCronograma )
+        {
+            tcTarefa * tarefa = NULL;
+            tcRecurso * recurso = NULL;
+            int encontrado = 0;
+            int qtdRecurso = 0;
+            int qtdTarefa = 0;
+            int * idRecursoAuxiliar = (int*) malloc(sizeof(int));
+            LIS_tpCondRet recursoListaCondRet;
+            LIS_tpCondRet tarefaListaCondRet;
+
+            if (cCronograma == NULL || cCronograma->cronograma == NULL)
+								return CRO_CondRetCronogramaNaoExiste;
+
+            CRO_CaminhoCritico(cCronograma);
+
+            IrInicioLista(cCronograma->cronograma->listaRecursos);
+            IrInicioLista(cCronograma->cronograma->listaTarefas);
+
+            recursoListaCondRet = LIS_VerificarVazia(cCronograma->cronograma->listaRecursos);
+            tarefaListaCondRet = LIS_VerificarVazia(cCronograma->cronograma->listaTarefas);
+
+            if (recursoListaCondRet == LIS_CondRetListaVazia && tarefaListaCondRet == LIS_CondRetListaVazia)
+                return CRO_CronogramaVazio;
+
+            printf("\nCronograma: \n");
+
+            if (recursoListaCondRet != LIS_CondRetListaVazia)
+                qtdRecurso = 1;
+            
+            if (tarefaListaCondRet != LIS_CondRetListaVazia)
+                qtdTarefa = 1;
+
+            while(LIS_AvancarElementoCorrente(cCronograma->cronograma->listaRecursos, 1) != LIS_CondRetFimLista)
+                qtdRecurso++;
+
+            while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+                qtdTarefa++;
+            
+            if(qtdTarefa > qtdRecurso)
+                return CRO_NaoExisteRecursoSuficiente;
+
+            IrInicioLista(cCronograma->cronograma->listaTarefas);
+            tarefa = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+            IrInicioLista(cCronograma->cronograma->listaRecursos);
+            recurso = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos); 
+
+            recursoListaCondRet = LIS_VerificarVazia(cCronograma->cronograma->listaRecursos);
+            tarefaListaCondRet = LIS_VerificarVazia(cCronograma->cronograma->listaTarefas);
+            
+            while(LIS_AvancarElementoCorrente(cCronograma->cronograma->listaRecursos, 1) != LIS_CondRetFimLista)
+                qtdRecurso++;
+
+            while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+                qtdTarefa++;
+
+            IrInicioLista(cCronograma->cronograma->listaTarefas);
+            tarefa = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+            IrInicioLista(cCronograma->cronograma->listaRecursos);
+            recurso = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos); 
+
+            REC_ConsultarId(recurso,idRecursoAuxiliar);
+            TRF_CadastrarIdRecurso(&tarefa,*idRecursoAuxiliar);
+
+            TRF_ImprimeBasicoTarefa(tarefa);
+            REC_ImprimeRecurso(recurso);
+
+            while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+            {
+								tarefa = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								LIS_AvancarElementoCorrente(cCronograma->cronograma->listaRecursos, 1);
+                recurso = (tcRecurso *) LIS_ObterValor(cCronograma->cronograma->listaRecursos);
+
+                REC_ConsultarId(recurso,idRecursoAuxiliar);
+                TRF_CadastrarIdRecurso(&tarefa,*idRecursoAuxiliar);
+
+                TRF_ImprimeBasicoTarefa(tarefa);
+                REC_ImprimeRecurso(recurso);
+            }
+
+            return CRO_CondRetOK;
+        } /* Fim função: CRO Gerar Cronograma */
+
+#undef TRUE
+#undef FALSE
 
 /********** Fim do módulo de implementação: Módulo cronograma **********/

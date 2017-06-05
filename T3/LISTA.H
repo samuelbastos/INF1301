@@ -365,6 +365,45 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
    LIS_tpCondRet LIS_VerificarVazia( LIS_tppLista pLista ) ;
 
+/***********************************************************************
+*
+*  $FC Função: LIS  &Adiciona ao Final
+*
+*  $ED Descrição da função
+*      Insere um elemento no fim da lista
+*
+*  $EP Parâmetros
+*     pLista    - ponteiro para a lista na qual será
+*                 verificada existência de conteúdo.
+*
+*  $FV Valor retornado
+*     LIS_CondRetOK
+*     LIS_CondRetFaltouMemoria
+*
+***********************************************************************/
+
+   LIS_tpCondRet LIS_InserirElementoFinal( LIS_tppLista pLista , void * pValor  ) ;
+
+/***********************************************************************
+*
+*  $FC Função: LIS  &Obtem Valor do Inicio e o remove da lista
+*
+*  $ED Descrição da função
+*     Obtem a referência para o valor contido no primeiro elemento da lista
+*			e o remove da lista
+*
+*  $EP Parâmetros
+*     pLista - ponteiro para a lista de onde se quer o valor do primeiro elemento
+*
+*  $FV Valor retornado
+*     não NULL - se o elemento corrente existe
+*     NULL     - se a lista estiver vazia
+*                Pode retornar NULL se o valor inserido no elemento for NULL.
+*
+***********************************************************************/
+
+   void * LIS_PopPrimeiro( LIS_tppLista pLista ) ;
+
 #undef LISTA_EXT
 
 /********** Fim do módulo de definição: LIS  Lista duplamente encadeada **********/

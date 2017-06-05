@@ -22,6 +22,10 @@
 #include "LISTA.H"
 #undef TAREFA_OWN
 
+#define INT_MAX 2147483647
+#define TRUE 1
+#define FALSE 0
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: TRF Descritor da estrutura de uma tarefa
@@ -87,42 +91,42 @@
    TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao )
    {
 
-      tcTarefa * cTarefa = (*ctTarefa);
-      tpTarefa * pTarefa;
+    tcTarefa * cTarefa = (*ctTarefa);
+    tpTarefa * pTarefa;
 
-      if ( cTarefa != NULL )
-      {
-         TRF_DestruirTarefa( ctTarefa ) ;
-      } /* if */
+    if ( cTarefa != NULL )
+    {
+        TRF_DestruirTarefa( ctTarefa ) ;
+    } /* if */
 
-      cTarefa = ( tcTarefa * ) malloc( sizeof( tcTarefa )) ;
-      if ( cTarefa == NULL )
-      {
-         return TRF_CondRetFaltouMemoria ;
-      } /* if */
+    cTarefa = ( tcTarefa * ) malloc( sizeof( tcTarefa )) ;
+    if ( cTarefa == NULL )
+    {
+        return TRF_CondRetFaltouMemoria ;
+    } /* if */
       
-      pTarefa = (tpTarefa * ) malloc( sizeof( tpTarefa )) ;
+    pTarefa = (tpTarefa * ) malloc( sizeof( tpTarefa )) ;
 
-      pTarefa->tarefasPredecessoras = LIS_CriarLista(NULL);
-      pTarefa->tarefasSucessoras = LIS_CriarLista(NULL);
-      LIS_EsvaziarLista( pTarefa->tarefasPredecessoras );
-      LIS_EsvaziarLista( pTarefa->tarefasSucessoras );
-      cTarefa->id = idAtual;
-      pTarefa->nome = (char*)malloc(strlen(novoNome)+1);
-      pTarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
-						pTarefa->duracao = duracao;
-						pTarefa->dataMarcada = -1;
-						pTarefa->dataMaisTarde = -1;
-      pTarefa->idRecurso = -1;
-      strcpy(pTarefa->nome, novoNome);
-      strcpy(pTarefa->descricao, novaDescricao);
+    pTarefa->tarefasPredecessoras = LIS_CriarLista(NULL);
+    pTarefa->tarefasSucessoras = LIS_CriarLista(NULL);
+    LIS_EsvaziarLista( pTarefa->tarefasPredecessoras );
+    LIS_EsvaziarLista( pTarefa->tarefasSucessoras );
+    cTarefa->id = idAtual;
+    pTarefa->nome = (char*)malloc(strlen(novoNome)+1);
+    pTarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
+    pTarefa->duracao = duracao;
+    pTarefa->dataMarcada = -1;
+    pTarefa->dataMaisTarde = INT_MAX;
+    pTarefa->idRecurso = -1;
+    strcpy(pTarefa->nome, novoNome);
+    strcpy(pTarefa->descricao, novaDescricao);
 
-      idAtual += 1;
+    idAtual += 1;
 
-      cTarefa->tarefa = pTarefa;
-      (*ctTarefa) = cTarefa;
+    cTarefa->tarefa = pTarefa;
+    (*ctTarefa) = cTarefa;
 
-      return TRF_CondRetOK ;
+    return TRF_CondRetOK ;
 
    } /* Fim função: TRF Criar tarefa */
 
@@ -215,7 +219,7 @@
 *  Função: TRF Alterar Tarefa
 *  ****/
 
-   TRF_tpCondRet  TRF_AlterarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao  )
+   TRF_tpCondRet  TRF_AlterarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao )
    {
        tcTarefa * cTarefa = (*ctTarefa);
 
@@ -228,6 +232,7 @@
        cTarefa->tarefa->descricao = NULL;
        cTarefa->tarefa->nome = (char*)malloc(strlen(novoNome)+1);
        cTarefa->tarefa->descricao = (char*)malloc(strlen(novaDescricao)+1);
+       cTarefa->tarefa->duracao = duracao;
        strcpy(cTarefa->tarefa->nome, novoNome);
        strcpy(cTarefa->tarefa->descricao, novaDescricao);
 
@@ -283,7 +288,7 @@
 
    TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( tcTarefa ** ctTarefa, char ** descricaoConsultada ) 
    {
-       tcTarefa * cTarefa = (*ctTarefa);
+        tcTarefa * cTarefa = (*ctTarefa);
 
        if (cTarefa == NULL)
        {
@@ -302,20 +307,20 @@
 *  Função: TRF Consultar duracao da tarefa
 *  ****/
 			
-   TRF_tpCondRet  TRF_ConsultarDuracaoTarefa( tcTarefa ** ctTarefa, int * duracaoConsultada )
-			{
-							tcTarefa * cTarefa = (*ctTarefa);
+    TRF_tpCondRet  TRF_ConsultarDuracaoTarefa( tcTarefa ** ctTarefa, int * duracaoConsultada )
+    {
+        tcTarefa * cTarefa = (*ctTarefa);
 
-       if (cTarefa == NULL)
-       {
-           return TRF_CondRetTarefaInexistente;
-       }
+        if (cTarefa == NULL)
+        {
+            return TRF_CondRetTarefaInexistente;
+        }
 
-							(*duracaoConsultada) = cTarefa->tarefa->duracao;
+        (*duracaoConsultada) = cTarefa->tarefa->duracao;
 
-							return TRF_CondRetOK;
+        return TRF_CondRetOK;
 
-			} /* Fim função: TRF Consultar duracao da tarefa */
+    } /* Fim função: TRF Consultar duracao da tarefa */
    
 /***************************************************************************
 *
@@ -367,97 +372,272 @@
 *  Função: TRF Imprime informações da Tarefa
 *  ****/
 			
-				TRF_tpCondRet TRF_ImprimeTarefa( tcTarefa * ctTarefa)
-				{
-								tcTarefa * tarefaAux = NULL;
-								if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
-								{
-												return TRF_CondRetTarefaInexistente;
-								}
+    TRF_tpCondRet TRF_ImprimeTarefa( tcTarefa * ctTarefa)
+    {
+        tcTarefa * tarefaAux = NULL;
+        if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
+        {
+            return TRF_CondRetTarefaInexistente;
+        }
 
-								printf("Tarefa: %s\n", ctTarefa->tarefa->nome);
-								printf("Id: %d\n", ctTarefa->id);
-								printf("Descricao: %s\n", ctTarefa->tarefa->descricao);
+        printf("Tarefa: %s\n", ctTarefa->tarefa->nome);
+        printf("Id: %d\n", ctTarefa->id);
+        printf("Descricao: %s\n", ctTarefa->tarefa->descricao);
+        printf("Duracao: %d\n", ctTarefa->tarefa->duracao);
 
-								printf("Predecessoras: ");
-								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
-								{
-												printf("Não tem Tarefas predecessoras\n");
-								}
-								else
-								{
-												IrInicioLista(ctTarefa->tarefa->tarefasPredecessoras);
-												tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasPredecessoras);
-												printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+        printf("Predecessoras: ");
+        if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
+        {
+            printf("Nao tem Tarefas predecessoras\n");
+        }
+        else
+        {
+            IrInicioLista(ctTarefa->tarefa->tarefasPredecessoras);
+            tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasPredecessoras);
+            printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
 
-												while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasPredecessoras, 1) != LIS_CondRetFimLista)
-												{
-																printf(", ");
-																tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasPredecessoras);
-																printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
-												}
-												printf("\n");
-								}
+            while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasPredecessoras, 1) != LIS_CondRetFimLista)
+            {
+                printf(", ");
+                tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasPredecessoras);
+                printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+            }
+            printf("\n");
+        }
 
-								printf("Sucessoras: ");
-								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasSucessoras) == LIS_CondRetListaVazia)
-								{
-												printf("Não tem Tarefas sucessoras\n");
-								}
-								else
-								{
-												IrInicioLista(ctTarefa->tarefa->tarefasSucessoras);
-												tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
-												printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+        printf("Sucessoras: ");
+        if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasSucessoras) == LIS_CondRetListaVazia)
+        {
+            printf("Nao tem Tarefas sucessoras\n");
+        }
+        else
+        {
+            IrInicioLista(ctTarefa->tarefa->tarefasSucessoras);
+            tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+            printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
 
-												while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasSucessoras, 1) != LIS_CondRetFimLista)
-												{
-																printf(", ");
-																tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
-																printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
-												}
-												printf("\n");
-								}
+            while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasSucessoras, 1) != LIS_CondRetFimLista)
+            {
+                printf(", ");
+                tarefaAux = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+                printf("%s - id: %d", tarefaAux->tarefa->nome, tarefaAux->id);
+            }
+            printf("\n");
+        }
 
-								return TRF_CondRetOK;
+        return TRF_CondRetOK;
 
-				} /* Fim função: TRF Imprime informações da Tarefa */
+    } /* Fim função: TRF Imprime informações da Tarefa */
 
 /***************************************************************************
 *
 *  Função: TRF Checa se a lista de predecessores está vazia
 *  ****/
 			
-				TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras)
-				{
-								if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
-										return TRF_CondRetTarefaInexistente;
+    TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras)
+    {
+        if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
+            return TRF_CondRetTarefaInexistente;
 
-								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
-										*temPredecessoras = 1;
-								else
-										*temPredecessoras = 0;
+        if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasPredecessoras) == LIS_CondRetListaVazia)
+            *temPredecessoras = 1;
+        else
+            *temPredecessoras = 0;
 
-								return TRF_CondRetOK;
-				} /* Fim função: TRF Checa se a lista de predecessores está vazia */
+        return TRF_CondRetOK;
+
+    } /* Fim função: TRF Checa se a lista de predecessores está vazia */
 
 /***************************************************************************
 *
 *  Função: TRF Checa se a lista de sucessoras está vazia
 *  ****/
 			
-				TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras)
-				{
-								if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
-										return TRF_CondRetTarefaInexistente;
+    TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras)
+    {
+        if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
+            return TRF_CondRetTarefaInexistente;
 
-								if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasSucessoras) == LIS_CondRetListaVazia)
-										*temSucessoras = 1;
-								else
-										*temSucessoras = 0;
+        if (LIS_VerificarVazia(ctTarefa->tarefa->tarefasSucessoras) == LIS_CondRetListaVazia)
+            *temSucessoras = 1;
+        else
+            *temSucessoras = 0;
 
-								return TRF_CondRetOK;
-				} /* Fim função: TRF Checa se a lista de predecessores está vazia */
+        return TRF_CondRetOK;
+
+    } /* Fim função: TRF Checa se a lista de predecessores está vazia */
+
+/*****  Código das funções encapsuladas no módulo  *****/
+
+/***************************************************************************
+*
+*  Função: TRF Calcula Caminho Crítico
+*  ****/
+			
+    TRF_tpCondRet TRF_CalculaCaminhoCritico( tcTarefa * ctTarefa )
+    {
+        int dataMarcada, dataMaisTarde, estaVazia;
+        tcTarefa * tarefaAtual, * tarefaSucessora, * tarefaPredecessora;
+        LIS_tppLista filaDeExecucao = LIS_CriarLista(NULL);
+        LIS_EsvaziarLista(filaDeExecucao);
+				
+        // Coloca na fila de execucao as reais origens do cronograma
+        IrInicioLista(ctTarefa->tarefa->tarefasSucessoras);
+        tarefaSucessora = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+        LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+        tarefaSucessora->tarefa->dataMarcada = 1;
+
+        while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasSucessoras, 1) != LIS_CondRetFimLista)
+        {
+            tarefaSucessora = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+            LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+            tarefaSucessora->tarefa->dataMarcada = 1;
+        }
+								
+        // Calcula as datas marcadas
+        while (LIS_VerificarVazia(filaDeExecucao) != LIS_CondRetListaVazia)
+        {
+            tarefaAtual = (tcTarefa *) LIS_PopPrimeiro(filaDeExecucao);
+            TRF_TemSucessores(tarefaAtual, &estaVazia);
+            if (estaVazia == FALSE)
+            {
+                IrInicioLista(tarefaAtual->tarefa->tarefasSucessoras);
+                tarefaSucessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasSucessoras);
+                LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+												
+                dataMarcada = tarefaAtual->tarefa->dataMarcada + tarefaAtual->tarefa->duracao;
+                if (tarefaSucessora->tarefa->dataMarcada < dataMarcada)
+                    tarefaSucessora->tarefa->dataMarcada = dataMarcada;
+
+                while (LIS_AvancarElementoCorrente(tarefaAtual->tarefa->tarefasSucessoras, 1) != LIS_CondRetFimLista)
+                {
+                    tarefaSucessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasSucessoras);
+                    LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+
+                    dataMarcada = tarefaAtual->tarefa->dataMarcada + tarefaAtual->tarefa->duracao;
+                    if (tarefaSucessora->tarefa->dataMarcada < dataMarcada)
+                        tarefaSucessora->tarefa->dataMarcada = dataMarcada;
+                }
+            }
+        }
+
+        // Colocar na fila de execuçao os finais reais do cronograma
+        tarefaAtual->tarefa->dataMaisTarde = tarefaAtual->tarefa->dataMarcada;
+        IrInicioLista(tarefaAtual->tarefa->tarefasPredecessoras);
+        tarefaPredecessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasPredecessoras);
+        LIS_InserirElementoFinal(filaDeExecucao, tarefaPredecessora);
+        tarefaPredecessora->tarefa->dataMaisTarde = tarefaAtual->tarefa->dataMaisTarde - tarefaPredecessora->tarefa->duracao;
+
+        while (LIS_AvancarElementoCorrente(tarefaAtual->tarefa->tarefasPredecessoras, 1) != LIS_CondRetFimLista)
+        {
+            tarefaPredecessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasPredecessoras);
+            LIS_InserirElementoFinal(filaDeExecucao, tarefaPredecessora);
+            tarefaPredecessora->tarefa->dataMaisTarde = tarefaAtual->tarefa->dataMaisTarde - tarefaPredecessora->tarefa->duracao;
+        }
+
+        // Calcula as datas mais tardes
+        while (LIS_VerificarVazia(filaDeExecucao) != LIS_CondRetListaVazia)
+        {
+            tarefaAtual = (tcTarefa *) LIS_PopPrimeiro(filaDeExecucao);
+            TRF_TemPredecessores(tarefaAtual, &estaVazia);
+            if (estaVazia == FALSE)
+            {
+                IrInicioLista(tarefaAtual->tarefa->tarefasPredecessoras);
+                tarefaPredecessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasPredecessoras);
+                LIS_InserirElementoFinal(filaDeExecucao, tarefaPredecessora);
+												
+                dataMaisTarde = tarefaAtual->tarefa->dataMaisTarde - tarefaPredecessora->tarefa->duracao;
+                if (tarefaPredecessora->tarefa->dataMaisTarde > dataMaisTarde)
+                    tarefaPredecessora->tarefa->dataMaisTarde = dataMaisTarde;
+
+                while (LIS_AvancarElementoCorrente(tarefaAtual->tarefa->tarefasPredecessoras, 1) != LIS_CondRetFimLista)
+                {
+                    tarefaPredecessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasPredecessoras);
+                    LIS_InserirElementoFinal(filaDeExecucao, tarefaPredecessora);
+
+                    dataMaisTarde = tarefaAtual->tarefa->dataMaisTarde - tarefaPredecessora->tarefa->duracao;
+                    if (tarefaPredecessora->tarefa->dataMaisTarde > dataMaisTarde)
+                        tarefaPredecessora->tarefa->dataMaisTarde = dataMaisTarde;
+                }
+            }
+        }
+
+        return TRF_CondRetOK;
+
+    } /* Fim função: TRF Calcula Caminho Crítico */
+
+/***************************************************************************
+*
+*  Função: TRF Imprime Caminho Crítico
+*  ****/
+			
+    TRF_tpCondRet TRF_ImprimeCaminhoCritico( tcTarefa * ctTarefa )
+    {
+        int dataMarcada, dataMaisTarde, estaVazia;
+        tcTarefa * tarefaAtual, * tarefaSucessora, * tarefaPredecessora;
+        LIS_tppLista filaDeExecucao = LIS_CriarLista(NULL);
+        LIS_EsvaziarLista(filaDeExecucao);
+				
+        // Coloca na fila de execucao as reais origens do cronograma
+        IrInicioLista(ctTarefa->tarefa->tarefasSucessoras);
+        tarefaSucessora = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+        if (tarefaSucessora->tarefa->dataMaisTarde - tarefaSucessora->tarefa->dataMarcada == 0)
+            LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+
+        while (LIS_AvancarElementoCorrente(ctTarefa->tarefa->tarefasSucessoras, 1) != LIS_CondRetFimLista)
+        {
+            tarefaSucessora = (tcTarefa *) LIS_ObterValor(ctTarefa->tarefa->tarefasSucessoras);
+            if (tarefaSucessora->tarefa->dataMaisTarde - tarefaSucessora->tarefa->dataMarcada == 0)
+                LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+        }
+
+        // Imprime tarefas com folga 0
+        printf("\nTarefas que formam o caminho Critico\n");
+        while (LIS_VerificarVazia(filaDeExecucao) != LIS_CondRetListaVazia)
+        {
+            tarefaAtual = (tcTarefa *) LIS_PopPrimeiro(filaDeExecucao);
+            if (tarefaAtual->tarefa->dataMarcada - tarefaAtual->tarefa->dataMaisTarde == 0)
+            {
+                printf("Tarefa: %s dia: %d -> ", tarefaAtual->tarefa->nome, tarefaAtual->tarefa->dataMarcada);
+            }
+
+            TRF_TemSucessores(tarefaAtual, &estaVazia);
+            if (estaVazia == FALSE)
+            {
+                IrInicioLista(tarefaAtual->tarefa->tarefasSucessoras);
+                tarefaSucessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasSucessoras);
+                if (tarefaSucessora->tarefa->dataMaisTarde - tarefaSucessora->tarefa->dataMarcada == 0)
+                    LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+								
+                while (LIS_AvancarElementoCorrente(tarefaAtual->tarefa->tarefasSucessoras, 1) != LIS_CondRetFimLista)
+                {
+                    tarefaSucessora = (tcTarefa *) LIS_ObterValor(tarefaAtual->tarefa->tarefasSucessoras);
+                    if (tarefaSucessora->tarefa->dataMaisTarde - tarefaSucessora->tarefa->dataMarcada == 0)
+                        LIS_InserirElementoFinal(filaDeExecucao, tarefaSucessora);
+                }
+            }
+        }
+        printf("Fim\n");
+
+        return TRF_CondRetOK;
+
+    } /* Fim função: TRF Imprime Caminho Crítico */
+
+    TRF_tpCondRet TRF_ImprimeBasicoTarefa( tcTarefa * ctTarefa )
+    {
+        tcTarefa * tarefaAux = NULL;
+        int folga = ctTarefa->tarefa->dataMaisTarde - ctTarefa->tarefa->dataMarcada;
+        if (ctTarefa == NULL || ctTarefa->tarefa == NULL)
+        {
+            return TRF_CondRetTarefaInexistente;
+        }
+
+        printf("Tarefa: %s\n", ctTarefa->tarefa->nome);
+        printf("Id: %d\n", ctTarefa->id);
+        printf("Duracao: %d\n", ctTarefa->tarefa->duracao);
+        printf("Data Marcada: %d\n", ctTarefa->tarefa->dataMarcada);
+        printf("Folga: %d\n", folga);
+    }
 
 /*****  Código das funções encapsuladas no módulo  *****/
 
@@ -558,5 +738,9 @@
            }
        }
    }
+
+#undef INT_MAX
+#undef TRUE
+#undef FALSE
 
 /********** Fim do módulo de implementação: Módulo tarefa **********/

@@ -37,36 +37,45 @@
 *
 ***********************************************************************/
 
-				typedef enum {
+    typedef enum {
 
-								CRO_CondRetOK = 0,
-												/* Executou correto */
+        CRO_CondRetOK = 0,
+            /* Executou correto */
 
-								CRO_CondRetFaltouMemoria = 1,
-												/* Faltou memória ao alocar os dados */
+        CRO_CondRetFaltouMemoria = 1,
+            /* Faltou memória ao alocar os dados */
 												
-								CRO_CondRetCronogramaNaoExiste = 2,
-												/* A estrutura de cronograma não existe */
+        CRO_CondRetCronogramaNaoExiste = 2,
+            /* A estrutura de cronograma não existe */
 
-								CRO_CondRetNomeRecursoInvalido = 3,
-												/* Nome fornecido para recurso inválido */
+        CRO_CondRetNomeRecursoInvalido = 3,
+            /* Nome fornecido para recurso inválido */
 
-								CRO_CondRetTarefaNaoEncontrada = 4,
-												/* Tarefa procurada nao encontrada na lista de tarefas */
+        CRO_CondRetTarefaNaoEncontrada = 4,
+            /* Tarefa procurada nao encontrada na lista de tarefas */
 
-								CRO_CondRetRecursoNaoEncontrado = 5,
-												/* Recurso procurado nao encontrado na lista de recursos */
+        CRO_CondRetRecursoNaoEncontrado = 5,
+            /* Recurso procurado nao encontrado na lista de recursos */
 
-								CRO_CondRetConectarTarefaComElaMesma = 6,
-												/* Usuario tentou conectar uma tarefa nela mesma */
+        CRO_CondRetConectarTarefaComElaMesma = 6,
+            /* Usuario tentou conectar uma tarefa nela mesma */
 
-								CRO_CondRetConexaoJaExistente = 7,
-												/* Conexao que esta tentando ser criada já existe */
+        CRO_CondRetConexaoJaExistente = 7,
+            /* Conexao que esta tentando ser criada já existe */
 
-								CRO_CondRetConexaoInvalida = 8
-												/* Conexao que esta tentando ser criada é inválida */
+        CRO_CondRetConexaoInvalida = 8,
+            /* Conexao que esta tentando ser criada é inválida */
+
+        CRO_NaoExisteNenhumaTarefa = 9,
+            /* A lista de tarefas está vazia e não pode estar */
+
+        CRO_NaoExisteRecursoSuficiente = 10,
+            /* Não há recurso suficiente para gerar o cronograma */
+
+        CRO_CronogramaVazio = 11
+            /* Não existem tarefas nem recursos alocados para o cronograma */
   
-				} CRO_tpCondRet ;
+    } CRO_tpCondRet ;
 
 
 /***********************************************************************
@@ -132,7 +141,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_InserirTarefa( tcCronograma * ctCronograma, char * novoNome, char * novaDescricao );
+   CRO_tpCondRet CRO_InserirTarefa( tcCronograma * ctCronograma, char * novoNome, char * novaDescricao, int duracao );
 
 /***********************************************************************
 *
@@ -270,10 +279,78 @@
 *  $FV Valor retornado
 *     CRO_CondRetOK
 *     CRO_CondRetFaltouMemoria
+*     CRO_CondRetCronogramaNaoExiste
+*     CRO_NaoExisteNenhumaTarefa
 *
 ***********************************************************************/
 
    CRO_tpCondRet CRO_CaminhoCritico( tcCronograma * cCronograma);
+
+/***********************************************************************
+*
+*  $FC Função: CRO Altera Tarefa
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*     $P idTarefa - id da tarefa
+*     $P novoNome - novo nome da tarefa
+*     $P novaDescricao - nova descricao da tarefa
+*     $P duracao - nova duracao da tarefa
+*
+*  $ED Descrição da função
+*					Altera nome, descricao e duracao de uma tarefa com base 
+*         em seu id.
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetCronogramaNaoExiste
+*     CRO_CondRetTarefaNaoEncontrada
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_AlterarTarefa( tcCronograma * cCronograma, int idTarefa, char * novoNome, char * novaDescricao, int novaDuracao );
+
+/***********************************************************************
+*
+*  $FC Função: CRO Altera Recurso
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*     $P idTarefa - id do recurso
+*     $P novoNome - novo nome do recurso
+*
+*  $ED Descrição da função
+*					Altera  nome de um recurso com base 
+*         em seu id.
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetCronogramaNaoExiste
+*     CRO_CondRetRecursoNaoEncontrado
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_AlterarRecurso( tcCronograma * cCronograma, int idRecurso, char * novoNome );
+
+/***********************************************************************
+*
+*  $FC Função: CRO Gerar Cronograma
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*
+*  $ED Descrição da função
+*     Gere e imprime o cronograma
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetCronogramaNaoExiste
+*     CRO_NaoExisteRecursoSuficiente
+*     CRO_CronogramaVazio
+
+***********************************************************************/
+
+   CRO_tpCondRet CRO_GerarCronograma( tcCronograma * cCronograma );
 
 #undef CRONOGRAMA_EXT
 

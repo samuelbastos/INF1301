@@ -143,7 +143,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_AlterarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao  ) ;
+   TRF_tpCondRet  TRF_AlterarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao  ) ;
 
 /***********************************************************************
 *
@@ -275,8 +275,7 @@
 *  $FC Função: TRF Checa se a lista de predecessores está vazia
 *
 *  $EP Parâmetros
-*     $P cTarefa            - ponteiro para a cabeça da tarefa que terá
-*																													suas informações impressas
+*     $P cTarefa            - ponteiro para a cabeça da tarefa que será consultada
 *					$P temPredecessores			- variavel na qual sera retornado se a tarefa possui
 *																													predecessores 1 para se estiver vazio e 0 caso contrario
 *
@@ -286,15 +285,14 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras) ;
+   TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras ) ;
 
 /***********************************************************************
 *
 *  $FC Função: TRF Checa se a lista de sucessores está vazia
 *
 *  $EP Parâmetros
-*     $P cTarefa            - ponteiro para a cabeça da tarefa que terá
-*																													suas informações impressas
+*     $P cTarefa            - ponteiro para a cabeça da tarefa que será consultada
 *					$P temSucessores						- variavel na qual sera retornado se a tarefa possui
 *																													sucessores 1 para se estiver vazio e 0 caso contrario
 *
@@ -304,8 +302,39 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras) ;
+   TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras ) ;
 
+/***********************************************************************
+*
+*  $FC Função: TRF Calcula Caminho Crítico
+*
+*  $EP Parâmetros
+*     $P cTarefa            - ponteiro para a cabeça da tarefa que da origem a todas
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet TRF_CalculaCaminhoCritico( tcTarefa * ctTarefa ) ;
+
+/***********************************************************************
+*
+*  $FC Função: TRF Imprime Caminho Crítico
+*
+*  $EP Parâmetros
+*     $P cTarefa            - ponteiro para a cabeça da tarefa que da origem a todas
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+   TRF_tpCondRet TRF_ImprimeCaminhoCritico( tcTarefa * ctTarefa ) ;
+
+   TRF_tpCondRet TRF_ImprimeBasicoTarefa( tcTarefa * ctTarefa );
 
 #undef TAREFA_EXT
 

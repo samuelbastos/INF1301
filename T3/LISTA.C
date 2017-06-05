@@ -488,6 +488,42 @@
 
    } /* Fim função: LIS  &Verificar Vazia */
 
+/***************************************************************************
+*
+*  Função: LIS  &Adiciona ao Final
+*  ****/
+
+   LIS_tpCondRet LIS_InserirElementoFinal( LIS_tppLista pLista,	void * pValor  )
+   {
+						IrFinalLista(pLista);
+						return LIS_InserirElementoApos(pLista, pValor);
+
+   } /* Fim função: LIS  LIS  &Adiciona ao Final */
+
+/***************************************************************************
+*
+*  Função: LIS  &Obtem Valor do Inicio e o remove da lista
+*  ****/
+ 
+		 void * LIS_PopPrimeiro( LIS_tppLista pLista )
+   {
+						void * valorParaRetornar;
+      #ifdef _DEBUG
+         assert( pLista != NULL ) ;
+      #endif
+						
+      if ( pLista->pOrigemLista == NULL )
+      {
+        return NULL ;
+      } /* if */
+						valorParaRetornar = pLista->pOrigemLista->pValor;						
+
+						IrInicioLista(pLista);
+						LIS_ExcluirElemento(pLista);
+      return valorParaRetornar ;
+
+   } /* Fim função: LIS  &Obtem Valor do Inicio e o remove da lista */
+
 
 /*****  Código das funções encapsuladas no módulo  *****/
 

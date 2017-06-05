@@ -4,5 +4,5 @@
 
 01/06   2			Codificação dos Módulos				Código para Imprimir recursos e tarefas em suas respectivas listas dentro do módulo cronograma
 
-03/06   Comecei as 13:30h
+03/06   11			Codificação dos Módulos				Código para remover tarefas e recursos de suas listas e conectar tarefas entre si
                             	
