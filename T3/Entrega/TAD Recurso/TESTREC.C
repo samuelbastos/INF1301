@@ -116,7 +116,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros( "isi" ,
-                                            &RecursoObtido, NomeObtido, &CondRetEsperada ) ;
+            &RecursoObtido, NomeObtido, &CondRetEsperada ) ;
             if ( NumLidos != 3 )
             {
                 return TST_CondRetParm ;
@@ -143,7 +143,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros("i",
-                                            &RecursoObtido);
+            &RecursoObtido);
             if (NumLidos != 1)
             {
                 return TST_CondRetParm;
@@ -169,7 +169,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros("isi",
-                                            &RecursoObtido, NomeObtido, &CondRetEsperada);
+            &RecursoObtido, NomeObtido, &CondRetEsperada);
             if (NumLidos != 3)
             {
                 return TST_CondRetParm;
@@ -196,7 +196,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros("ii",
-                                            &RecursoObtido, &CondRetEsperada);
+            &RecursoObtido, &CondRetEsperada);
             if (NumLidos != 2)
             {
                 return TST_CondRetParm;
@@ -223,7 +223,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros("ii",
-                                            &RecursoObtido, &CondRetEsperada);
+            &RecursoObtido, &CondRetEsperada);
             if (NumLidos != 2)
             {
                 return TST_CondRetParm;
@@ -250,7 +250,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros("iii",
-                                            &RecursoObtido, &idObtido, &CondRetEsperada);
+            &RecursoObtido, &idObtido, &CondRetEsperada);
             if (NumLidos != 3)
             {
                 return TST_CondRetParm;
@@ -282,7 +282,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros("isi",
-                                            &RecursoObtido, NomeObtido, &CondRetEsperada);
+            &RecursoObtido, NomeObtido, &CondRetEsperada);
             if (NumLidos != 3)
             {
                 return TST_CondRetParm;
@@ -314,7 +314,7 @@ tcRecurso * recursos[10];
         {
 
             NumLidos = LER_LerParametros("iii",
-                                            &RecursoObtido, &DisponibilidadeObtida, &CondRetEsperada);
+            &RecursoObtido, &DisponibilidadeObtida, &CondRetEsperada);
             if (NumLidos != 3)
             {
                 return TST_CondRetParm;

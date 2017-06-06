@@ -1,5 +1,10 @@
 TO DO
-- tirar os testes de imprimir dos scripts
-- atualizar funçoes da interface de acesso TAREFA e CRONOGRAMA e RECURSO
-- teste para novas funções do módulo tarefa e atencao para condições de retorno
+- script tarefa (atencao para condicoes de retorno)
 - Atualizar scripts de tarefa no alterar (para receber duracao)
+
+
+SAMS
+- atualizar interface do diagrama de arquitetura
+- manual do usuario
+- teste manual
+- wrap up pdfs
