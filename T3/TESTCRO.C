@@ -56,6 +56,7 @@
 #define     CAMINHO_CRITICO_CRO_CMD     "=caminhocritico"
 #define     ALTERAR_TAREFA_CRO_CMD      "=alteratarefa"
 #define     ALTERAR_RECURSO_CRO_CMD     "=alterarecurso"
+#define     GERAR_CRO_CMD               "=cronograma"
 
 /* Vetor de tarefas para serem usados nos testes */
 
@@ -389,6 +390,29 @@ tcCronograma * cronogramas[10];
             return TST_CompararInt( CondRetEsperada , CondRetObtido, "Retorno errado ao alterar recurso do cronograma" ); 
 
         } /* fim ativa: Testar CRO Altera Tarefa */
+
+        /* Testar CRO Gerar Cronograma */
+
+        else if ( strcmp(ComandoTeste , GERAR_CRO_CMD) == 0 )
+        {
+            NumLidos = LER_LerParametros( "ii", &CronogramaObtido, &CondRetEsperada );
+            if( NumLidos != 2 )
+            {
+                return TST_CondRetParm;
+            } /* if */
+
+            if (CronogramaObtido < 10 && CronogramaObtido >= 0)
+            {
+                CondRetObtido = CRO_ImprimeCronograma(cronogramas[CronogramaObtido]);
+            }
+            else
+            {
+                return TST_CompararInt(CondRetEsperada, TST_CondRetAcessoInvalidoVetor, "Acesso Invalido ao vetor de cronogramas.");
+            }
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido, "Retorno errado ao gerar o cronograma" ); 
+
+        } /* fim ativa: Testar CRO Gerar Cronograma */
 
         return TST_CondRetNaoConhec ;	
 

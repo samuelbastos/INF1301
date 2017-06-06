@@ -97,7 +97,7 @@
 *
 *  $EP Parâmetros
 *     $P ctCronograma - ponteiro passado por referência para apontar para a 
-*				                   cabeça do cronograma a ser criado
+*				                cabeça do cronograma a ser criado
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -127,7 +127,7 @@
 *  $FC Função: CRO Insere Tarefa
 *
 *  $EP Parâmetros
-*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*     $P ctCronograma  - ponteiro para a cabeça do cronograma
 *     $P novoNome      - nome da tarefa a ser inserida
 *     $P novaDescricao - descricao da tarefa a ser inserida
 *
@@ -136,7 +136,7 @@
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
-*			  CRO_CondRetCronogramaNaoExiste
+*			CRO_CondRetCronogramaNaoExiste
 *     CRO_CondRetFaltouMemoria
 *
 ***********************************************************************/
@@ -148,7 +148,7 @@
 *  $FC Função: CRO Insere Recurso
 *
 *  $EP Parâmetros
-*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*     $P ctCronograma  - ponteiro para a cabeça do cronograma
 *     $P novoNome      - nome do recurso a ser inserido
 *
 *  $ED Descrição da função
@@ -156,9 +156,9 @@
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
-*					CRO_CondRetCronogramaNaoExiste
+*     CRO_CondRetCronogramaNaoExiste
 *     CRO_CondRetFaltouMemoria
-*					CRO_CondRetNomeRecursoInvalido
+*			CRO_CondRetNomeRecursoInvalido
 *
 ***********************************************************************/
 
@@ -169,8 +169,8 @@
 *  $FC Função: CRO Remover Tarefa
 *
 *  $EP Parâmetros
-*     $P ctCronograma - ponteiro para a cabeça do cronograma
-*					$P idParaRemover - id da tarefa que se deseja remover
+*     $P ctCronograma  - ponteiro para a cabeça do cronograma
+*			$P idParaRemover - id da tarefa que se deseja remover
 *
 *  $ED Descrição da função
 *    Remove uma tarefa da lista de tarefas do cronograma
@@ -178,7 +178,8 @@
 *  $FV Valor retornado
 *     CRO_CondRetOK
 *     CRO_CondRetFaltouMemoria
-*					CRO_CondRetCronogramaNaoExiste
+*			CRO_CondRetCronogramaNaoExiste
+*     CRO_CondRetTarefaNaoEncontrada
 *
 ***********************************************************************/
 
@@ -189,8 +190,8 @@
 *  $FC Função: CRO Remover Recurso
 *
 *  $EP Parâmetros
-*     $P ctCronograma - ponteiro para a cabeça do cronograma
-*					$P idParaRemover - id do recurso que se deseja remover
+*     $P ctCronograma  - ponteiro para a cabeça do cronograma
+*			$P idParaRemover - id do recurso que se deseja remover
 *
 *  $ED Descrição da função
 *    Remove um recurso da lista de recursos do cronograma
@@ -198,7 +199,8 @@
 *  $FV Valor retornado
 *     CRO_CondRetOK
 *     CRO_CondRetFaltouMemoria
-*					CRO_CondRetCronogramaNaoExiste
+*			CRO_CondRetCronogramaNaoExiste
+*     CRO_CondRetRecursoNaoEncontrado
 *
 ***********************************************************************/
 
@@ -209,9 +211,9 @@
 *  $FC Função: CRO Conectar Tarefas
 *
 *  $EP Parâmetros
-*     $P ctCronograma											- ponteiro para a cabeça do cronograma
-*					$P idTarefaSucessora						-	id da tarefa que será a sucessora
-*					$P idTarefaPredecessora			- id da tarefa que será a predecessora
+*     $P ctCronograma							 - ponteiro para a cabeça do cronograma
+*			$P idTarefaSucessora				 - id da tarefa que será a sucessora
+*			$P idTarefaPredecessora			 - id da tarefa que será a predecessora
 *
 *  $ED Descrição da função
 *    Conecta duas tarefas
@@ -219,11 +221,11 @@
 *  $FV Valor retornado
 *     CRO_CondRetOK
 *     CRO_CondRetFaltouMemoria
-*			  CRO_CondRetCronogramaNaoExiste
-*			  CRO_CondRetTarefaNaoEncontrada
-*					CRO_CondRetConectarTarefaComElaMesma
-*			  CRO_CondRetConexaoJaExistente
-*					CRO_CondRetConexaoInvalida
+*			CRO_CondRetCronogramaNaoExiste
+*			CRO_CondRetTarefaNaoEncontrada
+*			CRO_CondRetConectarTarefaComElaMesma
+*			CRO_CondRetConexaoJaExistente
+*			CRO_CondRetConexaoInvalida
 *
 ***********************************************************************/
 
@@ -273,7 +275,7 @@
 *     $P ctCronograma - ponteiro para a cabeça do cronograma
 *
 *  $ED Descrição da função
-*					Calcula o caminho critico e o imprime na tela baseado nos recursos e
+*					Calcula o caminho critico baseado nos recursos e
 *			tarefas inseridos nas listas do respectivo cronograma
 *
 *  $FV Valor retornado
@@ -285,6 +287,26 @@
 ***********************************************************************/
 
    CRO_tpCondRet CRO_CaminhoCritico( tcCronograma * cCronograma);
+
+/***********************************************************************
+*
+*  $FC Função: CRO Imprime Caminho Critico
+*
+*  $EP Parâmetros
+*     $P ctCronograma - ponteiro para a cabeça do cronograma
+*
+*  $ED Descrição da função
+*					Imprime o Caminho Critico já calculado pelo módulo
+*
+*  $FV Valor retornado
+*     CRO_CondRetOK
+*     CRO_CondRetFaltouMemoria
+*     CRO_CondRetCronogramaNaoExiste
+*     CRO_NaoExisteNenhumaTarefa
+*
+***********************************************************************/
+
+   CRO_tpCondRet CRO_ImprimeCaminhoCritico( tcCronograma * cCronograma);
 
 /***********************************************************************
 *
@@ -320,8 +342,7 @@
 *     $P novoNome - novo nome do recurso
 *
 *  $ED Descrição da função
-*					Altera  nome de um recurso com base 
-*         em seu id.
+*			Altera  nome de um recurso com base em seu id.
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -334,13 +355,13 @@
 
 /***********************************************************************
 *
-*  $FC Função: CRO Gerar Cronograma
+*  $FC Função: CRO Imprime Cronograma
 *
 *  $EP Parâmetros
 *     $P ctCronograma - ponteiro para a cabeça do cronograma
 *
 *  $ED Descrição da função
-*     Gere e imprime o cronograma
+*     Imprime o cronograma
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -350,7 +371,7 @@
 
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_GerarCronograma( tcCronograma * cCronograma );
+   CRO_tpCondRet CRO_ImprimeCronograma( tcCronograma * cCronograma );
 
 #undef CRONOGRAMA_EXT
 

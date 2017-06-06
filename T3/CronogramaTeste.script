@@ -9,10 +9,10 @@
 =criar 0 0
 
 == Insere Tarefa
-=instrf 0 "Tarefa1" "Documentar" 0
+=instrf 0 "Tarefa1" "Documentar" 2 0
 
 == Insere Tarefa em Cronograma não existente
-=instrf 1 "Tarefa1" "Documentar" 2
+=instrf 1 "Tarefa1" "Documentar" 2 2
 
 == Insere Recurso
 =insrec 0 "Recurso1" 0
@@ -26,10 +26,35 @@
 == Insere Recurso com nome inválido
 =insrec 0 " " 3
 
+== Insere segunda tarefa no cronograma
+=instrf 0 "Tarefa2" "Descricao Tarefa2" 2 0
+
+== Conecta duas tarefas
+=conectartrf 0 0 2 0
+
+== Conecta duas tarefas de um cronograma que nao existe
+=conectartrf 1 0 2 2
+
+== Conecta tarefa e uma delas nao existe
+=conectartrf 0 0 6 4
+
+== Conecta tarefa e as duas nao existem
+=conectartrf 0 12 15 4
+
+== Tenta Conectar tarefa com ela mesma
+=conectartrf 0 2 2 6
+
+== Tenta fazer conexao ja existente
+=conectartrf 0 0 2 7
+
+== Tenta fazer conexao invalida
+=conectartrf 0 2 0 8
+
 == Remove Tarefa Existente
-=instrf 0 "Tarefa2" "Descricao Tarefa2" 0
-=implistrf 0 0
 =deltrf 0 2 0
+
+== Remove Tarefa em Cronograma Inexistente
+=deltrf 1 1 2
 
 == Remove Tarefa Inexistente
 =deltrf 0 10 4
@@ -38,11 +63,55 @@
 =insrec 0 "Recurso 2" 0
 =delrec 0 2 0
 
+== Remove Recurso em Cronograma Inexistente
+=delrec 1 1 2
+
 == Remove Recurso Inexistente
 =delrec 0 10 5
 
-== Imprime Lista Tarefas
-=implistrf 0 0
+== Cria a um cronograma mais complexo
+=instrf 0 "Tarefa2" "Descricao Tarefa2" 6 0
+=instrf 0 "Tarefa3" "Descricao Tarefa3" 4 0
+=instrf 0 "Tarefa4" "Descricao Tarefa4" 3 0
+=instrf 0 "Tarefa5" "Descricao Tarefa5" 5 0
+=instrf 0 "Tarefa6" "Descricao Tarefa6" 5 0
+=instrf 0 "Tarefa7" "Descricao Tarefa7" 0 0
+=conectartrf 0 3 0 0
+=conectartrf 0 4 0 0
+=conectartrf 0 5 0 0
+=conectartrf 0 6 3 0
+=conectartrf 0 6 4 0
+=conectartrf 0 7 5 0
+=conectartrf 0 8 6 0
+=conectartrf 0 8 7 0
 
-== Imprime Lista Recursos
-=implisrec 0 0
+== Altera uma tarefa
+=alteratarefa 0 0 "Teste" "testedesc" 9 0
+
+== Altera outra tarefa 
+=alteratarefa 0 6 "Teste2" "testedesc2" 11 0
+
+== Altera tarefa em cronograma inexistente 
+=alteratarefa 4 6 "Teste2" "testedesc2" 11 2
+
+== Altera tarefa que nao existe
+=alteratarefa 0 9 "TarefaNaoExist" "Desc" 10 4
+
+== Altera um recurso
+=alterarecurso 0 0 "Nome novo" 0
+
+== Altera um recurso que nao existe
+=alterarecurso 0 2 "Nome Nao Existe" 5
+
+== Altera recurso em cronograma inexistente
+=alterarecurso 5 0 "Nome Nao Existe" 2
+
+== Calcular o Caminho Critico
+=caminhocritico 0 0
+
+== Calcular o Caminho Critico de um cronograma que nao existe
+=caminhocritico 2 2
+
+== Caminho Critico quando o Cronograma nao possui tarefas
+=criar 1 0
+=caminhocritico 1 9

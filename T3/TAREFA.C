@@ -637,6 +637,8 @@
         printf("Duracao: %d\n", ctTarefa->tarefa->duracao);
         printf("Data Marcada: %d\n", ctTarefa->tarefa->dataMarcada);
         printf("Folga: %d\n", folga);
+
+        return TRF_CondRetOK;
     }
 
 /*****  Código das funções encapsuladas no módulo  *****/

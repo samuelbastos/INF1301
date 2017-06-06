@@ -486,11 +486,55 @@
 
 								TRF_CalculaCaminhoCritico(tarefaInicial);
                 TRF_DestruirTarefa(&tarefaFinal);
-                TRF_ImprimeCaminhoCritico(tarefaInicial);
-								
+								TRF_DestruirTarefa(&tarefaInicial);
+
 								return CRO_CondRetOK;
 
 				} /* Fim função: CRO Calcula Caminho Critico */
+
+/***************************************************************************
+*
+*  Função: CRO Imprime Caminho Critico
+*  ****/
+
+				CRO_tpCondRet CRO_ImprimeCaminhoCritico( tcCronograma * cCronograma)
+				{
+								TRF_tpCondRet condRet;
+								tcTarefa * tarefaInicial = NULL;
+								tcTarefa * tarefaAux = NULL;
+								int estaVazia;
+
+                if (cCronograma == NULL || cCronograma->cronograma == NULL)
+								    return CRO_CondRetCronogramaNaoExiste;
+				
+								condRet = TRF_CriarTarefa(&tarefaInicial, "Tarefa Origem", "Primeira tarefa", 0);
+								if (condRet == TRF_CondRetFaltouMemoria)
+										return CRO_CondRetFaltouMemoria;
+
+                if (LIS_VerificarVazia( cCronograma->cronograma->listaTarefas ) == LIS_CondRetListaVazia)
+                    return CRO_NaoExisteNenhumaTarefa;
+
+								IrInicioLista(cCronograma->cronograma->listaTarefas);
+								tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+								TRF_TemPredecessores(tarefaAux, &estaVazia);
+								if ( estaVazia == TRUE )
+										TRF_ConectarTarefas(&tarefaAux, &tarefaInicial);
+								
+
+								while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
+								{
+												tarefaAux = (tcTarefa *) LIS_ObterValor(cCronograma->cronograma->listaTarefas);
+												TRF_TemPredecessores(tarefaAux, &estaVazia);
+												if ( estaVazia == TRUE )
+														TRF_ConectarTarefas(&tarefaAux, &tarefaInicial);
+								}
+
+                TRF_ImprimeCaminhoCritico(tarefaInicial);
+								TRF_DestruirTarefa(&tarefaInicial);
+
+								return CRO_CondRetOK;
+
+				} /* Fim função: CRO Imprime Caminho Critico */
 
 
 /***************************************************************************
@@ -579,10 +623,10 @@
 
 /***************************************************************************
 *
-*  Função: CRO Gerar Cronograma
+*  Função: CRO Imprime Cronograma
 *  ****/
 
-        CRO_tpCondRet CRO_GerarCronograma( tcCronograma * cCronograma )
+        CRO_tpCondRet CRO_ImprimeCronograma( tcCronograma * cCronograma )
         {
             tcTarefa * tarefa = NULL;
             tcRecurso * recurso = NULL;
@@ -648,6 +692,7 @@
 
             TRF_ImprimeBasicoTarefa(tarefa);
             REC_ImprimeRecurso(recurso);
+            printf("\n");
 
             while (LIS_AvancarElementoCorrente(cCronograma->cronograma->listaTarefas, 1) != LIS_CondRetFimLista)
             {
@@ -660,10 +705,11 @@
 
                 TRF_ImprimeBasicoTarefa(tarefa);
                 REC_ImprimeRecurso(recurso);
+                printf("\n");
             }
 
             return CRO_CondRetOK;
-        } /* Fim função: CRO Gerar Cronograma */
+        } /* Fim função: CRO Imprime Cronograma */
 
 #undef TRUE
 #undef FALSE
