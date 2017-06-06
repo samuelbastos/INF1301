@@ -1,0 +1,31 @@
+Esse LEIAME se refere ao trabalho 3 de Programação Modular do grupo composto por:
+Mauricio Pedro Silva Goncalves Vieira 131110
+Samuel Bastos de Souza Junior 1311416
+Anna Katharine Gonçalves Alves 1321492
+
+Para executar a aplicação cronograma siga os seguintes passos:
+1- entre na pasta "Aplicação Cronograma" e extraia o arquivo "TRAB3-1.EXE"
+2- clique duas vezes no arquivo "TRAB3-1.EXE"
+
+Para gerar o arquivo de .log que contem os resultados dos testes do módulo Recurso siga os seguintes passos:
+1- extraia os arquivos "TRAB3-2.EXE", "RecursoTeste.script" e "ExecutaTesteRecurso.bat" que estão na pasta "TAD Recurso"
+2- caso os arquivos nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta
+3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "ExecutaTesteRecurso.bat"
+4- nesse momento deve aparecer um arquivo chamado "logRecursoGerado.log" na pasta, dentro dele você encontrará o relatório de execução dos testes do módulo Recurso
+5- clique duas vezes no arquivo "logRecursoGerado.log" para ter acesso ao relatório de execução de testes
+
+Para gerar o arquivo de .log que contem os resultados dos testes do módulo Tarefa siga os seguintes passos:
+1- extraia os arquivos "TRAB3-3.EXE", "TarefaTeste.script" e "ExecutaTesteTarefa.bat" que estão na pasta "TAD Tarefa"
+2- caso os arquivos nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta
+3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "ExecutaTesteTarefa.bat"
+4- nesse momento deve aparecer um arquivo chamado "logTarefaGerado.log" na pasta, dentro dele você encontrará o relatório de execução dos testes do módulo Tarefa
+5- clique duas vezes no arquivo "logTarefaGerado.log" para ter acesso ao relatório de execução de testes
+
+Para gerar o arquivo de .log que contem os resultados dos testes do módulo Cronograma siga os seguintes passos:
+1- extraia os arquivos "TRAB3-4.EXE", "CronogramaTeste.script" e "ExecutaTesteCronograma.bat" que estão na pasta "TAD Cronograma"
+2- caso os arquivos nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta
+3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "ExecutaTesteTarefa.bat"
+4- nesse momento deve aparecer um arquivo chamado "logCronogramaGerado.log" na pasta, dentro dele você encontrará o relatório de execução dos testes do módulo Cronograma
+5- clique duas vezes no arquivo "logCronogramaGerado.log" para ter acesso ao relatório de execução de testes
+
+A entrega também inclui o arquivo "Teste Manual.pdf" que contém instruções para reproduzir na aplicação Cronograma os testes manuais usados pela dupla para testar a aplicação.
