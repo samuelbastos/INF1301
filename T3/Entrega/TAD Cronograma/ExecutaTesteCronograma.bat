@@ -1,0 +1,1 @@
+TRAB2-4.EXE /sCronogramaTeste.script > logCronogramaGerado.log

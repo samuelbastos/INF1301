@@ -38,7 +38,7 @@
 *
 ***********************************************************************/
 
-   typedef enum {
+    typedef enum {
 
        TRF_CondRetOK = 0,
             /* Executou correto */
@@ -58,7 +58,7 @@
        TRF_CondRetIdRecursoNaoCadastrado = 5
             /* Id do recurso não cadastrado */
 
-   } TRF_tpCondRet ;
+    } TRF_tpCondRet ;
 
 
 /***********************************************************************
@@ -68,7 +68,7 @@
 *
 ***********************************************************************/
 
-   typedef struct tcTarefa tcTarefa;
+    typedef struct tcTarefa tcTarefa;
 
 /***********************************************************************
 *
@@ -80,7 +80,7 @@
 *
 *  $EP Parâmetros
 *     $P ctTarefa      - ponteiro passado por referência para apontar para a 
-*				         cabeça da tarefa a ser criada
+*				                 cabeça da tarefa a ser criada
 *     $P novoNome      - nome da tarefa a ser criada 
 *     $P novaDescricao - descricao da tarefa a ser criada
 *
@@ -90,7 +90,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao ) ;
+    TRF_tpCondRet TRF_CriarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao ) ;
 
 /***********************************************************************
 *
@@ -101,11 +101,11 @@
 *                   cabeça da tarefa que será destruida
 *
 *  $ED Descrição da função
-*    Destroi a tarefa passada por referência. 
+*     Destroi a tarefa passada por referência. 
 *
 ***********************************************************************/
 
-   void TRF_DestruirTarefa( tcTarefa ** ctTarefa ) ;
+    void TRF_DestruirTarefa( tcTarefa ** ctTarefa ) ;
 
 /***********************************************************************
 *
@@ -113,9 +113,9 @@
 *
 *  $EP Parâmetros
 *     $P ctTarefaSucessora    - ponteiro passado por referência que aponta para a 
-*				                cabeça da tarefa que será conectada como sucessora
+*				                        cabeça da tarefa que será conectada como sucessora
 *     $P ctTarefaPredecessora - ponteiro passado por referência que aponta para a 
-*				                cabeça da tarefa que será conectada como predecessora
+*				                        cabeça da tarefa que será conectada como predecessora
 * 
 *  $FV Valor retornado
 *     TRF_CondRetOK
@@ -125,7 +125,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_ConectarTarefas( tcTarefa ** ctTarefaSucessora, tcTarefa ** ctTarefaPredecessora ) ;
+    TRF_tpCondRet TRF_ConectarTarefas( tcTarefa ** ctTarefaSucessora, tcTarefa ** ctTarefaPredecessora ) ;
 
 /***********************************************************************
 *
@@ -143,7 +143,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_AlterarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao  ) ;
+    TRF_tpCondRet  TRF_AlterarTarefa( tcTarefa ** ctTarefa, char * novoNome, char * novaDescricao, int duracao  ) ;
 
 /***********************************************************************
 *
@@ -153,7 +153,7 @@
 *     $P cTarefa              - ponteiro passado por referência que aponta 
 *                               para cabeça da tarefa a ser consultada
 *                               nome
-*     $P idConsultado									- id da tarefa passado por referencia
+*     $P idConsultado					- id da tarefa passado por referencia
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
@@ -161,7 +161,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarIdTarefa( tcTarefa ** ctTarefa, int * idConsultado ) ;
+    TRF_tpCondRet  TRF_ConsultarIdTarefa( tcTarefa ** ctTarefa, int * idConsultado ) ;
 
 /***********************************************************************
 *
@@ -179,7 +179,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarNomeTarefa( tcTarefa ** ctTarefa, char ** nomeConsultado ) ;
+    TRF_tpCondRet  TRF_ConsultarNomeTarefa( tcTarefa ** ctTarefa, char ** nomeConsultado ) ;
 
 /***********************************************************************
 *
@@ -197,7 +197,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( tcTarefa ** ctTarefa, char ** descricaoConsultada ) ;
+    TRF_tpCondRet  TRF_ConsultarDescricaoTarefa( tcTarefa ** ctTarefa, char ** descricaoConsultada ) ;
 
 /***********************************************************************
 *
@@ -207,7 +207,7 @@
 *     $P cTarefa              - ponteiro passado por referência que aponta 
 *                               para cabeça da tarefa a ser consultada
 *                               nome
-*     $P duracaoConsultada				- duracao da tarefa passado por referencia
+*     $P duracaoConsultada		- duracao da tarefa passado por referencia
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
@@ -215,7 +215,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet  TRF_ConsultarDuracaoTarefa( tcTarefa ** ctTarefa, int * duracaoConsultada ) ;
+    TRF_tpCondRet  TRF_ConsultarDuracaoTarefa( tcTarefa ** ctTarefa, int * duracaoConsultada ) ;
 
 /***********************************************************************
 *
@@ -233,7 +233,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_CadastrarIdRecurso( tcTarefa ** ctTarefa, int idRecurso ) ;
+    TRF_tpCondRet TRF_CadastrarIdRecurso( tcTarefa ** ctTarefa, int idRecurso ) ;
 
 /***********************************************************************
 *
@@ -252,7 +252,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_ConsultarIdRecurso( tcTarefa ** ctTarefa, int * idRecurso ) ;
+    TRF_tpCondRet TRF_ConsultarIdRecurso( tcTarefa ** ctTarefa, int * idRecurso ) ;
 
 /***********************************************************************
 *
@@ -260,7 +260,7 @@
 *
 *  $EP Parâmetros
 *     $P cTarefa              - ponteiro para a cabeça da tarefa que terá
-*																															suas informações impressas
+*																suas informações impressas
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
@@ -268,16 +268,16 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_ImprimeTarefa( tcTarefa * ctTarefa) ;
+    TRF_tpCondRet TRF_ImprimeTarefa( tcTarefa * ctTarefa) ;
 
 /***********************************************************************
 *
 *  $FC Função: TRF Checa se a lista de predecessores está vazia
 *
 *  $EP Parâmetros
-*     $P cTarefa            - ponteiro para a cabeça da tarefa que será consultada
-*					$P temPredecessores			- variavel na qual sera retornado se a tarefa possui
-*																													predecessores 1 para se estiver vazio e 0 caso contrario
+*     $P cTarefa             - ponteiro para a cabeça da tarefa que será consultada
+*			$P temPredecessores		 - variavel na qual sera retornado se a tarefa possui
+*															 predecessores 1 para se estiver vazio e 0 caso contrario
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
@@ -285,7 +285,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras ) ;
+    TRF_tpCondRet TRF_TemPredecessores( tcTarefa * ctTarefa, int * temPredecessoras ) ;
 
 /***********************************************************************
 *
@@ -293,8 +293,8 @@
 *
 *  $EP Parâmetros
 *     $P cTarefa            - ponteiro para a cabeça da tarefa que será consultada
-*					$P temSucessores						- variavel na qual sera retornado se a tarefa possui
-*																													sucessores 1 para se estiver vazio e 0 caso contrario
+*			$P temSucessores			- variavel na qual sera retornado se a tarefa possui
+*															sucessores 1 para se estiver vazio e 0 caso contrario
 *
 *  $FV Valor retornado
 *     TRF_CondRetOK
@@ -302,7 +302,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras ) ;
+    TRF_tpCondRet TRF_TemSucessores( tcTarefa * ctTarefa, int * temSucessoras ) ;
 
 /***********************************************************************
 *
@@ -317,7 +317,7 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_CalculaCaminhoCritico( tcTarefa * ctTarefa ) ;
+    TRF_tpCondRet TRF_CalculaCaminhoCritico( tcTarefa * ctTarefa ) ;
 
 /***********************************************************************
 *
@@ -332,9 +332,23 @@
 *
 ***********************************************************************/
 
-   TRF_tpCondRet TRF_ImprimeCaminhoCritico( tcTarefa * ctTarefa ) ;
+    TRF_tpCondRet TRF_ImprimeCaminhoCritico( tcTarefa * ctTarefa ) ;
 
-   TRF_tpCondRet TRF_ImprimeBasicoTarefa( tcTarefa * ctTarefa );
+/***********************************************************************
+*
+*  $FC Função: TRF Imprime informações da Tarefa relevantes para Cronograma
+*
+*  $EP Parâmetros
+*     $P cTarefa              - ponteiro para a cabeça da tarefa que terá
+*																suas informações impressas
+*
+*  $FV Valor retornado
+*     TRF_CondRetOK
+*     TRF_CondRetTarefaInexistente
+*
+***********************************************************************/
+
+    TRF_tpCondRet TRF_ImprimeBasicoTarefa( tcTarefa * ctTarefa );
 
 #undef TAREFA_EXT
 

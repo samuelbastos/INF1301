@@ -85,7 +85,7 @@
 *
 ***********************************************************************/
 
-   typedef struct tcCronograma tcCronograma;
+    typedef struct tcCronograma tcCronograma;
 
 /***********************************************************************
 *
@@ -105,14 +105,14 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_CriarCronograma( tcCronograma ** ctCronograma );
+    CRO_tpCondRet CRO_CriarCronograma( tcCronograma ** ctCronograma );
 
 /***********************************************************************
 *
 *  $FC Função: CRO Destruir cronograma
 *
 *  $EP Parâmetros
-*     $P ctCronograma - ponteiro passado por referência que aponta para a 
+*    $P ctCronograma - ponteiro passado por referência que aponta para a 
 *                       cabeça do cronograma que será destruido
 *
 *  $ED Descrição da função
@@ -120,7 +120,7 @@
 *
 ***********************************************************************/
 
-   void CRO_DestruirCronograma( tcCronograma ** ctCronograma );
+    void CRO_DestruirCronograma( tcCronograma ** ctCronograma );
 
 /***********************************************************************
 *
@@ -132,7 +132,7 @@
 *     $P novaDescricao - descricao da tarefa a ser inserida
 *
 *  $ED Descrição da função
-*    Insere uma nova tarefa na lista de tarefas do cronograma passado
+*     Insere uma nova tarefa na lista de tarefas do cronograma passado
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -141,7 +141,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_InserirTarefa( tcCronograma * ctCronograma, char * novoNome, char * novaDescricao, int duracao );
+    CRO_tpCondRet CRO_InserirTarefa( tcCronograma * ctCronograma, char * novoNome, char * novaDescricao, int duracao );
 
 /***********************************************************************
 *
@@ -162,7 +162,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_InserirRecurso( tcCronograma * ctCronograma, char * novoNome);
+    CRO_tpCondRet CRO_InserirRecurso( tcCronograma * ctCronograma, char * novoNome);
 
 /***********************************************************************
 *
@@ -173,7 +173,7 @@
 *			$P idParaRemover - id da tarefa que se deseja remover
 *
 *  $ED Descrição da função
-*    Remove uma tarefa da lista de tarefas do cronograma
+*     Remove uma tarefa da lista de tarefas do cronograma
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -183,7 +183,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_RemoveTarefa( tcCronograma * cCronograma, int idParaRemover );
+    CRO_tpCondRet CRO_RemoveTarefa( tcCronograma * cCronograma, int idParaRemover );
 
 /***********************************************************************
 *
@@ -194,7 +194,7 @@
 *			$P idParaRemover - id do recurso que se deseja remover
 *
 *  $ED Descrição da função
-*    Remove um recurso da lista de recursos do cronograma
+*     Remove um recurso da lista de recursos do cronograma
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -204,7 +204,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_RemoveRecurso( tcCronograma * cCronograma, int idParaRemover );
+    CRO_tpCondRet CRO_RemoveRecurso( tcCronograma * cCronograma, int idParaRemover );
 
 /***********************************************************************
 *
@@ -216,7 +216,7 @@
 *			$P idTarefaPredecessora			 - id da tarefa que será a predecessora
 *
 *  $ED Descrição da função
-*    Conecta duas tarefas
+*     Conecta duas tarefas
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -229,7 +229,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_ConectarTarefas( tcCronograma * cCronograma, int idTarefaSucessora, int idTarefaPredecessora );
+    CRO_tpCondRet CRO_ConectarTarefas( tcCronograma * cCronograma, int idTarefaSucessora, int idTarefaPredecessora );
 
 /***********************************************************************
 *
@@ -239,7 +239,7 @@
 *     $P ctCronograma - ponteiro para a cabeça do cronograma
 *
 *  $ED Descrição da função
-*    Insere um novo recurso na lista de tarefas do cronograma passado
+*     Insere um novo recurso na lista de tarefas do cronograma passado
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -247,7 +247,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_ImprimeListaTarefa( tcCronograma * cCronograma);
+    CRO_tpCondRet CRO_ImprimeListaTarefa( tcCronograma * cCronograma);
 
 /***********************************************************************
 *
@@ -257,7 +257,7 @@
 *     $P ctCronograma - ponteiro para a cabeça do cronograma
 *
 *  $ED Descrição da função
-*    Insere um novo recurso na lista de recursos do cronograma passado
+*     Insere um novo recurso na lista de recursos do cronograma passado
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -265,7 +265,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_ImprimeListaRecurso( tcCronograma * cCronograma);
+    CRO_tpCondRet CRO_ImprimeListaRecurso( tcCronograma * cCronograma);
 
 /***********************************************************************
 *
@@ -275,7 +275,7 @@
 *     $P ctCronograma - ponteiro para a cabeça do cronograma
 *
 *  $ED Descrição da função
-*					Calcula o caminho critico baseado nos recursos e
+*			Calcula o caminho critico baseado nos recursos e
 *			tarefas inseridos nas listas do respectivo cronograma
 *
 *  $FV Valor retornado
@@ -286,7 +286,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_CaminhoCritico( tcCronograma * cCronograma);
+    CRO_tpCondRet CRO_CaminhoCritico( tcCronograma * cCronograma);
 
 /***********************************************************************
 *
@@ -296,7 +296,7 @@
 *     $P ctCronograma - ponteiro para a cabeça do cronograma
 *
 *  $ED Descrição da função
-*					Imprime o Caminho Critico já calculado pelo módulo
+*			Imprime o Caminho Critico já calculado pelo módulo
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -306,7 +306,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_ImprimeCaminhoCritico( tcCronograma * cCronograma);
+    CRO_tpCondRet CRO_ImprimeCaminhoCritico( tcCronograma * cCronograma);
 
 /***********************************************************************
 *
@@ -320,8 +320,8 @@
 *     $P duracao - nova duracao da tarefa
 *
 *  $ED Descrição da função
-*					Altera nome, descricao e duracao de uma tarefa com base 
-*         em seu id.
+*			Altera nome, descricao e duracao de uma tarefa com base 
+*     em seu id.
 *
 *  $FV Valor retornado
 *     CRO_CondRetOK
@@ -330,7 +330,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_AlterarTarefa( tcCronograma * cCronograma, int idTarefa, char * novoNome, char * novaDescricao, int novaDuracao );
+    CRO_tpCondRet CRO_AlterarTarefa( tcCronograma * cCronograma, int idTarefa, char * novoNome, char * novaDescricao, int novaDuracao );
 
 /***********************************************************************
 *
@@ -351,7 +351,7 @@
 *
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_AlterarRecurso( tcCronograma * cCronograma, int idRecurso, char * novoNome );
+    CRO_tpCondRet CRO_AlterarRecurso( tcCronograma * cCronograma, int idRecurso, char * novoNome );
 
 /***********************************************************************
 *
@@ -371,7 +371,7 @@
 
 ***********************************************************************/
 
-   CRO_tpCondRet CRO_ImprimeCronograma( tcCronograma * cCronograma );
+    CRO_tpCondRet CRO_ImprimeCronograma( tcCronograma * cCronograma );
 
 #undef CRONOGRAMA_EXT
 

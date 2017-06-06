@@ -41,29 +41,29 @@
 *
 ***********************************************************************/
 
-				typedef enum {
+    typedef enum {
 
-								REC_CondRetOK = 0 ,
-												/* Executou correto */
+        REC_CondRetOK = 0 ,
+            /* Executou correto */
 
-								REC_CondRetRecursoNaoExiste = 1,
-												/* O recurso não existe */
+        REC_CondRetRecursoNaoExiste = 1,
+            /* O recurso não existe */
 
-								REC_CondRetNomeInvalido = 2,
-												/* O nome é invalido */
+        REC_CondRetNomeInvalido = 2,
+            /* O nome é invalido */
 
-								REC_CondRetFaltouMemoria = 3
-												/* Faltou memória ao alocar dados */
+        REC_CondRetFaltouMemoria = 3
+            /* Faltou memória ao alocar dados */
 
-				} REC_tpCondRet ;
+    } REC_tpCondRet ;
    
 
-   /***********************************************************************
-   *
-   *  $TC Tipo de dados: REC cabeça de uma estrutura de recurso
-   *
-   *
-   ***********************************************************************/
+/***********************************************************************
+*
+*  $TC Tipo de dados: REC cabeça de uma estrutura de recurso
+*
+*
+***********************************************************************/
 
    typedef struct tcRecurso tcRecurso;
 
@@ -77,16 +77,16 @@
 *
 *  $EP Parâmetros
 *     $P ptRecurso - ponteiro que vai armazenar o recurso que foi criado
-*	  $P novoNome - nome que deverá ser colocado dentro do recurso
+*	    $P novoNome - nome que deverá ser colocado dentro do recurso
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
 *     REC_CondRetFaltouMemoria
-*					REC_CondRetNomeInvalido
+*			REC_CondRetNomeInvalido
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_CriarRecurso(tcRecurso ** ptRecurso, char * novoNome) ;
+    REC_tpCondRet REC_CriarRecurso(tcRecurso ** ptRecurso, char * novoNome) ;
 
 
 /***********************************************************************
@@ -95,11 +95,11 @@
 *
 *  $ED Descrição da função
 *     Destroi o recurso liberando a memoria alocada para a variavel nome
-*	  e depois a memoria alocada pro resto da estrutura
+*	    e depois a memoria alocada pro resto da estrutura
 *
 ***********************************************************************/
 
-   void REC_DestruirRecurso( tcRecurso ** ptRecurso ) ;
+    void REC_DestruirRecurso( tcRecurso ** ptRecurso ) ;
 
 
 /***********************************************************************
@@ -107,19 +107,19 @@
 *  $FC Função: REC Alterar nome do recurso
 *
 *  $EP Parâmetros
-*	  $P ptRecurso - Recurso que terá o nome alterado
-*	  $P novoNome - nome que deverá ser colocado dentro do recurso no lugar
-*					do nome atual
+*	    $P ptRecurso  - Recurso que terá o nome alterado
+*	    $P novoNome   - nome que deverá ser colocado dentro do recurso no lugar
+*					            do nome atual
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
 *     REC_CondRetFaltouMemoria
-*	  REC_CondRetRecursoNaoExiste
-*	  REC_CondRetNomeInvalido
+*	    REC_CondRetRecursoNaoExiste
+*	    REC_CondRetNomeInvalido
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_AlterarNome(tcRecurso * ptRecurso, char * novoNome);
+    REC_tpCondRet REC_AlterarNome(tcRecurso * ptRecurso, char * novoNome);
 
 
 /***********************************************************************
@@ -131,11 +131,11 @@
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
-*	  REC_CondRetRecursoNaoExiste
+*	    REC_CondRetRecursoNaoExiste
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_MarcarComoOcupada(tcRecurso * ptRecurso);
+    REC_tpCondRet REC_MarcarComoOcupada(tcRecurso * ptRecurso);
 
 
 /***********************************************************************
@@ -147,11 +147,11 @@
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
-*	  REC_CondRetRecursoNaoExiste
+*	    REC_CondRetRecursoNaoExiste
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_MarcarComoDisponivel(tcRecurso * ptRecurso);
+    REC_tpCondRet REC_MarcarComoDisponivel(tcRecurso * ptRecurso);
 
 
 /***********************************************************************
@@ -159,17 +159,17 @@
 *  $FC Função: REC Consulta o Id do recurso
 *
 *  $EP Parâmetros
-*     $P ptRecurso - Recurso que será consultada
-*	  $P id - ponteiro para o local de memoria onde o id do recurso será
-*			  armazenado para consulta externa
+*     $P ptRecurso   - Recurso que será consultada
+*	    $P id          - ponteiro para o local de memoria onde o id do 
+*			                 recurso será armazenado para consulta externa
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
-*	  REC_CondRetRecursoNaoExiste
+*	    REC_CondRetRecursoNaoExiste
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_ConsultarId(tcRecurso * ptRecurso, int * id);
+    REC_tpCondRet REC_ConsultarId(tcRecurso * ptRecurso, int * id);
 
 
 /***********************************************************************
@@ -178,17 +178,17 @@
 *
 *  $EP Parâmetros
 *     $P ptRecurso - Recurso que será consultada
-*	  $P pNome - ponteiro para o local de memoria onde o nome do recurso 
-*				 será armazenado para consulta externa
+*	    $P pNome     - ponteiro para o local de memoria onde o nome do recurso 
+*				             será armazenado para consulta externa
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
 *     REC_CondRetFaltouMemoria
-*	  REC_CondRetRecursoNaoExiste
+*	    REC_CondRetRecursoNaoExiste
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_ConsultarNome(tcRecurso * ptRecurso, char ** pNome);
+    REC_tpCondRet REC_ConsultarNome(tcRecurso * ptRecurso, char ** pNome);
 
 
 /***********************************************************************
@@ -197,8 +197,8 @@
 *
 *  $EP Parâmetros
 *     $P ptRecurso - Recurso que será consultada
-*	  $P id - ponteiro para o local de memoria onde a disponibilidade do 
-*			  recurso será armazenada para consulta externa
+*	    $P id        - ponteiro para o local de memoria onde a disponibilidade do 
+*			               recurso será armazenada para consulta externa
 *
 *  $FV Valor retornado
 *     REC_CondRetOK
@@ -206,7 +206,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_ConsultarDisponibilidade(tcRecurso * ptRecurso, int * estaDisponivel);
+    REC_tpCondRet REC_ConsultarDisponibilidade(tcRecurso * ptRecurso, int * estaDisponivel);
 
 /***********************************************************************
 *
@@ -221,7 +221,7 @@
 *
 ***********************************************************************/
 
-   REC_tpCondRet REC_ImprimeRecurso(tcRecurso * ptRecurso);
+    REC_tpCondRet REC_ImprimeRecurso(tcRecurso * ptRecurso);
 
 #undef RECURSO_EXT
 
