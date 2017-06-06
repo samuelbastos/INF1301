@@ -1,0 +1,23 @@
+Data            Horas Trabalhadas              TipoTarefa                 Descrição da Tarefa Realizada
+
+03/06           0.5                            revisar especificações     Atualização do diagrama de arquitetura
+		1.0			       revisar especificações 	  Atualização da documentação de requisitos
+		0.5			       revisar especificações     Atualização das interfaces de acesso             
+
+04/06           4                              codificar                  Codificação do módulo principal da aplicação
+		2			       codificar	          Codificação das funções de alterar tarefa e recurso
+									  no módulo Cronograma
+                0.5                            redigir script de teste    Atualização do script de testes do módulo Cronograma
+									  para realizar os testes das novas funções criadas
+		0.5                            realizar os testes	  Realização dos testes do módulo Cronograma
+		1			       realizar os testes 	  Realização de testes do módulo principal da aplicação
+		1			       codificar 		  Criação da função de impressão do cronograma no módulo
+									  Cronograma
+                                               
+05/06           1                              especificar                Criação do Teste Manual da aplicação 
+                1                              especificar                Criação do Manual do Usuário da aplicação
+                1                              revisar especificações 	  Atualização das interfaces de acesso
+		1			       realizar os testes         Realização de testes do módulo principal da aplicação
+                
+
+

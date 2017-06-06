@@ -1,0 +1,20 @@
+﻿Data    Horas Trabalhadas	TipoTarefa                                      	Descrição da Tarefa Realizada
+31/05	2			Especificação dos Módulos				Criação do Esqueleto do novo módulo de Cronograma
+				Codificação dos Módulos					Código para inserir recursos e tarefas em suas respectivas listas dentro do módulo cronograma
+
+01/06   2			Codificação dos Módulos					Código para Imprimir recursos e tarefas em suas respectivas listas dentro do módulo cronograma
+
+03/06   11			Redigir Script de Teste					Script de teste para inserir tarefa e recurso em suas respectivas listas dentro do módulo cronograma
+				Codificação dos Módulos					Teste da Impressão de tarefas e recursos em suas respectivas listas dentro do módulo cronograma
+											Código para remover tarefas e recursos de suas listas e conectar tarefas entre si
+				Redigir Script de Teste					Script de teste para remover tarefa, remover recurso
+
+04/06	12			Codificação dos Módulos					Código para cálculo e impressão do caminho crítico
+				Redigir Script de Teste					Script de teste para cálculo e impressão do caminho crítico
+				Especificar os Módulos					Criação do Modelo Físico e Exemplo Físico
+				Estudar							Escrever a Argumentação de Corretude
+				Diagnosticar e Corrigir os Problemas Encontrados	Principalmente nas funcoes de imprimir cronograma e caminho critico
+
+05/06   Comecei as 19 		Codificação dos Módulos					Completar o módulo de teste do cronograma, recurso e tarefa
+				Revisar os scripts de testes				Revisar e completar script de teste do módulo cronograma, recurso e tarefa
+                            	

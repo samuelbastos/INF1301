@@ -1,0 +1,1 @@
+TRAB3-3.EXE /sTarefaTeste.script > logTarefaGerado.log

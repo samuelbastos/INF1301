@@ -105,7 +105,7 @@ int main (void)
                  printf("\nId da tarefa a ser removida: ");
                  scanf("%d", &idTarefaRemovida);
                  removeRecurso = CRO_RemoveTarefa(cronograma, idTarefaRemovida);
-                 if(removeRecurso == CRO_CondRetRecursoNaoEncontrado) 
+                 if(removeRecurso == CRO_CondRetTarefaNaoEncontrada) 
                      printf("\nTarefa nao encontrada. Tente novamente. \n\n");
                  else 
                      printf("\Tarefa removida com sucesso. \n\n");
@@ -160,12 +160,13 @@ int main (void)
              case 10:
                  printf("\n");
                  CRO_CaminhoCritico(cronograma);
+                 CRO_ImprimeCaminhoCritico(cronograma);
                  printf("\n");
                  break;
             
              case 11:
                  printf("\n");
-                 geraCronograma = CRO_GerarCronograma(cronograma);
+                 geraCronograma = CRO_ImprimeCronograma(cronograma);
                  if(geraCronograma == CRO_NaoExisteRecursoSuficiente)
                      printf("\nNao ha recurso suficiente. Tente novamente. \n\n");
                  else if(geraCronograma == CRO_CronogramaVazio)
