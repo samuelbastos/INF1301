@@ -65,7 +65,10 @@
 == Ver se a lista ficou vazia
 =obtervalorelem  lista0   "???"     pNULL
 
-== Destruir a lista
+== Verificar Estrutura da lista 0
+=verificarest    lista0   0
+
+== Destruir a lista 0
 =destruirlista   lista0
 
 == Criar uma lista com dois elementos
@@ -77,7 +80,10 @@
 =esvaziarlista   lista1
 =obtervalorelem  lista1   "???"     pNULL
 
-== Destruir a lista
+== Verificar Estrutura da lista 1
+=verificarest    lista1   0
+
+== Destruir a lista 1
 =destruirlista   lista1
 
 == Criar uma lista com quatro elementos
@@ -115,7 +121,10 @@
 =avancarelem     lista2   10     FimLista
 =obtervalorelem  lista2   str3   pNaoNULL
 
-== Destruir a lista
+== Verificar a estrutura da lista 2
+=verificarest    lista2   0
+
+== Destruir a lista 2
 =destruirlista   lista2
 
 == Criar lista 3
@@ -151,7 +160,10 @@
 == Verificar se lista nao vazia esta vazia
 =verificarvazia    lista3  ListaNaoVazia
 
-== Destruir a lista
+== Verificar estrutura da lista 3
+=verificarest     lista3  0
+
+== Destruir a lista 3
 =destruirlista     lista3
 
 == Criar lista 4
@@ -168,6 +180,12 @@
 
 == Verifica se a lista vazia esta vazia
 =verificarvazia    lista4  ListaVazia
+
+== Verificar estrutura da lista 4
+=verificarest     lista4  0
+
+== Destruir a lista 4
+=destruirlista   lista4
 
 == Terminar contadores
 =pararcontagem
