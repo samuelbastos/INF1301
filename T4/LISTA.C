@@ -135,6 +135,7 @@
             CED_MarcarEspacoAtivo(pLista);
             CED_DefinirTipoEspaco(pLista, LIS_IdCabecaLista);
             pLista->tamElementos = 0;
+            pLista->tipo = LIS_IdTipoNaoDefinido;
         #endif
 
         return pLista ;
@@ -219,10 +220,10 @@
         #ifdef _DEBUG
             CNT_CONTAR("LIS_InserirElementoAntes");
             pElem->pCabeca = pLista;
-            pElem->tamanho = CED_ObterTamanhoValor(pElem);
-            pElem->tipo = CED_ObterTipoEspaco(pElem);
+            pElem->tamanho = CED_ObterTamanhoValor(pValor);
+            pElem->tipo = CED_ObterTipoEspaco(pValor);
 
-            pLista->tamElementos += pElem->tamanho;
+            pLista->tamElementos += pElem->tamanho + CED_ObterTamanhoValor(pElem);
         #endif
 
         /* Encadear o elemento antes do elemento corrente */
@@ -303,7 +304,7 @@
             pElem->tamanho = CED_ObterTamanhoValor(pElem);
             pElem->tipo = CED_ObterTipoEspaco(pElem);
 
-            pLista->tamElementos += pElem->tamanho;
+            pLista->tamElementos += pElem->tamanho + CED_ObterTamanhoValor(pElem);
         #endif
         /* Encadear o elemento após o elemento */
 
@@ -396,9 +397,7 @@
             #endif
             pLista->pElemCorr    = pElem->pProx ;
             pLista->pOrigemLista = pLista->pElemCorr ;
-            #ifdef _DEBUG
-                pLista->tipo = pLista->pOrigemLista->tipo;
-            #endif
+
         } /* if */
 
         /* Desencadeia à direita */
@@ -418,6 +417,14 @@
         } /* if */
 
         LiberarElemento( pLista , pElem ) ;
+
+        #ifdef _DEBUG
+            if (LIS_VerificarVazia(pLista) == LIS_CondRetListaVazia)
+                pLista->tipo = LIS_IdTipoNaoDefinido;
+            else
+                pLista->tipo = pLista->pOrigemLista->tipo;
+        #endif
+
 
         return LIS_CondRetOK ;
 
@@ -721,14 +728,71 @@
         int tamanhoRealLista = 0;
         LIS_tpCondRet fimLista = LIS_CondRetOK;
 
-        while ( fimLista == LIS_CondRetFimLista)
+        IrInicioLista(pLista);
+        if (pLista->pOrigemLista != NULL)
         {
-            tamanhoRealLista += pLista->pElemCorr->tamanho;
-            fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+            while ( fimLista != LIS_CondRetFimLista)
+            {
+                tamanhoRealLista += pLista->pElemCorr->tamanho + CED_ObterTamanhoValor(pLista->pElemCorr);
+                fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+            }
         }
-        if (tamanhoRealLista = pLista->tamElementos)
-            *(numErros)++;
+        if (tamanhoRealLista != pLista->tamElementos)
+            (*numErros)++;
 
+        // Testa se a lista esta perfeitamente conexa
+        IrInicioLista(pLista);
+        fimLista = LIS_CondRetOK;
+        if (pLista->pOrigemLista != NULL)
+        {
+            while ( fimLista == LIS_CondRetFimLista)
+            {
+                if (pLista->pElemCorr->pAnt != NULL)
+                {
+                    if (pLista->pElemCorr->pAnt->pProx != pLista->pElemCorr)
+                        (*numErros)++;
+                }
+                if (pLista->pElemCorr->pProx != NULL)
+                {
+                    if (pLista->pElemCorr->pProx->pAnt != pLista->pElemCorr)
+                        (*numErros)++;
+                }
+                fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+            }
+        }
+
+        // Testa se todos os nos dizem ser do mesmo tipo do cabeca
+        if (pLista->pOrigemLista != NULL)
+        {
+            IrInicioLista(pLista);
+            fimLista = LIS_CondRetOK;
+            while ( fimLista == LIS_CondRetFimLista)
+            {
+                if ( pLista->pElemCorr->tipo != pLista->tipo )
+                    (*numErros)++;
+                fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+            }
+        }
+        else
+        {
+            if (pLista->tipo != LIS_IdTipoNaoDefinido)
+            {
+                (*numErros)++;
+            }
+        }
+
+        // Testar se todos os nos possuem o mesmo tipo dos dados que armazenam
+        if (pLista->pOrigemLista != NULL)
+        {
+            IrInicioLista(pLista);
+            fimLista = LIS_CondRetOK;
+            while ( fimLista == LIS_CondRetFimLista)
+            {
+                if ( pLista->pElemCorr->tipo != CED_ObterTipoEspaco(pLista->pElemCorr->pValor))
+                    (*numErros)++;
+                fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+            }
+        }
     }
 
     /***************************************************************************
@@ -759,6 +823,10 @@
     void LiberarElemento( LIS_tppLista   pLista ,
     tpElemLista  * pElem   )
     {
+        #ifdef _DEBUG
+            pLista->tamElementos -= pElem->tamanho;
+            pLista->tamElementos -= CED_ObterTamanhoValor(pElem);
+        #endif
 
         if ( ( pLista->ExcluirValor != NULL )
           && ( pElem->pValor != NULL        ))
@@ -770,12 +838,13 @@
         } /* if */
 
         #ifdef _DEBUG
-            CNT_CONTAR("LiberarElemento-pr0");
+                CNT_CONTAR("LiberarElemento-pr0");
         #endif
 
         free( pElem ) ;
 
         pLista->numElem-- ;
+
 
     } /* Fim função: LIS  -Liberar elemento da lista */
 
@@ -826,6 +895,7 @@
         #ifdef _DEBUG
             CNT_CONTAR("LimparCabeca");
             pLista->tamElementos = 0;
+            pLista->tipo = LIS_IdTipoNaoDefinido;
         #endif
         pLista->pOrigemLista = NULL ;
         pLista->pFimLista = NULL ;

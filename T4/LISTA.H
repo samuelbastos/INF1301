@@ -122,6 +122,9 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
          LIS_IdString ,
                /* Id do tipo string */
+         
+         LIS_IdTipoNaoDefinido
+               /* Id de uma lista que nao possui um tipo definido ainda */
 
    } LIS_idTipo ;
 

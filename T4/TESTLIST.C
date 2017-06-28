@@ -48,6 +48,7 @@ static const char IR_FIM_CMD              [ ] = "=irfinal"           ;
 static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"       ;
 static const char PROCURA_EXISTENTE_CMD   [ ] = "=procuraexistente"  ;
 static const char PROCURA_N_EXISTENTE_CMD [ ] = "=procuranexistente" ;
+static const char VERIFICAR_ESTRUTURA_CMD [ ] = "=verificarest"      ;
 
 #ifdef _DEBUG
 static const char DETURPAR_LISTA_CMD	    [ ] = "=deturpar"          ;
@@ -115,6 +116,8 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
       int i ;
 
       int numElem = -1 ;
+
+      int numErros = -1;
 
       StringDado[ 0 ] = 0 ;
 
@@ -496,6 +499,28 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                      "Condicao de retorno errada ao procurar valor nao existente." ) ;
 
          } /* fim ativa: Testar procura valor nao existente */
+
+        /* Testar verificar estrutura */
+
+         else if ( strcmp( ComandoTeste , VERIFICAR_ESTRUTURA_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "ii" ,
+                       &inxLista , &CondRetEsp ) ;
+
+            if ( ( numLidos != 2 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+            
+            numErros = 0;
+            LIS_VerificarEstrutura( vtListas[ inxLista ] , &numErros ) ;
+
+            return TST_CompararInt( CondRetEsp , numErros ,
+                     "A quantidade de erros encontrada foi diferente da esperada." ) ;
+
+         } /* fim ativa: Testar verificar estrutura */
 
       return TST_CondRetNaoConhec ;
 
