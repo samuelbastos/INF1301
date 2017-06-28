@@ -9,17 +9,20 @@
 =declararparm   lista1  int 1
 =declararparm   lista2  int 2
 =declararparm   lista3  int 3
+=declararparm   lista4  int 4
 
 =declararparm   str0    string  "abcdefg"
 =declararparm   str1    string  "qwerty"
 =declararparm   str2    string  "xxx"
 =declararparm   str3    string  "xpto"
+=declararparm   str4    string  "asdf"
 
 =declararparm   OK             int  0
 =declararparm   ListaVazia     int  1
 =declararparm   FimLista       int  2
 =declararparm   NaoAchou       int  3
 =declararparm   FaltouMemoria  int  4
+=declararparm   ListaNaoVazia  int  5
 
 =declararparm   pNULL          int  0
 =declararparm   pNaoNULL       int  1
@@ -120,11 +123,51 @@
 
 == Inserir Elemento antes do corrente quando o corrente aponta para a origem
 =inselemapos     lista3   str0   OK
+=irinicio        lista3
 =inselemantes    lista3   str1   OK
 
 == Inserir Elemento antes do corrente quando o corrente aponta para nó sem ser a origem
 =avancarelem     lista3   1      OK
 =inselemantes    lista3   str2   OK
+
+== Avancar 0 elementos na lista
+=avancarelem     lista3   0      OK
+
+== Insere um elemento apos o corrente quando já existe um elemento após o corrente
+=irinicio        lista3
+=inselemapos     lista3   str3   OK
+
+== Insere elemento no final da lista
+=inselemfinal    lista3   str3   OK
+
+== Procura por valor na lista
+=irinicio          lista3
+=procuraexistente  lista3  OK
+
+== Procura por valor na lista e nao achar
+=irinicio          lista3
+=procuranexistente lista3  NaoAchou
+
+== Verificar se lista nao vazia esta vazia
+=verificarvazia    lista3  ListaNaoVazia
+
+== Destruir a lista
+=destruirlista     lista3
+
+== Criar lista 4
+=criarlista        lista4
+
+== Avancar elemento em lista vazia
+=avancarelem       lista4   1      ListaVazia
+
+== Excluir elemento de lista vazia
+=excluirelem       lista4   ListaVazia
+
+== Procura por valor na lista vazia
+=procuranexistente lista4  ListaVazia
+
+== Verifica se a lista vazia esta vazia
+=verificarvazia    lista4  ListaVazia
 
 == Terminar contadores
 =pararcontagem

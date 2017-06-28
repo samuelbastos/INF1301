@@ -33,21 +33,25 @@
 #include    "Lista.h"
 
 
-static const char RESET_LISTA_CMD         [ ] = "=resetteste"     ;
-static const char CRIAR_LISTA_CMD         [ ] = "=criarlista"     ;
-static const char DESTRUIR_LISTA_CMD      [ ] = "=destruirlista"  ;
-static const char ESVAZIAR_LISTA_CMD      [ ] = "=esvaziarlista"  ;
-static const char INS_ELEM_ANTES_CMD      [ ] = "=inselemantes"   ;
-static const char INS_ELEM_APOS_CMD       [ ] = "=inselemapos"    ;
-static const char OBTER_VALOR_CMD         [ ] = "=obtervalorelem" ;
-static const char EXC_ELEM_CMD            [ ] = "=excluirelem"    ;
-static const char IR_INICIO_CMD           [ ] = "=irinicio"       ;
-static const char IR_FIM_CMD              [ ] = "=irfinal"        ;
-static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"    ;
+static const char RESET_LISTA_CMD         [ ] = "=resetteste"        ;
+static const char CRIAR_LISTA_CMD         [ ] = "=criarlista"        ;
+static const char DESTRUIR_LISTA_CMD      [ ] = "=destruirlista"     ;
+static const char ESVAZIAR_LISTA_CMD      [ ] = "=esvaziarlista"     ;
+static const char VERIFICAR_VAZIA_CMD     [ ] = "=verificarvazia"    ;
+static const char INS_ELEM_ANTES_CMD      [ ] = "=inselemantes"      ;
+static const char INS_ELEM_APOS_CMD       [ ] = "=inselemapos"       ;
+static const char INS_ELEM_FINAL_CMD      [ ] = "=inselemfinal"      ;
+static const char OBTER_VALOR_CMD         [ ] = "=obtervalorelem"    ;
+static const char EXC_ELEM_CMD            [ ] = "=excluirelem"       ;
+static const char IR_INICIO_CMD           [ ] = "=irinicio"          ;
+static const char IR_FIM_CMD              [ ] = "=irfinal"           ;
+static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"       ;
+static const char PROCURA_EXISTENTE_CMD   [ ] = "=procuraexistente"  ;
+static const char PROCURA_N_EXISTENTE_CMD [ ] = "=procuranexistente" ;
 
 #ifdef _DEBUG
-static const char DETURPAR_LISTA_CMD	  [ ] = "=deturpar"       ;
-static const char VERIFICAR_LISTA_CMD     [ ] = "=verificar"      ;
+static const char DETURPAR_LISTA_CMD	    [ ] = "=deturpar"          ;
+static const char VERIFICAR_LISTA_CMD     [ ] = "=verificar"         ;
 #endif
 
 #define TRUE  1
@@ -170,6 +174,27 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
          } /* fim ativa: Testar Esvaziar lista lista */
 
+      /* Testar verificar lista vazia */
+
+         else if ( strcmp( ComandoTeste , VERIFICAR_VAZIA_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "ii" ,
+                       &inxLista , &CondRetEsp ) ;
+
+            if ( ( numLidos != 2 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            CondRet = LIS_VerificarVazia( vtListas[ inxLista ] ) ;
+
+            return TST_CompararInt( CondRetEsp , CondRet ,
+                     "Condicao de retorno errada ao verificar lista vazia." ) ;
+
+         } /* fim ativa: Testar verificar lista vazia */
+
       /* Testar Destruir lista */
 
          else if ( strcmp( ComandoTeste , DESTRUIR_LISTA_CMD ) == 0 )
@@ -226,6 +251,41 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
          } /* fim ativa: Testar inserir elemento antes */
 
+      /* Testar inserir elemento final */
+
+         else if ( strcmp( ComandoTeste , INS_ELEM_FINAL_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "isi" ,
+                       &inxLista , StringDado , &CondRetEsp ) ;
+
+            if ( ( numLidos != 3 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            pDado = ( char * ) malloc( strlen( StringDado ) + 1 ) ;
+            if ( pDado == NULL )
+            {
+               return TST_CondRetMemoria ;
+            } /* if */
+
+            strcpy( pDado , StringDado ) ;
+
+
+            CondRet = LIS_InserirElementoFinal( vtListas[ inxLista ] , pDado ) ;
+
+            if ( CondRet != LIS_CondRetOK )
+            {
+               free( pDado ) ;
+            } /* if */
+
+            return TST_CompararInt( CondRetEsp , CondRet ,
+                     "Condicao de retorno errada ao inserir elemento no final." ) ;
+
+         } /* fim ativa: Testar inserir elemento final */
+
       /* Testar inserir elemento apos */
 
          else if ( strcmp( ComandoTeste , INS_ELEM_APOS_CMD ) == 0 )
@@ -247,7 +307,6 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             } /* if */
 
             strcpy( pDado , StringDado ) ;
-
 
             CondRet = LIS_InserirElementoApos( vtListas[ inxLista ] , pDado ) ;
 
@@ -372,9 +431,62 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
          } /* fim ativa: LIS  &Avançar elemento */
 
+    /* Testar procura valor existente */
+
+         else if ( strcmp( ComandoTeste , PROCURA_EXISTENTE_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "ii" ,
+                       &inxLista , &CondRetEsp ) ;
+
+            if ( ( numLidos != 2 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+            
+            pDado = ( char * ) LIS_ObterValor( vtListas[ inxLista ] ) ;
+            
+            CondRet = LIS_ProcurarValor( vtListas[ inxLista ] , pDado ) ;
+
+            return TST_CompararInt( CondRetEsp , CondRet ,
+                     "Condicao de retorno errada ao procurar valor existente." ) ;
+
+         } /* fim ativa: Testar procura valor existente */
+
+    /* Testar procura valor nao existente */
+
+         else if ( strcmp( ComandoTeste , PROCURA_N_EXISTENTE_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "ii" ,
+                       &inxLista , &CondRetEsp ) ;
+
+            if ( ( numLidos != 2 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+            
+            pDado = ( char * ) malloc(10) ;
+            if ( pDado == NULL )
+            {
+               return TST_CondRetMemoria ;
+            } /* if */
+            
+            CondRet = LIS_ProcurarValor( vtListas[ inxLista ] , pDado ) ;
+
+            free(pDado);
+
+            return TST_CompararInt( CondRetEsp , CondRet ,
+                     "Condicao de retorno errada ao procurar valor nao existente." ) ;
+
+         } /* fim ativa: Testar procura valor nao existente */
+
       return TST_CondRetNaoConhec ;
 
    } /* Fim função: TLIS &Testar lista */
+
 
 
 /*****  Código das funções encapsuladas no módulo  *****/

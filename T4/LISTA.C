@@ -662,37 +662,6 @@
 
     } /* Fim função: LIS  LIS  &Adiciona ao Final */
 
-    /***************************************************************************
-    *
-    *  Função: LIS  &Obtem Valor do Inicio e o remove da lista
-    *  ****/
- 
-    void * LIS_PopPrimeiro( LIS_tppLista pLista )
-    {
-        void * valorParaRetornar;
-        #ifdef _DEBUG
-            assert( pLista != NULL ) ;
-        #endif
-						
-        if ( pLista->pOrigemLista == NULL )
-        {
-            #ifdef _DEBUG
-                CNT_CONTAR("LIS_PopPrimeiro-if0");
-            #endif
-            return NULL ;
-        } /* if */
-
-        #ifdef _DEBUG
-            CNT_CONTAR("LIS_PopPrimeiro-sq0");
-        #endif
-        valorParaRetornar = pLista->pOrigemLista->pValor;						
-
-        IrInicioLista(pLista);
-        LIS_ExcluirElemento(pLista);
-        return valorParaRetornar ;
-
-    } /* Fim função: LIS  &Obtem Valor do Inicio e o remove da lista */
-
     #ifdef _DEBUG
 
     /***************************************************************************
