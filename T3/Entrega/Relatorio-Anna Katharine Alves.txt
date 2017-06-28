@@ -1,4 +1,3 @@
-Anna Katharine Gonçalves Alves - 1321492
 Data	Horas Trabalhadas 	Tipo Tarefa		Descrição da Tarefa Realizada
 03/06	2			Estudar módulos		Estudei os módulos por não ter participado do grupo na primeira parte do trabalho.
 04/06 	4			Estudar módulos		Estudei os módulos por não ter participado do grupo na primeira parte do trabalho.
