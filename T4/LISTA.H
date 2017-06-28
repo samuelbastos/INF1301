@@ -104,6 +104,30 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
 /***********************************************************************
 *
+*  $TC Tipo de dados: LIS Tipos de Dados
+*
+*
+*  $ED Descrição do tipo
+*     Condições de retorno das funções da lista
+*
+***********************************************************************/
+
+   typedef enum {
+
+         LIS_IdCabecaLista ,
+               /* Id do tipo cabeça de lista */
+
+         LIS_IdNoLista ,
+               /* Id do tipo nó de lista */
+
+         LIS_IdString ,
+               /* Id do tipo string */
+
+   } LIS_idTipo ;
+
+
+/***********************************************************************
+*
 *  $FC Função: LIS  &Criar lista
 *
 *  $ED Descrição da função

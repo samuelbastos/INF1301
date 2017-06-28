@@ -238,6 +238,11 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
             strcpy( pDado , StringDado ) ;
 
+            #ifdef _DEBUG
+                CED_MarcarEspacoAtivo(pDado);
+                CED_DefinirTipoEspaco(pDado, LIS_IdString);
+            #endif
+
 
             CondRet = LIS_InserirElementoAntes( vtListas[ inxLista ] , pDado ) ;
 
@@ -273,6 +278,10 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
             strcpy( pDado , StringDado ) ;
 
+            #ifdef _DEBUG
+                CED_MarcarEspacoAtivo(pDado);
+                CED_DefinirTipoEspaco(pDado, LIS_IdString);
+            #endif
 
             CondRet = LIS_InserirElementoFinal( vtListas[ inxLista ] , pDado ) ;
 
@@ -307,6 +316,11 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
             } /* if */
 
             strcpy( pDado , StringDado ) ;
+
+            #ifdef _DEBUG
+                CED_MarcarEspacoAtivo(pDado);
+                CED_DefinirTipoEspaco(pDado, LIS_IdString);
+            #endif
 
             CondRet = LIS_InserirElementoApos( vtListas[ inxLista ] , pDado ) ;
 

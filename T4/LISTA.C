@@ -47,6 +47,17 @@
         struct tagElemLista * pProx ;
             /* Ponteiro para o elemento sucessor */
 
+        #ifdef _DEBUG
+            int tipo;
+                /* tipo do dado armazenado no elemento */
+
+            int tamanho;
+                /* tamanho de memoria utilizado pelo elemento */
+            
+            struct LIS_tagLista * pCabeca;
+                /* Ponteiro para a cabeça da lista */
+        #endif
+
     } tpElemLista ;
 
     /***********************************************************************
@@ -72,6 +83,14 @@
 
         void ( * ExcluirValor ) ( void * pValor ) ;
             /* Ponteiro para a função de destruição do valor contido em um elemento */
+
+        #ifdef _DEBUG
+            int tipo;
+                /* tipo do dado armazenado no elemento */
+
+            int tamElementos;
+                /* tamanho total de memoria utilizado pelos elementos da lista */
+        #endif
 
     } LIS_tpLista ;
 
@@ -111,6 +130,12 @@
         LimparCabeca( pLista ) ;
 
         pLista->ExcluirValor = ExcluirValor ;
+        
+        #ifdef _DEBUG
+            CED_MarcarEspacoAtivo(pLista);
+            CED_DefinirTipoEspaco(pLista, LIS_IdCabecaLista);
+            pLista->tamElementos = 0;
+        #endif
 
         return pLista ;
 
@@ -193,6 +218,11 @@
 
         #ifdef _DEBUG
             CNT_CONTAR("LIS_InserirElementoAntes");
+            pElem->pCabeca = pLista;
+            pElem->tamanho = CED_ObterTamanhoValor(pElem);
+            pElem->tipo = CED_ObterTipoEspaco(pElem);
+
+            pLista->tamElementos += pElem->tamanho;
         #endif
 
         /* Encadear o elemento antes do elemento corrente */
@@ -205,6 +235,11 @@
 
             pLista->pOrigemLista = pElem ;
             pLista->pFimLista = pElem ;
+
+            #ifdef _DEBUG
+                pLista->tipo = pElem->tipo;
+            #endif
+            
         } else
         {
             #ifdef _DEBUG
@@ -264,6 +299,11 @@
 
         #ifdef _DEBUG
             CNT_CONTAR("LIS_InserirElementoApos");
+            pElem->pCabeca = pLista;
+            pElem->tamanho = CED_ObterTamanhoValor(pElem);
+            pElem->tipo = CED_ObterTipoEspaco(pElem);
+
+            pLista->tamElementos += pElem->tamanho;
         #endif
         /* Encadear o elemento após o elemento */
 
@@ -275,6 +315,9 @@
 
             pLista->pOrigemLista = pElem ;
             pLista->pFimLista = pElem ;
+            #ifdef _DEBUG
+                pLista->tipo = pElem->tipo;
+            #endif
         } else
         {
             #ifdef _DEBUG
@@ -353,6 +396,9 @@
             #endif
             pLista->pElemCorr    = pElem->pProx ;
             pLista->pOrigemLista = pLista->pElemCorr ;
+            #ifdef _DEBUG
+                pLista->tipo = pLista->pOrigemLista->tipo;
+            #endif
         } /* if */
 
         /* Desencadeia à direita */
@@ -671,7 +717,18 @@
 
     LIS_tpCondRet LIS_VerificarEstrutura( LIS_tppLista pLista, int * numErros )
     {
-    //todo
+        // Checa se o tamanho da lista esta correto
+        int tamanhoRealLista = 0;
+        LIS_tpCondRet fimLista = LIS_CondRetOK;
+
+        while ( fimLista == LIS_CondRetFimLista)
+        {
+            tamanhoRealLista += pLista->pElemCorr->tamanho;
+            fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+        }
+        if (tamanhoRealLista = pLista->tamElementos)
+            *(numErros)++;
+
     }
 
     /***************************************************************************
@@ -743,6 +800,8 @@
 
         #ifdef _DEBUG
             CNT_CONTAR("CriarElemento");
+            CED_MarcarEspacoAtivo(pElem);
+            CED_DefinirTipoEspaco(pElem, LIS_IdNoLista);
         #endif
 
         pElem->pValor = pValor ;
@@ -766,6 +825,7 @@
     {
         #ifdef _DEBUG
             CNT_CONTAR("LimparCabeca");
+            pLista->tamElementos = 0;
         #endif
         pLista->pOrigemLista = NULL ;
         pLista->pFimLista = NULL ;
