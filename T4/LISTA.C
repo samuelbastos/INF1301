@@ -724,7 +724,25 @@
 
     LIS_tpCondRet LIS_VerificarEstrutura( LIS_tppLista pLista, int * numErros )
     {
+        
         // Checa se o tamanho da lista esta correto
+        int numElementosRealLista = 0;
+        int tamanhoRealLista = 0;
+        LIS_tpCondRet fimLista = LIS_CondRetOK;
+
+        IrInicioLista(pLista);
+        if (pLista->pOrigemLista != NULL)
+        {
+            while ( fimLista != LIS_CondRetFimLista)
+            {
+                numElementosRealLista++;
+                fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+            }
+        }
+        if (numElementosRealLista != pLista->numElem)
+            (*numErros)++;
+
+        // Checa se o tamanho em memoria da lista esta correto
         int tamanhoRealLista = 0;
         LIS_tpCondRet fimLista = LIS_CondRetOK;
 
@@ -761,6 +779,19 @@
             }
         }
 
+        // Checa se todos os nos apontam para alguma coisa
+
+        IrInicioLista(pLista);
+        if (pLista->pOrigemLista != NULL)
+        {
+            while ( fimLista != LIS_CondRetFimLista)
+            {
+                if ( pLista->pElemCorr->pValor == NULL )
+                    (*numErros)++;
+                fimLista = LIS_AvancarElementoCorrente(pLista, 1);
+            }
+        }
+
         // Testa se todos os nos dizem ser do mesmo tipo do cabeca
         if (pLista->pOrigemLista != NULL)
         {
@@ -793,6 +824,14 @@
                 fimLista = LIS_AvancarElementoCorrente(pLista, 1);
             }
         }
+
+        // Garante que se o ponteiro para a origem for null a lista tem que estar vazia
+        if ( pLista->pOrigemLista == NULL && pLista->numElem > 0 )
+            (*numErros)++;
+        
+        // Garante que se o ponteiro para o corrente for null a lista tem que estar vazia
+        if ( pLista->pElemCorr == NULL && pLista->numElem > 0)
+            (*numErros)++;
     }
 
     /***************************************************************************
@@ -802,7 +841,64 @@
 
     LIS_tpCondRet LIS_Deturpar( LIS_tppLista pLista, int flag )
     {
-    //todo
+        tpElemLista * ponteiroNaoInicializado, * auxProx, * auxAnt;
+        switch(flag)
+        {
+            case 1:
+                free(pLista->pElemCorr);
+                break;
+
+            case 2:
+                pLista->pElemCorr->pAnt = NULL;
+                break;
+
+            case 3:
+                pLista->pElemCorr->pProx = NULL;
+                break;
+
+            case 4:
+                pLista->pElemCorr->pProx = ponteiroNaoInicializado;
+                break;
+
+            case 5:
+                pLista->pElemCorr->pAnt  = ponteiroNaoInicializado;
+                break;
+
+            case 6:
+                pLista->pElemCorr->pValor = NULL;
+                break;
+
+            case 7:
+                CED_DefinirTipoEspaco(pLista->pElemCorr->pValor, LIS_IdCabecaLista);
+                break;
+
+            case 8:
+                auxAnt = pLista->pElemCorr->pAnt;
+                auxProx = pLista->pElemCorr->pProx;
+                pLista->pElemCorr->pProx->pAnt = auxAnt;
+                pLista->pElemCorr->pAnt->pProx = auxProx;
+                break;
+
+            case 9:
+                pLista->pElemCorr = NULL;
+                break;
+
+            case 10:
+                pLista->pOrigemLista = NULL;
+                break;
+
+            case 11:
+                pLista->pElemCorr->pAnt = pLista->pElemCorr->pAnt->pAnt;
+                break;
+
+            case 12:
+                pLista->pElemCorr->pProx = pLista->pElemCorr->pProx->pProx;
+                break;
+
+            case 13:
+                pLista->pElemCorr->tipo = LIS_IdTipoNaoDefinido;
+                break;
+        }
     }
 
     #endif
