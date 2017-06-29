@@ -1,20 +1,17 @@
-﻿Data    Horas Trabalhadas	TipoTarefa                                      	Descrição da Tarefa Realizada
-31/05	2			Especificação dos Módulos				Criação do Esqueleto do novo módulo de Cronograma
-				Codificação dos Módulos					Código para inserir recursos e tarefas em suas respectivas listas dentro do módulo cronograma
+﻿Data    Horas Trabalhadas	TipoTarefa			Descrição da Tarefa Realizada
+27/06   3			Estudar				Estudar funcionamento dos módulos CESPDIN e CONTA
+                                Especificar os Módulos		Arrumar Identação
+				Revisar Código do Módulo	Ajuste dos contadores e remoção de contadores desnecessários
+				Codificar Módulo		Adição de novos contadores
 
-01/06   2			Codificação dos Módulos					Código para Imprimir recursos e tarefas em suas respectivas listas dentro do módulo cronograma
-
-03/06   11			Redigir Script de Teste					Script de teste para inserir tarefa e recurso em suas respectivas listas dentro do módulo cronograma
-				Codificação dos Módulos					Teste da Impressão de tarefas e recursos em suas respectivas listas dentro do módulo cronograma
-											Código para remover tarefas e recursos de suas listas e conectar tarefas entre si
-				Redigir Script de Teste					Script de teste para remover tarefa, remover recurso
-
-04/06	12			Codificação dos Módulos					Código para cálculo e impressão do caminho crítico
-				Redigir Script de Teste					Script de teste para cálculo e impressão do caminho crítico
-				Especificar os Módulos					Criação do Modelo Físico e Exemplo Físico
-				Estudar							Escrever a Argumentação de Corretude
-				Diagnosticar e Corrigir os Problemas Encontrados	Principalmente nas funcoes de imprimir cronograma e caminho critico
-
-05/06   Comecei as 19 		Codificação dos Módulos					Completar o módulo de teste do cronograma, recurso e tarefa
-				Revisar os scripts de testes				Revisar e completar script de teste do módulo cronograma, recurso e tarefa
-                            	
+28/06   16			Codificar Módulo		Adição de funções no módulo de teste para chamar as funções que não estavam
+								sendo testadas pelo script inicial
+				Redigir Script de Teste		Redação de um script de teste que passava por todos os contadores
+				Projetar			Elaboração de como tornar a estrutura de lista auto-verificavel
+				Codificar Módulo		Adição dos campos que tornam a estrutura auto-verificavel
+				Codificar Módulo		Codificação da função de verificação da estrutura da lista
+				Codificar Módulo		Adicionar função no módulo de teste que chama a função de verificacao
+				Redigir Script de Teste		Adição de chamadas para a função de verificação no script de teste
+				Codificar Módulo		A função de verificação foi incrementada para ficar mais completa e a
+								função de deturpação foi escrita
+				Redigir Script de Teste		Script de Teste que faz uso da função de deturpação da lista foi criado

@@ -1,0 +1,25 @@
+Esse LEIAME se refere ao trabalho 4 de Programação Modular do grupo composto por:
+Mauricio Pedro Silva Goncalves Vieira 131110
+Samuel Bastos de Souza Junior 1311416
+
+Para gerar o arquivo de .log que contem os resultados dos testes do módulo de Lista com a instrumentação desligada:
+1- extraia os arquivos "TRAB4-1.EXE", "TesteLista.script" e "RealizaTeste.bat" que estão na pasta "Teste Com Instrumentacao Desligada"
+2- caso os arquivos, após a extração, nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta
+3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "RealizaTeste.bat"
+4- nesse momento deve aparecer um arquivo chamado "logTesteLista.log" na pasta, dentro dele você encontrará o relatório de execução dos testes do módulo Lista
+5- clique duas vezes no arquivo "logTesteLista.log" para ter acesso ao relatório de execução de testes
+
+Para gerar os arquivos de .log que contem os resultados dos testes do módulo Tarefa com a instrumentação ligada com e sem deturpação e o arquivo com a contagem 
+dos contadores siga os seguintes passos:
+1- extraia os arquivos "TRAB4-2.EXE", "TesteListaInstrumentada.script", "TesteListaDeturpada.script", "Lista.count" e "RealizaTesteInstrumentado.bat" que estão 
+na pasta "Teste Com Instrumentacao Ligada"
+2- caso os arquivos, após a extração, nao estejam na mesma pasta mova eles de forma que fiquem todos na mesma pasta
+3- agora que os arquivos acima estão na mesma pasta clique duas vezes no arquivo "RealizaTesteInstrumentado.bat"
+4- nesse momento aparecerão três arquivos que são: "LogTesteListaIntrumentada.log", "LogTesteListaDeturpada.log" e "contadores.count"
+5- clique duas vezes no arquivo "LogTesteListaIntrumentada.log" para ter acesso ao relatório de execução dos testes instrumentados sem deturpação
+6- clique duas vezes no arquivo "LogTesteListaDeturpada.log" para ter acesso ao relatório de execução dos testes instrumentados com deturpação da lista
+7- clique duas vezes no arquivo "contadores.count" para ter acesso ao arquivo de totalização dos contadores
+
+OBS - O arquivo "contadores.count" também já está sendo enviado junto com o trabalho na pasta "Teste Com Instrumentacao Ligada" por exigencia do enunciado
+
+
