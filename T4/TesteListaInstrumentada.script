@@ -1,8 +1,8 @@
-// Script:    TesteLista.script
+// Script:    TesteListaInstrumentada.script
 // Autor:     Mauricio Pedro Vieira
 //            Samuel Bastos
 // Data:      28/jun/2017
-//
+// A contagem dos contadores é feito após a execução do script com deturpação
 
 == Inicializar valores
 =declararparm   lista0  int 0
@@ -29,6 +29,7 @@
 
 == Inicialiar contadores
 =inicializarcontadores ""
+=zeracontadores OK
 =lercontadores "Lista"
 =iniciarcontagem
 
@@ -66,7 +67,7 @@
 =obtervalorelem  lista0   "???"     pNULL
 
 == Verificar Estrutura da lista 0
-=verificarest    lista0   0
+=verificar       lista0   0
 
 == Destruir a lista 0
 =destruirlista   lista0
@@ -81,7 +82,7 @@
 =obtervalorelem  lista1   "???"     pNULL
 
 == Verificar Estrutura da lista 1
-=verificarest    lista1   0
+=verificar       lista1   0
 
 == Destruir a lista 1
 =destruirlista   lista1
@@ -122,7 +123,7 @@
 =obtervalorelem  lista2   str3   pNaoNULL
 
 == Verificar a estrutura da lista 2
-=verificarest    lista2   0
+=verificar       lista2   0
 
 == Destruir a lista 2
 =destruirlista   lista2
@@ -161,7 +162,7 @@
 =verificarvazia    lista3  ListaNaoVazia
 
 == Verificar estrutura da lista 3
-=verificarest     lista3  0
+=verificar        lista3  0
 
 == Destruir a lista 3
 =destruirlista     lista3
@@ -182,15 +183,16 @@
 =verificarvazia    lista4  ListaVazia
 
 == Verificar estrutura da lista 4
-=verificarest     lista4  0
+=verificar        lista4  0
 
 == Destruir a lista 4
 =destruirlista   lista4
 
-== Terminar contadores
-=pararcontagem
-=verificarcontagens 0
+== Registra Contadores
+=registraracumulador  "contadores"
+
+== Interromper Contagem
 =terminarcontadores
 
 
-// fim
+// fim TesteListaInstrumentada.script

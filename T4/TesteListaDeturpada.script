@@ -1,0 +1,168 @@
+// Script:    TesteListaDeturpada.script
+// Autor:     Mauricio Pedro Vieira
+//            Samuel Bastos
+// Data:      28/jun/2017
+// Esse script deve ser executado após o script TesteListaInstrumentada.script 
+// para que os contadores sejam contados de forma correta
+
+== Inicializar valores
+=declararparm   lista0  int 0
+=declararparm   lista1  int 1
+=declararparm   lista2  int 2
+=declararparm   lista3  int 3
+=declararparm   lista4  int 4
+=declararparm   lista5  int 5
+=declararparm   lista6  int 6
+=declararparm   lista7  int 7
+=declararparm   lista8  int 8
+=declararparm   lista9  int 9
+
+=declararparm   str0    string  "abcdefg"
+=declararparm   str1    string  "qwerty"
+=declararparm   str2    string  "xxx"
+=declararparm   str3    string  "xpto"
+=declararparm   str4    string  "asdf"
+
+=declararparm   OK             int  0
+
+== Inicialiar contadores
+=inicializarcontadores "contadores"
+=lercontadores "Lista"
+=iniciarcontagem
+
+== Teste Deturpação Tipo 1
+=criarlista      lista0 
+=inselemapos     lista0   str0   OK
+=inselemapos     lista0   str1   OK
+=inselemapos     lista0   str2   OK
+=inselemapos     lista0   str3   OK
+=inselemapos     lista0   str4   OK
+=irinicio        lista0
+=avancarelem     lista0   2      OK
+=deturpar        lista0   1      OK
+=verificar       lista0   1
+=destruirlista   lista0
+
+== Teste Deturpação Tipo 2
+=criarlista      lista1 
+=inselemapos     lista1   str0   OK
+=inselemapos     lista1   str1   OK
+=inselemapos     lista1   str2   OK
+=inselemapos     lista1   str3   OK
+=inselemapos     lista1   str4   OK
+=irinicio        lista1
+=avancarelem     lista1   2      OK
+=deturpar        lista1   2      OK
+=verificar       lista1   6
+=destruirlista   lista1
+
+== Teste Deturpação Tipo 3
+=criarlista      lista2 
+=inselemapos     lista2   str0   OK
+=inselemapos     lista2   str1   OK
+=inselemapos     lista2   str2   OK
+=inselemapos     lista2   str3   OK
+=inselemapos     lista2   str4   OK
+=irinicio        lista2
+=avancarelem     lista2   2      OK
+=deturpar        lista2   3      OK
+=verificar       lista2   3
+=destruirlista   lista2
+
+== Teste Deturpação Tipo 4
+=criarlista      lista3 
+=inselemapos     lista3   str0   OK
+=inselemapos     lista3   str1   OK
+=inselemapos     lista3   str2   OK
+=inselemapos     lista3   str3   OK
+=inselemapos     lista3   str4   OK
+=irinicio        lista3
+=avancarelem     lista3   2      OK
+=deturpar        lista3   4      OK
+=verificar       lista3   1
+=destruirlista   lista3
+
+== Teste Deturpação Tipo 5
+=criarlista      lista4 
+=inselemapos     lista4   str0   OK
+=inselemapos     lista4   str1   OK
+=inselemapos     lista4   str2   OK
+=inselemapos     lista4   str3   OK
+=inselemapos     lista4   str4   OK
+=irinicio        lista4
+=avancarelem     lista4   2      OK
+=deturpar        lista4   5      OK
+=verificar       lista4   4
+=destruirlista   lista4
+
+== Teste Deturpação Tipo 6
+=criarlista      lista5 
+=inselemapos     lista5   str0   OK
+=inselemapos     lista5   str1   OK
+=inselemapos     lista5   str2   OK
+=inselemapos     lista5   str3   OK
+=inselemapos     lista5   str4   OK
+=irinicio        lista5
+=avancarelem     lista5   2      OK
+=deturpar        lista5   6      OK
+=verificar       lista5   1
+=destruirlista   lista5
+
+== Teste Deturpação Tipo 7
+=criarlista      lista6 
+=inselemapos     lista6   str0   OK
+=inselemapos     lista6   str1   OK
+=inselemapos     lista6   str2   OK
+=inselemapos     lista6   str3   OK
+=inselemapos     lista6   str4   OK
+=irinicio        lista6
+=avancarelem     lista6   2      OK
+=deturpar        lista6   7      OK
+=verificar       lista6   14
+=destruirlista   lista6
+
+== Teste Deturpação Tipo 8
+=criarlista      lista7 
+=inselemapos     lista7   str0   OK
+=inselemapos     lista7   str1   OK
+=inselemapos     lista7   str2   OK
+=inselemapos     lista7   str3   OK
+=inselemapos     lista7   str4   OK
+=irinicio        lista7
+=avancarelem     lista7   2      OK
+=deturpar        lista7   8      OK
+=verificar       lista7   2
+=destruirlista   lista7
+
+== Teste Deturpação Tipo 9
+=criarlista      lista8 
+=inselemapos     lista8   str0   OK
+=inselemapos     lista8   str1   OK
+=inselemapos     lista8   str2   OK
+=inselemapos     lista8   str3   OK
+=inselemapos     lista8   str4   OK
+=irinicio        lista8
+=avancarelem     lista8   2      OK
+=deturpar        lista8   9     OK
+=verificar       lista8   5
+=destruirlista   lista8
+
+== Teste Deturpação Tipo 10
+=criarlista      lista9 
+=inselemapos     lista9   str0   OK
+=inselemapos     lista9   str1   OK
+=inselemapos     lista9   str2   OK
+=inselemapos     lista9   str3   OK
+=inselemapos     lista9   str4   OK
+=irinicio        lista9
+=avancarelem     lista9   2      OK
+=deturpar        lista9   10     OK
+=verificar       lista9   2
+=destruirlista   lista9
+
+== Terminar contadores
+=pararcontagem
+=verificarcontagens 0
+=terminarcontadores
+
+//fim TesteListaDeturpada.script

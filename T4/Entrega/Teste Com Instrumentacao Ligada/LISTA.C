@@ -24,8 +24,6 @@
 #include "LISTA.h"
 #undef LISTA_OWN
 
-#undef _DEBUG
-
 #ifdef _DEBUG
 #include "CONTA.H"
 #include "CESPDIN.H"

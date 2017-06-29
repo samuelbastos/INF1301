@@ -51,8 +51,6 @@ static const char PROCURA_EXISTENTE_CMD   [ ] = "=procuraexistente"  ;
 static const char PROCURA_N_EXISTENTE_CMD [ ] = "=procuranexistente" ;
 static const char ZERAR_CONTADORES_CMD    [ ] = "=zeracontadores"    ;
 
-#undef _DEBUG
-
 #ifdef _DEBUG
 static const char DETURPAR_LISTA_CMD	    [ ] = "=deturpar"          ;
 static const char VERIFICAR_LISTA_CMD     [ ] = "=verificar"         ;

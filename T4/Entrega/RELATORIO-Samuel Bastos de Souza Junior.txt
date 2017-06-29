@@ -1,0 +1,9 @@
+Data            Horas Trabalhadas              TipoTarefa                Descrição da Tarefa Realizada
+
+23/06           1                              estudar                   Instalação do arcabouço no projeto;
+                                                                         Compilação e execução do projeto sem nenhuma modificação.
+
+23/06           0.5                            estudar                   Estudo do CESPDIN e do CONTA
+
+23/06		1	       		       codificar	         Posicionamento dos contadores no módulo Lista
+
